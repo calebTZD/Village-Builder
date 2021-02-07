@@ -44,6 +44,11 @@ def addMany():
     return json.dumps(resultObj)
 
 
+@app.route('/getResourceTypes')
+def getResourceTypes():
+    resources = ['wood', 'grain', 'ore']
+    return json.dumps(resources)
+
 class InvalidUsageExeption(Exception):
     def __init__(self, message, status_code=400, data={}):
         Exception.__init__(self)

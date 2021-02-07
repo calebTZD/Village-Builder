@@ -3,6 +3,7 @@ window.onload=initAdd
 // import tab classes
 import {VanillaJSAdder} from './vanillaJSAdd.js';
 import {VueAdder} from './vueAdd.js';
+import {SimRules} from './dadSimRules.js';
 //import {ReactAdder} from './reactAdd.js';
 
 

@@ -5,7 +5,7 @@ let VueAdderClass = new Vue({
                     <input v-model="y">
                     <button v-on:click="add">=</button>
                     <button v-on:click="addAsync">=(async)</button>
-                    <p>Results: {{value}}</p>
+                    <p>Results: {{value}} {{x+y}}</p>
                 </div>`,
     data: {
         x: 0,
