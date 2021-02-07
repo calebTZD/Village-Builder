@@ -1,14 +1,14 @@
-let VueAdderClass = new Vue({
+let ResourceClass = new Vue({
     el: '#VueResource',
     template: `<div >
                     <label>{{type}}</label>
-                    <input type="number" value="{{priority}}">
+                    <input type="number" v-model="priority">
                 </div>`,
     data: {
         // resources: [
         //     {
         //     resource: {
-                type: wood,
+                type: 'wood',
                 priority: 1
             //   }
             // }
@@ -30,4 +30,4 @@ let VueAdderClass = new Vue({
     }
   });
 
-export const VueAdder = VueAdderClass;
+export const resource = ResourceClass;

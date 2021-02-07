@@ -1,6 +1,8 @@
 window.onload = initvillage
 
 import { APICalls } from './api.js';
+import { resource } from './resourceVue.js';
+
 function testAPI(){
 
     const response = APICalls.getWorkSpeed(2);
