@@ -1,32 +1,38 @@
 let ResourceClass = new Vue({
     el: '#VueResource',
-    template: `<div >
-                    <label>{{type}}</label>
-                    <input type="number" v-model="priority">
+    template: `<div>
+                    <div v-for="resource in resources">
+                        <label>{{resource.type}}</label>
+                        <input type="number" v-model="resource.priority">
+                    </div>
                 </div>`,
     data: {
-        // resources: [
-        //     {
-        //     resource: {
+        resources: [
+            
+             {
                 type: 'wood',
+                priority: 4
+              },
+              {
+                type: 'stone',
                 priority: 1
-            //   }
-            // }
-        // ]
+              }
+            
+        ]
 
     },
     methods: {
-        add: function(){
-            fetch("/add2?x="+this.x+"&y="+this.y)
-                .then(response => response.json())
-                .then(results => (this.value = JSON.stringify(results.value)))
-        },
-        addAsync: async function(){
-            const response = await fetch("/add2?x="+this.x+"&y="+this.y);
-            const results = await response.json();
-            console.log(JSON.stringify(results));
-            this.value = JSON.stringify(results);
+        getResources: function(){
+            fetch("/getResource")
+            .then(response => response.json())
+            .then(results => {
+                this.resources = results;
+                console.log(this.resources);})
         }
+
+    },
+    mounted(){
+        this.getResources();
     }
   });
 

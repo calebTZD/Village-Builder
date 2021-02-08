@@ -10,6 +10,7 @@ class villageData:
         initalValCol = self.villageDB["villageBuilder"]
         initalValCol.drop()
         initalValCol.create_index('VillageId')
+        
 
 
 VillageDB = villageData()

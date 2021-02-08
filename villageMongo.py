@@ -1,18 +1,23 @@
 from DB import VillageDB
 
-class villageData:
+class villageDataClass:
     def __init__(self):
         self.db = VillageDB
 
     def getInitalVals(self, villageid):
-        return self.db.initalValCol.find_one({'initalValCol': villageid})
+        return self.db.initalValCol.find_one({'vId': villageid})
 
     def storeVals(self, valData):
-        self.db.initalValCol.replace_one({"initalValCol": valData["initalValCol"]}, valData, upsert=True) 
+        self.db.initalValCol.replace_one({"vId": valData["vId"]}, valData, upsert=True) 
 
-Data = villageData()
+    def getInitalResources(self):
+        return self.db.initalValCol.find({},{'_id':0})
+
+villageData = villageDataClass()
 
 if __name__== "__main__":
     from initDB import *
-    Data.db.initGamesCollection()
-    Data.storeVals(inVals)
+    from pprint import pprint
+    villageData.db.initGamesCollection()
+    villageData.storeVals(inVals)
+    pprint(villageData.getInitalResources())

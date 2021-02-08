@@ -2,6 +2,8 @@ from flask import Flask, request, make_response, render_template, redirect, url_
 from flask_socketio import SocketIO
 import traceback, json
 
+from villageMongo import villageData
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!' #TODO: Change this
 app.config["CACHE_TYPE"] = "null"
@@ -25,6 +27,11 @@ def workSpeed():
     vilager = request.args.get('vil')
 
     return '2'
+
+@app.route('/getResource')
+def getResource():
+    resources = villageData.getInitalResources()
+    return json.dumps(resources)
 
 class InvalidUsageExeption(Exception):
     def __init__(self, message, status_code=400, data={}):
