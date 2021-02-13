@@ -18,7 +18,7 @@ gamesocket = SocketIO(app)
 
 @app.route('/') #root redirect
 def index():
-    return redirect(url_for('static', filename='Add.html'))
+    return redirect(url_for('static', filename='dApp.html'))
 
 @app.route('/add2')
 def add2():

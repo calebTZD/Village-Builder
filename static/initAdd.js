@@ -14,6 +14,8 @@ const vueTab = $("#vueTab");
 const vueNav = $("#vueNav");
 const reactTab = $("#reactTab");
 const reactNav = $("#reactNav");
+const rulesTab = $("#rulesTab");
+const rulesNav = $("#rulesNav");
 
 // initializ all classes and nav bar
 function initAdd(){
@@ -27,16 +29,19 @@ function initNavBar(){
     vanillaJSNav.click( function() {setTab("js")});
     vueNav.click( function() {setTab("vue")});
     reactNav.click( function() {setTab("react")});
+    rulesNav.click( function() {setTab("rules")});
 }
 
 // hide tabs and show clicked tab
 function setTab(tab){
     vanillaJSNav.removeClass("ActiveTab");
-    vueTab.removeClass("ActiveTab");
-    reactTab.removeClass("ActiveTab");
+    vueNav.removeClass("ActiveTab");
+    reactNav.removeClass("ActiveTab");
+    rulesNav.removeClass("ActiveTab");
     vanillaJSTab.hide();
     vueTab.hide();
     reactTab.hide();
+    rulesTab.hide();
     if(tab == "js"){
         vanillaJSNav.addClass("ActiveTab");
         vanillaJSTab.show();
@@ -46,5 +51,8 @@ function setTab(tab){
     } else if(tab == "react"){
         reactNav.addClass("ActiveTab");
         reactTab.show();
+    } else if(tab == "rules"){
+        rulesNav.addClass("ActiveTab");
+        rulesTab.show();
     }
 }

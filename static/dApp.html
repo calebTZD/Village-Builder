@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Example</title>
-
+    <title>Simulator</title>
 
     <!-- load Bootstrap libraries--> 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -22,26 +21,25 @@
     <!-- development version, includes helpful console warnings -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
-    <script type="module" src="initAdd.js"></script>
+    <script type="module" src="dInit.js"></script>
     <link rel="stylesheet" type="text/css" href="Add.css">
 
 </head>
 <body>
     <div id="NavBar" class="row">
-        <div id="vanillaJSNav" class="NavTab ActiveTab col">VanillaJS</div>
-        <div id="vueNav" class="NavTab col">Vue</div>
-        <div id="reactNav" class="NavTab col">React</div>
+        <div id="defNav" class="NavTab ActiveTab col">Definitions</div>
         <div id="rulesNav" class="NavTab col">Rules</div>
+        <div id="simNav" class="NavTab col">Simulations</div>
+        <div id="resultsNav" class="NavTab col">Results</div>
     </div>
-    <div id="vanillaJSTab" class="row">
+    <div id="defTab" class="row">
+        <div id="DefView"></div>
     </div>
-    <div id="vueTab" class="row" style="display: none;">
-        <div id="VueAdder"></div>
+    <div id="rulesTab" class="row" style="display: none;">
     </div>
-    <div id="reactTab" class="row" style="display: none;">
+    <div id="simTab" class="row" style="display: none;">
     </div>
-    <div id='rulesTab' class="row" style="display: none;">
-        <div id="SimRules"></div>
+    <div id='resultsTab' class="row" style="display: none;">
     </div>
 </body>
 </html>
