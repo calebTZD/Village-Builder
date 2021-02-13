@@ -14,7 +14,16 @@ inVals = {
         {
             "type": "Stone",
             "priority": 5
-        }
-            
+        }            
+    ],
+    "villageNames": [
+        "Athens",
+        "Sparta",
+        "Shire",
+        "Rome",
+        "Tokyo",
+        "Mist",
+        "Wanderers",
+        "MountainDale"
     ]
 }

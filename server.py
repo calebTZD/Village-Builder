@@ -34,7 +34,7 @@ def workSpeed():
 
     return '2'
 
-@app.route('/getResource')
+@app.route('/getData')
 def getResource():
     data = villageData.getInitalResources()
     print(data)

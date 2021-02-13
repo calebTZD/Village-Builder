@@ -7,23 +7,12 @@ let ResourceClass = new Vue({
                     </div>
                 </div>`,
     data: {
-        resources: [
-            
-             {
-                type: 'wood',
-                priority: 4
-              },
-              {
-                type: 'stone',
-                priority: 1
-              }
-            
-        ]
+        resources: []
 
     },
     methods: {
         getResources: function(){
-            fetch("/getResource")
+            fetch("/getData")
             .then(response => response.json())
             .then(results => {
                 this.resources = results.resources;
