@@ -11,7 +11,7 @@ class villageDataClass:
         self.db.initalValCol.replace_one({"vId": valData["vId"]}, valData, upsert=True) 
 
     def getInitalResources(self):
-        return self.db.initalValCol.find({},{'_id':0})
+        return self.db.initalValCol.find_one()
 
 villageData = villageDataClass()
 

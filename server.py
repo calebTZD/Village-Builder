@@ -1,12 +1,18 @@
 from flask import Flask, request, make_response, render_template, redirect, url_for, after_this_request, jsonify
 from flask_socketio import SocketIO
 import traceback, json
+from bson import json_util
+
 
 from villageMongo import villageData
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!' #TODO: Change this
 app.config["CACHE_TYPE"] = "null"
+
+def serializeToJSON(data):
+    data.pop('_id', None)
+    return json.dumps(data)
 
 ##############################################################################
 #                        WebSockets
@@ -30,8 +36,9 @@ def workSpeed():
 
 @app.route('/getResource')
 def getResource():
-    resources = villageData.getInitalResources()
-    return json.dumps(resources)
+    data = villageData.getInitalResources()
+    print(data)
+    return serializeToJSON(data)
 
 class InvalidUsageExeption(Exception):
     def __init__(self, message, status_code=400, data={}):

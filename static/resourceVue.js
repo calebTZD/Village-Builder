@@ -26,12 +26,13 @@ let ResourceClass = new Vue({
             fetch("/getResource")
             .then(response => response.json())
             .then(results => {
-                this.resources = results;
+                this.resources = results.resources;
+                console.log(this.data)
                 console.log(this.resources);})
         }
 
     },
-    mounted(){
+    created(){
         this.getResources();
     }
   });
