@@ -11,14 +11,44 @@ Vue.component('VillageDefView', {
 
 Vue.component('ResourceDefView', {
     template: `<div>
-                    R: {{name}}                  
+                    R: {{name}}
+                    <input v-model="simData['numVillages']"> 
+                    <ul>
+                        <li v-for="r in resources">
+                            <input type="checkbox" :value="r" :id="r" v-model="simData['checkedResources']" @click="check($event)"> {{r}}
+                        </li>
+                    </ul>
+                    <div v-for="r in resources">
+                        <input type="checkbox" :value="r" :id="r" v-model="simData['checkedResources']" @click="check($event)"> {{r}}
+                    </div>
+                    <p>{{simData}}</p>                
                 </div>`,
     data: function() {
         return {
-            'name': "resource"
+            'name': "resource",
+            'resources': [],
+            'simData': {
+                'numVillages': 1,
+                'checkedResources': []
+            }
         };
     },
-    methods: {
+    methods: {    
+        check: function(e){
+            if (e.target.checked){
+                console.log(e.target.value);
+            }
+        },
+        getResources: function(){
+            fetch("/getResourceTypes")
+                .then(response => response.json())
+                .then(results => {
+                    this.resources = results;
+                    console.log(this.resources);})
+        }
+    },    
+    created(){
+        this.getResources();
     }
 });
 
