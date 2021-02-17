@@ -6,10 +6,19 @@ Vue.component('VillageDefView', {
         <div v-for="resource in resources">
             <label>{{resource.type}}</label><input type="number" id="resource.type" value="100">
         </div>
+        <br><br>
+        <div class="d-flex flex-column">
+            <div v-for="name in villages">
+                <input id="name" type="text" v-model="name">
+            </div>
+            <button v-on:click="addVillage">New village</button>
+        </div>
     </div>`,
     data: function() {
         return {
-            'resources': []
+            'resources': [],
+            'villages': []
+
         };
     },
     methods: {
@@ -19,6 +28,15 @@ Vue.component('VillageDefView', {
                 .then(results => {
                     this.resources = results.resources;
                     console.log(this.resources);})
+        },
+
+        addVillage: function(){
+            fetch("/getData")
+            .then(response => response.json())
+            .then(results => {
+                var i = Math.floor(Math.random() * results.villageNames.length)
+                this.villages.push(results.villageNames[i])
+            })
         }
     },    
     created(){
