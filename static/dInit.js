@@ -2,6 +2,8 @@ window.onload=init
 
 // import Views
 import {DefView} from './dDefView.js';
+import {RulesView} from './dRulesView.js';
+
 
 // jQuery objects for nav and tab elements
 const defTab = $("#defTab");

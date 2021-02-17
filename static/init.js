@@ -1,23 +1,56 @@
-window.onload = initvillage
+window.onload = init
 
 import { APICalls } from './api.js';
 import { resource } from './resourceVue.js';
 import { VBuilder} from './vueVillageBuilder.js';
+import {DefView} from './dDefView.js';
+import {RulesView} from './dRulesView.js';
 
-function testAPI(){
+// jQuery objects for nav and tab elements
+const defTab = $("#defTab");
+const defNav = $("#defNav");
+const rulesTab = $("#rulesTab");
+const rulesNav = $("#rulesNav");
+const simTab = $("#simTab");
+const simNav = $("#simNav");
+const resultsTab = $("#resultsTab");
+const resultsNav = $("#resultsNav");
 
-    const response = APICalls.getWorkSpeed(2);
-    response.then(function(results){
-        console.log(results);
-    });
-    
+// initializ all classes and nav bar
+function init(){
+    //DefView.init();
+    initNavBar();
 }
 
-function initvillage(){
-    // let btn = document.getElementById("btn");
-    // btn.addEventListener('click', function() { testAPI();});
-    // const response = APICalls.getWorkSpeed();
-    // response.then(function(results){
-    //     console.log(results);
-    // });
+// add click functions to nav tabs
+function initNavBar(){
+    defNav.click( function() {setTab("def")});
+    rulesNav.click( function() {setTab("rules")});
+    simNav.click( function() {setTab("sim")});
+    resultsNav.click( function() {setTab("results")});
+}
+
+// hide tabs and show clicked tab
+function setTab(tab){
+    defNav.removeClass("ActiveTab");
+    rulesNav.removeClass("ActiveTab");
+    simNav.removeClass("ActiveTab");
+    resultsNav.removeClass("ActiveTab");
+    defTab.hide();
+    rulesTab.hide();
+    simTab.hide();
+    resultsTab.hide();
+    if(tab == "def"){
+        defNav.addClass("ActiveTab");
+        defTab.show();
+    } else if(tab == "rules"){
+        rulesNav.addClass("ActiveTab");
+        rulesTab.show();
+    }else if(tab == "sim"){
+        simNav.addClass("ActiveTab");
+        simTab.show();
+    } else if(tab == "results"){
+        resultsNav.addClass("ActiveTab");
+        resultsTab.show();
+    } 
 }

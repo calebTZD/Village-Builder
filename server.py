@@ -28,12 +28,6 @@ gamesocket = SocketIO(app)
 def index():
     return redirect(url_for('static', filename='Village.html'))
 
-@app.route('/villager/workSpeed')
-def workSpeed():
-    vilager = request.args.get('vil')
-
-    return '2'
-
 @app.route('/getData')
 def getResource():
     data = villageData.getInitalResources()

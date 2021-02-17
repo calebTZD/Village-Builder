@@ -1,36 +1,53 @@
 Vue.component('VillageDefView', {
     template: `<div>
-                    Village                  
-                </div>`,
+        Starting Villagers <input type="number" id="NoVillagers" value="10"> 
+        <br> Starting size <input type="number" id="Size" value="1">
+        <br><br> Starting resource amounts: 
+        <div v-for="resource in resources">
+            <label>{{resource.type}}</label><input type="number" id="resource.type" value="100">
+        </div>
+    </div>`,
+    data: function() {
+        return {
+            'resources': []
+        };
+    },
+    methods: {
+        getResources: function(){
+            fetch("/getData")
+                .then(response => response.json())
+                .then(results => {
+                    this.resources = results.resources;
+                    console.log(this.resources);})
+        }
+    },    
+    created(){
+        this.getResources();
+    }
+});
+Vue.component('VillagerDefVeiw', {
+    template: `<div>
+        Base Work Speed <input type="number" id="WorkSpeed" value="5"> 
+        
+    </div>`,
     data: function() {
         return {};
     },
     methods: {
+        
     }
 });
 
 Vue.component('ResourceDefView', {
     template: `<div>
-                    R: {{name}}
-                    <input v-model="simData['numVillages']"> 
-                    <ul>
-                        <li v-for="r in resources">
-                            <input type="checkbox" :value="r" :id="r" v-model="simData['checkedResources']" @click="check($event)"> {{r}}
-                        </li>
-                    </ul>
-                    <div v-for="r in resources">
-                        <input type="checkbox" :value="r" :id="r" v-model="simData['checkedResources']" @click="check($event)"> {{r}}
-                    </div>
-                    <p>{{simData}}</p>                
+                    <input type="checkbox" id="buildingcheck" @click="check($event)"> Use buildings for resources
+                    <div v-for="resource in resources">
+                    <input type="checkbox" id="resource.type" @click="check($event)"><label>{{resource.type}}</label>
+                    </div>                    
                 </div>`,
     data: function() {
         return {
-            'name': "resource",
-            'resources': [],
-            'simData': {
-                'numVillages': 1,
-                'checkedResources': []
-            }
+            'resources': []
         };
     },
     methods: {    
@@ -40,10 +57,10 @@ Vue.component('ResourceDefView', {
             }
         },
         getResources: function(){
-            fetch("/getResourceTypes")
+            fetch("/getData")
                 .then(response => response.json())
                 .then(results => {
-                    this.resources = results;
+                    this.resources = results.resources;
                     console.log(this.resources);})
         }
     },    
@@ -55,9 +72,14 @@ Vue.component('ResourceDefView', {
 let DefViewClass = new Vue({
     el: '#DefView',
     template: `<div>
-                    <button v-on:click="village">Village</button>
-                    <button v-on:click="resource">Resource</button>
-                    <component v-bind:is="defView" />
+                    <div class="d-flex fles-row">
+                        <div class="d-flex flex-column">
+                            <button v-on:click="village">Village</button>
+                            <button v-on:click="resource">Resource</button>
+                            <button v-on:click="Villager">Villager</button>
+                        </div>
+                        <component v-bind:is="defView" />
+                    </div>
                 </div>`,
     data: {
         defView: 'VillageDefView'
@@ -69,11 +91,8 @@ let DefViewClass = new Vue({
         resource: function(){
             this.defView = 'ResourceDefView';
         },
-        addAsync: async function(){
-            const response = await fetch("/add2?x="+this.x+"&y="+this.y);
-            const results = await response.json();
-            console.log(JSON.stringify(results));
-            this.value = JSON.stringify(results);
+        Villager: function(){
+            this.defView = 'VillagerDefVeiw';
         }
     }
   });

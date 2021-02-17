@@ -21,19 +21,26 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
     <script type="module" src="init.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
 
 </head>
 <body>
-
-    <div id="VueBody"></div>
-
-
-        <div id="resource" class="d-flex flex-row justify-content-center">
-            <label id="body-content">Resources: </label>
-            
-            <div id="VueResource"></div>
-        
-
-
+    <div id="NavBar" class="row">
+        <div id="defNav" class="NavTab ActiveTab col">Definitions</div>
+        <div id="rulesNav" class="NavTab col">Rules</div>
+        <div id="simNav" class="NavTab col">Simulations</div>
+        <div id="resultsNav" class="NavTab col">Results</div>
+    </div>
+    <div id="defTab" class="row">
+        <div id="DefView"></div>
+    </div>
+    <div id="rulesTab" class="row" style="display: none;">
+        <div id="RulesView"></div>
+    </div>
+    <div id="simTab" class="row" style="display: none;">
+    </div>
+    <div id='resultsTab' class="row" style="display: none;">
+    </div>
 </body>
 </html>
