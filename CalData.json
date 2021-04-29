@@ -1,0 +1,405 @@
+{
+    "upgrades":{
+        "LoggingCamp":{
+            "settings": { 
+                "type": "loggingCamp",
+                "cost": 250
+             },
+            "fixed": { },
+            "simValues": {
+                "currentLevel": 1,
+                "enhanced": "loggingCamp",
+                "enhancement": 2
+            }
+      
+        },
+        "Mine":{
+            "settings": { 
+                "type": "mine",
+                "cost": 300
+             },
+            "fixed": { },
+            "simValues": {
+                "currentLevel": 1,
+                "enhanced": "mine",
+                "enhancement": 2
+            }
+      
+        },
+        "Quarry":{
+            "settings": { 
+                "type": "quarry",
+                "cost": 275
+             },
+            "fixed": { },
+            "simValues": {
+                "currentLevel": 1,
+                "enhanced": "quarry",
+                "enhancement": 2
+            }
+      
+        },
+        "Farm":{
+            "settings": { 
+                "type": "farm",
+                "cost": 200
+             },
+            "fixed": { },
+            "simValues": {
+                "currentLevel": 1,
+                "enhanced": "farm",
+                "enhancement": 2
+            }
+      
+        },
+        "HuntersHut":{
+            "settings": { 
+                "type": "huntersHut",
+                "cost": 275
+             },
+            "fixed": { },
+            "simValues": {
+                "currentLevel": 1,
+                "enhanced": "huntersHut",
+                "enhancement": 2
+            }      
+        },
+        "Market":{
+            "settings": { 
+                "type": "market",
+                "cost": 500
+             },
+            "fixed": { },
+            "simValues": {
+                "currentLevel": 1,
+                "enhanced": "market",
+                "enhancement": 2
+            }      
+        },  
+        "Library":{
+            "settings": { 
+                "type": "library",
+                "cost": 500
+             },
+            "fixed": { },
+            "simValues": {
+                "currentLevel": 1,
+                "enhanced": "library",
+                "enhancement": 2
+            }      
+        }, 
+        "Barracks":{
+            "settings": { 
+                "type": "barracks",
+                "cost": 300
+             },
+            "fixed": { },
+            "simValues": {
+                "currentLevel": 1,
+                "enhanced": "barracks",
+                "enhancement": 2
+            }      
+        }, 
+        
+        "Townhall":{
+            "settings": { 
+                "type": "townhall",
+                "cost": 700
+             },
+            "fixed": { },
+            "simValues": {
+                "currentLevel": 1,
+                "enhanced": "townhall",
+                "enhancement": 2
+            }      
+        },
+        "Lumberjack":{
+            "settings": { 
+                "type": "lumberjack",
+                "cost": 275
+             },
+            "fixed": { },
+            "simValues": {
+                "currentLevel": 1,
+                "enhanced": "lumberjack",
+                "enhancement": 2
+            }      
+        },
+        "Miner":{
+            "settings": { 
+                "type": "miner",
+                "cost": 275
+             },
+            "fixed": { },
+            "simValues": {
+                "currentLevel": 1,
+                "enhanced": "miner",
+                "enhancement": 2
+            }      
+        },
+        "Stonemason":{
+            "settings": { 
+                "type": "stonemason",
+                "cost": 275
+             },
+            "fixed": { },
+            "simValues": {
+                "currentLevel": 1,
+                "enhanced": "stonemason",
+                "enhancement": 2
+            }      
+        },
+        "Farmer":{
+            "settings": { 
+                "type": "farmer",
+                "cost": 275
+             },
+            "fixed": { },
+            "simValues": {
+                "currentLevel": 1,
+                "enhanced": "farmer",
+                "enhancement": 2
+            }      
+        },
+        "Hunter":{
+            "settings": { 
+                "type": "hunter",
+                "cost": 275
+             },
+            "fixed": { },
+            "simValues": {
+                "currentLevel": 1,
+                "enhanced": "hunter",
+                "enhancement": 2
+            }      
+        },
+        "Merchant":{
+            "settings": { 
+                "type": "merchant",
+                "cost": 275
+             },
+            "fixed": { },
+            "simValues": {
+                "currentLevel": 1,
+                "enhanced": "merchant",
+                "enhancement": 2
+            }      
+        },
+        "Warrior":{
+            "settings": { 
+                "type": "warrior",
+                "cost": 275
+             },
+            "fixed": { },
+            "simValues": {
+                "currentLevel": 1,
+                "enhanced": "warrior",
+                "enhancement": 2
+            }      
+        }
+            
+    },
+
+    "Building": {
+        "LoggingCamp":{
+            "settings": { 
+                "maxHealth": 100,
+                "buildTime": 24,
+                "resourceAmount": 2000
+
+             },
+            "fixed": { 
+                "cost": {
+                    "wood": 50,
+                    "gold": 50
+                },
+                "type": "loggingCamp",
+                "villagersAbleToSupport": 5,
+                "resource": "wood"
+            },
+            "simValues": {
+                "percentBuilt": 0,
+                "currentHealth": 100, 
+                "level": 1             
+            }
+        },
+        "Mine":{
+            "settings": { 
+                "maxHealth": 100,
+                "buildTime": 24,
+                "resourceAmount": 2000
+
+             },
+            "fixed": { 
+                "cost": {
+                    "wood": 50,
+                    "gold": 50
+                },
+                "type": "Mine",
+                "villagersAbleToSupport": 5,
+                "resource": "Ore"
+            },
+            "simValues": {
+                "percentBuilt": 0,
+                "currentHealth": 100, 
+                "level": 1             
+            }
+      
+        },
+        "Quarry":{
+            "settings": { 
+                "maxHealth": 100,
+                "buildTime": 24,
+                "resourceAmount": 2000
+
+             },
+            "fixed": { 
+                "cost": {
+                    "wood": 50,
+                    "gold": 50
+                },
+                "type": "quarry",
+                "villagersAbleToSupport": 5,
+                "resource": "stone"
+            },
+            "simValues": {
+                "percentBuilt": 0,
+                "currentHealth": 100, 
+                "level": 1             
+            }
+        },
+        "Farm":{
+            "settings": { 
+                "maxHealth": 100,
+                "buildTime": 24,
+                "resourceAmount": 2000
+
+             },
+            "fixed": { 
+                "cost": {
+                    "wood": 50,
+                    "gold": 50
+                },
+                "type": "farm",
+                "villagersAbleToSupport": 5,
+                "resource": "food"
+            },
+            "simValues": {
+                "percentBuilt": 0,
+                "currentHealth": 100, 
+                "level": 1             
+            }
+        },
+        "HuntersHut":{
+            "settings": { 
+                "maxHealth": 100,
+                "buildTime": 24,
+                "resourceAmount": 2000
+
+             },
+            "fixed": { 
+                "cost": {
+                    "wood": 50,
+                    "gold": 50
+                },
+                "type": "huntersHut",
+                "villagersAbleToSupport": 5,
+                "resource": "food"
+            },
+            "simValues": {
+                "percentBuilt": 0,
+                "currentHealth": 100, 
+                "level": 1             
+            } 
+        },
+        "Market":{
+            "settings": { 
+                "maxHealth": 100,
+                "buildTime": 24,
+                "resourceAmount": 2000
+
+             },
+            "fixed": { 
+                "cost": {
+                    "wood": 50,
+                    "gold": 50
+                },
+                "type": "market",
+                "villagersAbleToSupport": 5,
+                "resource": "gold"
+            },
+            "simValues": {
+                "percentBuilt": 0,
+                "currentHealth": 100, 
+                "level": 1             
+            }
+        },  
+        "Library":{
+            "settings": { 
+                "maxHealth": 100,
+                "buildTime": 24,
+                "resourceAmount": 2000
+
+             },
+            "fixed": { 
+                "cost": {
+                    "wood": 50,
+                    "gold": 50
+                },
+                "type": "library",
+                "villagersAbleToSupport": 5,
+                "resource": "research"
+            },
+            "simValues": {
+                "percentBuilt": 0,
+                "currentHealth": 100, 
+                "level": 1             
+            }
+        }, 
+        "Barracks":{
+            "settings": { 
+                "maxHealth": 100,
+                "buildTime": 24,
+                "resourceAmount": 2000
+
+             },
+            "fixed": { 
+                "cost": {
+                    "wood": 50,
+                    "gold": 50
+                },
+                "type": "barracks",
+                "villagersAbleToSupport": 5,
+                "resource": "Warrior"
+            },
+            "simValues": {
+                "percentBuilt": 0,
+                "currentHealth": 100, 
+                "level": 1             
+            }   
+        }
+        },
+        "Townhall":{
+            "settings": { 
+                "maxHealth": 100,
+                "buildTime": 24,
+                "resourceAmount": 2000
+
+             },
+            "fixed": { 
+                "cost": {
+                    "wood": 50,
+                    "gold": 50
+                },
+                "type": "townhall",
+                "villagersAbleToSupport": 5,
+                "resource": ""
+            },
+            "simValues": {
+                "percentBuilt": 0,
+                "currentHealth": 100, 
+                "level": 1             
+            }
+        }
+    }
+}

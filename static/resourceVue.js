@@ -1,5 +1,5 @@
 let ResourceClass = new Vue({
-    el: '#VueResource',
+    el: '',
     template: `<div>
                     <div v-for="resource in resources">
                         <label>{{resource.type}}</label>

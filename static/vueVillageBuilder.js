@@ -1,5 +1,5 @@
 let VillageBuilder = new Vue({
-    el: '#VueBody',
+    el: '',
     template: `<div>
     <div id="bdy" class="d-flex flex-row justify-content-left">
         <div id="sidebar" class="d-flex flex-column justify-content-center">

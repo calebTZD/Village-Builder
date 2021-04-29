@@ -7,17 +7,11 @@ Vue.component('VillageDefView', {
             <label>{{resource.type}}</label><input type="number" id="resource.type" value="100">
         </div>
         <br><br>
-        <div class="d-flex flex-column">
-            <div v-for="name in villages">
-                <input id="name" type="text" v-model="name">
-            </div>
-            <button v-on:click="addVillage">New village</button>
-        </div>
+        
     </div>`,
     data: function() {
         return {
             'resources': [],
-            'villages': []
 
         };
     },
@@ -30,14 +24,7 @@ Vue.component('VillageDefView', {
                     console.log(this.resources);})
         },
 
-        addVillage: function(){
-            fetch("/getData")
-            .then(response => response.json())
-            .then(results => {
-                var i = Math.floor(Math.random() * results.villageNames.length)
-                this.villages.push(results.villageNames[i])
-            })
-        }
+        
     },    
     created(){
         this.getResources();
@@ -45,8 +32,8 @@ Vue.component('VillageDefView', {
 });
 Vue.component('VillagerDefVeiw', {
     template: `<div>
-        Base Work Speed <input type="number" id="WorkSpeed" value="5"> 
-        
+        Base Work Speed <input type="number" id="WorkSpeed" value="5"><br> 
+        Allow villager types? <input type="checkbox" id="VillagerType">
     </div>`,
     data: function() {
         return {};
@@ -59,9 +46,12 @@ Vue.component('VillagerDefVeiw', {
 Vue.component('ResourceDefView', {
     template: `<div>
                     <input type="checkbox" id="buildingcheck" @click="check($event)"> Use buildings for resources
+                    <br><br>Select which resources are available:<br>
                     <div v-for="resource in resources">
-                    <input type="checkbox" id="resource.type" @click="check($event)"><label>{{resource.type}}</label>
-                    </div>                    
+                        <input type="checkbox" id="resource.type" @click="check($event)"><label>{{resource.type}}</label>
+                        <input type="number" class="resource.type" value=500>
+                    </div>
+
                 </div>`,
     data: function() {
         return {
