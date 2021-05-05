@@ -26,17 +26,27 @@
 
 </head>
 <body>
-    <div class="d-flex">
-        <div id="defTab" class="col">
-            <div id="DefView"></div>
+    <div class="d-flex flex-column">
+        <div class="d-flex">
+            <div id="sim" class="flex-fill">
+                <div id="simVue"></div>
+            </div>
+            <div id="villages" class="flex-fill">
+                <div id="villagesVue"></div>
+            </div>
         </div>
-        <div id="rulesTab" class="col">
-            <div id="RulesView"></div>
-        </div>
-        <div id="simTab" class="col">
-        </div>
-        <div id='resultsTab' class="col">
+        <div class="d-flex">
+            <div id="villagers" class="flex-fill">
+                <div id="villagersVue"></div>
+            </div>
+            <div id='locations' class="flex-fill">
+                <div id="locationsVue"></div>
+            </div>
+            <div id="buildings" class="flex-fill">
+                <div id="buildingsVue"></div>
+            </div>
         </div>
     </div>
+    <div id="results"></div>
 </body>
 </html>
