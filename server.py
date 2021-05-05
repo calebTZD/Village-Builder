@@ -30,8 +30,13 @@ def index():
 
 @app.route('/getData')
 def getResource():
-    data = villageData.getInitalResources()
-    print(data)
+    #data = villageData.getInitalResources() #TODO: remove hardcoded data
+    f = open("iData.json","r")
+    lines = f.readlines()
+    sData = ""
+    for line in lines:
+        sData += line.rstrip()
+    data = json.loads(sData)
     return serializeToJSON(data)
 
 class InvalidUsageExeption(Exception):
@@ -56,3 +61,4 @@ def handle_invalid_usage(error):
 
 if __name__ == '__main__':
     gamesocket.run(app)
+    
