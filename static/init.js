@@ -1,9 +1,7 @@
 window.onload = init
 
-import {RulesView} from './RulesView.js';
-import {VillagesView} from './VillagesView.js';
-
-
+import {SimulationApp} from './SimApp.js';
 
 function init(){
+    SimulationApp.mount('#SimView');
 }
