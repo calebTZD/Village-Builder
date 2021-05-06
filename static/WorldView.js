@@ -1,4 +1,4 @@
-const WorldViewClass = ({
+export const WorldView = ({
     props: ['worldData'],
     template: `<div>
                     <div class="d-flex flex-row">
@@ -9,10 +9,10 @@ const WorldViewClass = ({
                                 Days to Run: <input type="number" v-bind:days="worldData.settings.days">
                             </div>
                             <div>
-                                Villeger Maximum: <input type="number" v-bind:maxVillagers="worldData.settings.maxVillagersPerNillage">
+                                Villeger Maximum: <input type="number" v-bind:maxVillagers="worldData.settings.maxVillagersPerVillage">
                             </div>
                             <div>
-                                Building Maximum: <input type="number" v-bind:maxBuildings"worldData.settings.maxBuildingsPerNillage">
+                                Building Maximum: <input type="number" v-bind:maxBuildings="worldData.settings.maxBuildingsPerVillage">
                             </div>
                         </div>
                         <div class="d-flex flex-column flex-fill">
@@ -52,15 +52,8 @@ const WorldViewClass = ({
                         </div>
                     </div>
                 </div>`,
-    data: {
-        'worldData': [],
-        'maxBuildings': 0,
-        'maxVillagers': 0,
-        'days': 0
-    },
+    
     methods: {
 
     }
   });
-
-export const WorldViewClass;
