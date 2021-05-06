@@ -2,10 +2,12 @@ let VillagesViewClass = new Vue({
     el: '#VillagesView',
     props: ['simData'],
     template: `<div>
-                    {{simData}}
+                    {{villagesData}}
+                    <H1>{{villagesData.fixed.name}}</H1>
                 </div>`,
     data: {
-        'simData':{}      
+        'simData':{},
+        'villagesData': {}     
     },
     methods: {      
         getData: function(){
@@ -13,6 +15,7 @@ let VillagesViewClass = new Vue({
             .then(response => response.json())
             .then(results => {
                 this.simData = results;
+                this.villagesData = this.simData.villages;
             })
         }
     },
