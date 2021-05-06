@@ -1,5 +1,4 @@
-export const WorldView = ({
-    props: ['worldData'],
+export const WorldView = {
     template: `<div>
                     <div class="d-flex flex-row">
                         <div class="d-flex flex-column flex-fill">
@@ -52,8 +51,22 @@ export const WorldView = ({
                         </div>
                     </div>
                 </div>`,
-    
-    methods: {
 
+    data() {
+        return {
+            worldData: {}
+        }
+    },
+    methods: {      
+        getData: function(){
+            fetch("/getData")
+            .then(response => response.json())
+            .then(results => {
+                this.worldData = results.world;
+            })
+        }
+    },
+    mounted(){
+        this.getData();
     }
-  });
+}  
