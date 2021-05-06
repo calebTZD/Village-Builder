@@ -1,5 +1,5 @@
 {
-    "simulation": {
+    "world": {
         "fixed": {
             "name": "My Simulation"
         },

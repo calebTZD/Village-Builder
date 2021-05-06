@@ -1,18 +1,17 @@
-export const WorldView = ({
-    props: ['worldData'],
+export const WorldView = {
     template: `<div>
                     <div class="d-flex flex-row">
                         <div class="d-flex flex-column flex-fill">
                             <h2>Simulation Settings:</h2>
                             <br><br>
                             <div>
-                                Days to Run: <input type="number" v-bind:days="worldData.settings.days">
+                                Days to Run: <input type="number" v-model="worldData.settings.days">
                             </div>
                             <div>
-                                Villeger Maximum: <input type="number" v-bind:maxVillagers="worldData.settings.maxVillagersPerVillage">
+                                Villeger Maximum: <input type="number" v-model="worldData.settings.maxVillagersPerVillage">
                             </div>
                             <div>
-                                Building Maximum: <input type="number" v-bind:maxBuildings="worldData.settings.maxBuildingsPerVillage">
+                                Building Maximum: <input type="number" v-model="worldData.settings.maxBuildingsPerVillage">
                             </div>
                         </div>
                         <div class="d-flex flex-column flex-fill">
@@ -51,9 +50,23 @@ export const WorldView = ({
                             </div>
                         </div>
                     </div>
-                </div>`,
-    
-    methods: {
-
+                </div>
+                {{worldData}}`,
+    data() {
+        return {
+            worldData: {'settings':{'days':1, 'maxVillagersPerVillage': 1, 'maxBuildingsPerVillage': 1}}
+        }
+    },    
+    methods: {    
+        getData: async function(){
+            const response = await fetch("/getData");
+            const results = await response.json();
+            this.worldData = results.world;
+            console.log(JSON.stringify(results));
+            this.value = JSON.stringify(results);
+        }
+    },
+    created(){
+        this.getData();
     }
-  });
+  };

@@ -1,6 +1,29 @@
 export const SimulationView = {
     template: 
-    `<datacomp v-bind:mydata="simData.villages"></datacomp>`,
+    `<div>                    
+        <div class="d-flex flex-column">
+            <div class="d-flex">
+                <div id="sim" class="flex-fill">                
+                    <WorldView></WorldView>
+                </div>
+                <div id="villages" class="flex-fill">   
+                    Villages                 
+                </div>
+            </div>
+            <div class="d-flex">
+                <div id="villagers" class="flex-fill">
+                    Villagers
+                </div>
+                <div id='locations' class="flex-fill">
+                    locations
+                </div>
+                <div id="buildings" class="flex-fill">
+                    buildings
+                </div>
+            </div>
+        </div>
+    </div>
+    `,
     data() {
       return {
         simData: {}
@@ -15,7 +38,7 @@ export const SimulationView = {
             })
         }
     },
-    mounted(){
+    mount(){
         this.getData();
     }
   }  

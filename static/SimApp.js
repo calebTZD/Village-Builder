@@ -1,10 +1,9 @@
 import {SimulationView} from './SimView.js';
+import {WorldView} from './WorldView.js';
 
 const SimApp = Vue.createApp(SimulationView);
 
-SimApp.component('datacomp', {
-  props: ['mydata'],
-  template: `***{{ mydata }}`
-});
+
+SimApp.component('WorldView', WorldView);
 
 export const SimulationApp = SimApp;

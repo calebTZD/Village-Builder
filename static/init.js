@@ -1,4 +1,4 @@
-window.onload = init
+window.onload = init;
 
 import {SimulationApp} from './SimApp.js';
 

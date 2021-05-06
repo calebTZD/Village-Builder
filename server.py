@@ -26,7 +26,7 @@ gamesocket = SocketIO(app)
 
 @app.route('/') #root redirect
 def index():
-    return redirect(url_for('static', filename='Village.html'))
+    return redirect(url_for('static', filename='Simulation.html'))
 
 @app.route('/getData')
 def getResource():
