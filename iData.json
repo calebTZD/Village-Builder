@@ -1,6 +1,7 @@
 {
     "simulation": {
         "fixed": {
+            "name": "My Simulation"
         },
         "settings": {
             "days": 5,        
