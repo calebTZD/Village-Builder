@@ -27,8 +27,12 @@ export const VillagesView = {
                                     </button>
                                 </div>
                             </div>
-                            <div class="col-sm" v-if="villageData">
-                                {{villageData.fixed.name}}
+                            <div class="col-sm" v-if="villageData">                                
+                                <label>Name: </label><input type="text" v-model="villageData.fixed.name"><br>
+                                <div v-for="(value, priority) in villageData.settings.priorities">
+                                    {{priority}}:  
+                                <input type="number" v-model="villageData.settings.priorities[priority]">
+                        </div>
                             </div>
                         </div>
                     </div>
