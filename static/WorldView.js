@@ -58,13 +58,13 @@ export const WorldView = {
         }
     },    
     methods: {    
-        getData: async function(){
-            const response = await fetch("/getData");
-            const results = await response.json();
-            this.worldData = results.world;
-            console.log(JSON.stringify(results));
-            this.value = JSON.stringify(results);
-        }
+            getData: function(){
+                fetch("/getData")
+                .then(response => response.json())
+                .then(results => {
+                    this.worldData = results.world;
+                })
+            }
     },
     created(){
         this.getData();
