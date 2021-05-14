@@ -1,15 +1,15 @@
 export const BuildingView = {
-    template: `<div v-for="item in locationData">
-                    <h5>{{item.fixed.type}}:</h5>
-                    <label>Amount per Village: </label><input type="number" v-model="item.settings.numPerVillage"><br>
-                    <label>Average Distance: </label><input type="number" v-model="item.settings.aveDistance"><br>
-                    <label>Upgrade Cost: </label><input type="number" v-model="item.settings.enhancemntCost">
-
-                </div>
-                {{locationData}}`,
+    template: `<div v-for="(item, type) in buildingData">
+                    <h5>{{type}}:</h5>
+                    Max health: <input type="number" v-model="item.settings.maxHealth"><br>
+                    Time to Build: <input type="number" v-model="item.settings.buildTime"><br>
+                    Starting Amount of Resources: <input type="number" v-model="item.settings.resourceAmount"><br>
+                    Upgrade Cost: <input type="number" v-model="item.settings.enhancemntCost">
+                    <br><br>
+                </div>`,
     data() {
         return {
-            locationData: {'type':{'fixed':{'name': ""},'settings':{'numPerVillage': 1, 'aveDistance': 1, 'enhancemntCost': 200}}}
+            buildingData: {'type': {'settings':{'maxHealth': 100, 'buildTime': 9, 'resourceAmount': 2000, 'enhancemntCost': 200}}}
         }
     },    
     methods: {    
@@ -17,7 +17,7 @@ export const BuildingView = {
             fetch("/getData")
             .then(response => response.json())
             .then(results => {
-                this.locationData = results.buildings;
+                this.buildingData = results.buildings;
 
             })
         }

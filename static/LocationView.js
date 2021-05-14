@@ -4,9 +4,8 @@ export const LocationView = {
                     <label>Amount per Village: </label><input type="number" v-model="item.settings.numPerVillage"><br>
                     <label>Average Distance: </label><input type="number" v-model="item.settings.aveDistance"><br>
                     <label>Upgrade Cost: </label><input type="number" v-model="item.settings.enhancemntCost">
-
-                </div>
-                {{locationData}}`,
+                    <br><br>
+                </div>`,
     data() {
         return {
             locationData: {'type':{'fixed':{'name': ""},'settings':{'numPerVillage': 1, 'aveDistance': 1, 'enhancemntCost': 200}}}
