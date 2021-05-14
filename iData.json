@@ -62,7 +62,8 @@
                 "spawnTime": 2,
                 "enhancemntCost": 300,
                 "spawnCost": {
-                    "Food": 50
+                    "Food": 50,
+                    "wood": 100
                 }
             },
             "simValues":{
