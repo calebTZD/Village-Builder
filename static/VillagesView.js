@@ -12,11 +12,12 @@ export const VillagesView = {
         }
     },    
     methods: {    
-        getData: async function(){
-            const response = await fetch("/getData");
-            const results = await response.json();
-            this.villagesData = results.villages;
-            this.loaded = true;
+        getData: function(){
+            fetch("/getData")
+            .then(response => response.json())
+            .then(results => {
+                this.villagesData = results.villages;
+            })
         }
     },
     created(){
