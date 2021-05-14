@@ -1,14 +1,14 @@
 export const VillagesView = {
     template: `<div>
                     >>>>>>>>>>>>>test
-                    <div v-if="loaded">
+                    <div>
                         {{villagesData.fixed.name}}
+                        <div> test </div>
                     </div>
                 </div>`,
     data() {
         return {
-            loaded: false,
-            villagesData: {}
+            villagesData: {'fixed':{'name': ""}}
         }
     },    
     methods: {    
