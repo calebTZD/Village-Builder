@@ -19,7 +19,7 @@ export const VilligerView = {
                         </div>
                     </div>
                     <br>
-                </div>,
+                </div>`,
     data() {
         return {
             villagerData: {'type':{'settings':{'speed': 1, 'maxHealth': 100, 'enhancemntCost': 200, 'carryCapacity': 1, 'attack': 1, 'defense': 1, 'productionSpeed': 1, 'spawnTime': 1, 'spawnCost':{'wood': 60}}}}
