@@ -1,14 +1,26 @@
 export const VillagesView = {
     template: `<div>
-                    >>>>>>>>>>>>>test
+                    <button type="button" class="btn btn-success px-3"><i class="bi bi-plus-square" style="font-size: 1rem; color: white;"></i></button>
                     <div>
-                        {{villagesData.fixed.name}}
-                        <div> test </div>
+                        <li v-for="village in allVillages">
+                            {{village.fixed.name}}
+                        </li>
                     </div>
+                    <div>
+                        <li v-for="village in simVillages">
+                            {{village.fixed.name}}
+                        </li>
+                    </div>
+                    <div>
+                        {{villageData.fixed.name}}
+                    </div>
+                    {{simVillages}}
                 </div>`,
     data() {
         return {
-            villagesData: {'fixed':{'name': ""}}
+            allVillages: [],
+            simVillages:[],
+            villageData: {'fixed':{'name': "test"}}
         }
     },    
     methods: {    
@@ -16,8 +28,13 @@ export const VillagesView = {
             fetch("/getData")
             .then(response => response.json())
             .then(results => {
-                this.villagesData = results.villages;
-            })
+                this.simVillages = results.villages;
+            });
+            fetch("/getVillages")
+            .then(response => response.json())
+            .then(results => {
+                this.allVillages = results;
+            });
         }
     },
     created(){

@@ -15,9 +15,9 @@
             "curTick": 1
         }
     },
-    "villages": {
+    "villages": [{
         "fixed": {
-            "name": "Dragon Land",
+            "name": "Default",
             "type": "village"
         },
         "settings": {
@@ -45,7 +45,7 @@
                 "Research": 0
             }
         }
-    },
+    }],
     "villagers":{
         "Farmer": {
             "fixed": {

@@ -39,6 +39,17 @@ def getResource():
     data = json.loads(sData)
     return serializeToJSON(data)
 
+@app.route('/getVillages')
+def getVillages():
+    #data = villageData.getInitalResources() #TODO: remove hardcoded data
+    f = open("iDataVillages.json","r")
+    lines = f.readlines()
+    sData = ""
+    for line in lines:
+        sData += line.rstrip()
+    data = json.loads(sData)
+    return json.dumps(data)
+
 class InvalidUsageExeption(Exception):
     def __init__(self, message, status_code=400, data={}):
         Exception.__init__(self)

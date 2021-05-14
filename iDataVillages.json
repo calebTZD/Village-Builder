@@ -1,0 +1,95 @@
+[
+    {
+        "fixed": {
+            "name": "Rohan",
+            "type": "village"
+        },
+        "settings": {
+            "priorities": {
+                "FoodProduction": 5,
+                "WoodProduction": 1,
+                "StoneProduction": 1,
+                "OreProduction": 1,
+                "Commerce": 1,
+                "War": 10,
+                "Research": 1,
+                "Searching": 1
+            }
+        },
+        "simValues":{
+            "villagers": [],
+            "locations": [],
+            "size": 1,
+            "resources": {
+                "Food": 0,
+                "Wood": 0,
+                "Stone": 0,
+                "Ore": 0,
+                "Money": 0,
+                "Research": 0
+            }
+        }
+    },
+    {
+        "fixed": {
+            "name": "Rivendale",
+            "type": "village"
+        },
+        "settings": {
+            "priorities": {
+                "FoodProduction": 3,
+                "WoodProduction": 1,
+                "StoneProduction": 1,
+                "OreProduction": 1,
+                "Commerce": 1,
+                "War": 9,
+                "Research": 1,
+                "Searching": 1
+            }
+        },
+        "simValues":{
+            "villagers": [],
+            "locations": [],
+            "size": 1,
+            "resources": {
+                "Food": 0,
+                "Wood": 0,
+                "Stone": 0,
+                "Ore": 0,
+                "Money": 0,
+                "Research": 0
+            }
+        }
+    },
+    {
+        "fixed": {
+            "name": "Moria",
+            "type": "village"
+        },
+        "settings": {
+            "priorities": {
+                "FoodProduction": 1,
+                "WoodProduction": 1,
+                "StoneProduction": 10,
+                "OreProduction": 1,
+                "Commerce": 1,
+                "War": 8,
+                "Research": 1,
+                "Searching": 1
+            }
+        },
+        "simValues":{
+            "villagers": [],
+            "locations": [],
+            "size": 1,
+            "resources": {
+                "Food": 0,
+                "Wood": 0,
+                "Stone": 0,
+                "Ore": 0,
+                "Money": 0,
+                "Research": 0
+            }
+        }
+    }
+]
