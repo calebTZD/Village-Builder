@@ -48,7 +48,10 @@ def getVillages():
     for line in lines:
         sData += line.rstrip()
     data = json.loads(sData)
-    return json.dumps(data)
+    villages = {}
+    for village in data:
+        villages[village['fixed']['name']] = village
+    return json.dumps(villages)
 
 class InvalidUsageExeption(Exception):
     def __init__(self, message, status_code=400, data={}):
