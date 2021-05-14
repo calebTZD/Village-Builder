@@ -1,16 +1,25 @@
-let VillagesViewClass = new Vue({
-    el: '#VillagesView',
-    props: ['simdata'],
+export const VillagesView = {
     template: `<div>
-                    test
-                    {{simdata}}
+                    >>>>>>>>>>>>>test
+                    <div v-if="loaded">
+                        {{villagesData.fixed.name}}
+                    </div>
                 </div>`,
-    data: {
+    data() {
+        return {
+            loaded: false,
+            villagesData: {}
+        }
+    },    
+    methods: {    
+        getData: async function(){
+            const response = await fetch("/getData");
+            const results = await response.json();
+            this.villagesData = results.villages;
+            this.loaded = true;
+        }
     },
-    methods: {      
-    },
-    mounted(){        
+    created(){
+        this.getData();
     }
-});
-
-export const VillagesView = VillagesViewClass;
+};

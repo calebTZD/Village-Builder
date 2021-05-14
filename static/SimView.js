@@ -6,8 +6,8 @@ export const SimulationView = {
                 <div id="sim" class="flex-fill">                
                     <WorldView></WorldView>
                 </div>
-                <div id="villages" class="flex-fill">   
-                    Villages                 
+                <div id="villages" class="flex-fill">                  
+                    <VillagesView></VillagesView>  
                 </div>
             </div>
             <div class="d-flex">
