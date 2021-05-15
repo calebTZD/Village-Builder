@@ -1,8 +1,8 @@
 export const WorldView = {
     template: `<div>
-                    <div class="d-flex flex-row">
+                    <div class="d-flex">
                         <div class="d-flex flex-column flex-fill">
-                            <h2>Simulation Settings:</h2>
+                            <h4>Simulation Settings:</h4>
                             <br><br>
                             <div>
                                 Days to Run: <input type="number" v-model="worldData.settings.days">
@@ -15,7 +15,7 @@ export const WorldView = {
                             </div>
                         </div>
                         <div class="d-flex flex-column flex-fill">
-                            <h4>Starting Villagers</h4>
+                            <h5>Starting Villagers</h5>
                             <div>
                                 <input type="checkbox" id="lumberjack" value="lumberjack" v-model="worldData.settings.startingVillagers">
                                 <label for="lumberjack"> Lumberjack </label>
@@ -50,8 +50,7 @@ export const WorldView = {
                             </div>
                         </div>
                     </div>
-                </div>
-                {{worldData}}`,
+                </div>`,
     data() {
         return {
             worldData: {'settings':{'days':1, 'maxVillagersPerVillage': 1, 'maxBuildingsPerVillage': 1, 'startingVillagers': []}}
