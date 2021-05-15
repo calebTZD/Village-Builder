@@ -15,8 +15,7 @@
             "curTick": 1
         }
     },
-    "villages": {
-        "Default": {
+    "villages": [{
             "fixed": {
                 "name": "Default",
                 "type": "village"
@@ -45,9 +44,8 @@
                     "Money": 0,
                     "Research": 0
                 }
-            }
-        }
-    },
+        }        
+    }],
     "villagers":{
         "Farmer": {
             "fixed": {
