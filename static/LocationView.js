@@ -1,10 +1,17 @@
 export const LocationView = {
-    template: `<div v-for="item in locationData">
-                    <h5>{{item.fixed.type}}:</h5>
-                    <label>Amount per Village: </label><input type="number" class="form-control" v-model="item.settings.numPerVillage"><br>
-                    <label>Average Distance: </label><input type="number" class="form-control" v-model="item.settings.aveDistance"><br>
-                    <label>Upgrade Cost: </label><input type="number" class="form-control" v-model="item.settings.enhancemntCost">
-                    <br><br>
+    template: `<div class="d-flex">
+                    <div class="d-flex flex-column justify-content-between">
+                        <div>Type</div>
+                        <div>Amount per Village</div>
+                        <div>Avewrage Distance</div>
+                        <div>Upgrade Cost</div>
+                    </div>
+                    <div v-for="(item, type) in locationData" class="d-flex flex-column">
+                        <h5>{{type}}</h5>
+                        </label><input type="number" class="form-control" v-model="item.settings.numPerVillage">
+                        </label><input type="number" class="form-control" v-model="item.settings.aveDistance">
+                        </label><input type="number" class="form-control" v-model="item.settings.enhancemntCost">
+                    </div>
                 </div>`,
     data() {
         return {
