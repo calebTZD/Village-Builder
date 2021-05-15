@@ -11,7 +11,7 @@ export const VillagesView = {
                             <div class="list-group">
                                 <div v-for="village in allVillages" >
                                     <button class="list-group-item list-group-item-action" type="button" v-if="isNotInSim(village)" v-on:click="addVillage(village)">
-                                        {{village.fixed.name}}
+                                        {{village.fixed.name}}(Sim1)
                                     </button>
                                 </div>
                             </div>
@@ -65,7 +65,7 @@ export const VillagesView = {
             this.villageData = village;
         },
         removeVillage: function(village){
-            if ((this.villageData) && (village.fixed.name == this.villageData.fixed.name)){
+            if (village === this.villageData){
                 this.villageData = null;
             }
             let index = this.simVillages.indexOf(village);
