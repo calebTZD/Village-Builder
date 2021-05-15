@@ -1,40 +1,40 @@
 export const VillagesView = {
-    template: `<div>                    
-                    <div class="container">
-                        <div class="row">
-                            
-                            <i class="bi bi-chevron-double-down" style="font-size: 1rem; color: blue;" v-on:click="showAllVillages()" v-show="!showAll"></i>
-                            <i class="bi bi-chevron-double-up" style="font-size: 1rem; color: blue;" v-on:click="hideAllVillages()" v-show="showAll">Done</i>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2" v-show="showAll">
-                                <div class="list-group">
-                                    <div v-for="village in allVillages" >
-                                        <button class="list-group-item list-group-item-action" type="button" v-if="isNotInSim(village)">
-                                            {{village.fixed.name}}
-                                            <i class="bi bi-plus-square float-right" style="font-size: 1rem; color: green;" v-on:click="addVillage(village)" ></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="list-group">
-                                    <button type="button" class="list-group-item list-group-item-action" v-for="village in simVillages" v-on:click="setVillage(village)">
+    template: `
+                <div class="d-flex flex-column">
+                    <h4>Villages</h4>
+                    <div class="d-flex">
+                        <div class="flex-column">                            
+                            <i class="bi bi bi-plus-square" style="font-size: 1rem; color: blue;" v-on:click="showAllVillages()" v-show="!showAll"></i>
+                            <i class="bi bi-chevron-double-left" style="font-size: 1rem; color: blue;" v-on:click="hideAllVillages()" v-show="showAll"></i>
+                        </div>                    
+                        <div class="flex-column" v-show="showAll">
+                            <div class="list-group">
+                                <div v-for="village in allVillages" >
+                                    <button class="list-group-item list-group-item-action" type="button" v-if="isNotInSim(village)" v-on:click="addVillage(village)">
                                         {{village.fixed.name}}
-                                        <i class="bi bi-x-square  float-right" style="font-size: 1rem; color: red;" v-on:click="removeVillage(village)" ></i>
                                     </button>
                                 </div>
                             </div>
-                            <div class="col-sm" v-if="villageData">                                
-                                <label>Name: </label><input type="text" v-model="villageData.fixed.name"><br>
-                                <div v-for="(value, priority) in villageData.settings.priorities">
-                                    {{priority}}:  
-                                <input type="number" v-model="villageData.settings.priorities[priority]">
                         </div>
+                        <div class="flex-column">
+                            <div class="list-group">
+                                <button type="button" class="list-group-item list-group-item-action" v-for="village in simVillages" v-on:click="setVillage(village)">
+                                    {{village.fixed.name}}
+                                    <i class="bi bi-x-square  float-right" style="font-size: 1rem; color: red;" v-on:click.stop="removeVillage(village)" ></i>
+                                </button>
                             </div>
                         </div>
+                        <div class="flex-column" v-if="villageData" :key="villageData">                                
+                            <label>Name: </label><input type="text" v-model="villageData.fixed.name"><br>
+                            <div v-for="(value, priority) in villageData.settings.priorities">
+                                {{priority}}:  
+                                <input type="number" v-model="villageData.settings.priorities[priority]">
+                            </div>
+                        </div>
+                        <div class="flex-column" v-else> 
+                            <p>No Village Selected</p> 
+                        </div
                     </div>
-                    {{simVillages}}
                 </div>`,
     data() {
         return {
@@ -65,6 +65,9 @@ export const VillagesView = {
             this.villageData = village;
         },
         removeVillage: function(village){
+            if ((this.villageData) && (village.fixed.name == this.villageData.fixed.name)){
+                this.villageData = null;
+            }
             let index = this.simVillages.indexOf(village);
             this.simVillages.splice(index, 1);
         },
