@@ -17,35 +17,35 @@ export const WorldView = {
                         <div class="d-flex flex-column flex-fill">
                             <h4>Starting Villagers</h4>
                             <div>
-                                <input type="checkbox" id="lumberjack">
+                                <input type="checkbox" id="lumberjack" value="lumberjack" v-model="worldData.settings.startingVillagers">
                                 <label for="lumberjack"> Lumberjack </label>
                             </div>
                             <div>
-                                <input type="checkbox" id="farmer">
+                                <input type="checkbox" id="farmer" value="farmer" v-model="worldData.settings.startingVillagers">
                                 <label for="farmer"> Farmer </label>
                             </div>
                             <div>
-                                <input type="checkbox" id="hunter">
+                                <input type="checkbox" id="hunter" value="hunter" v-model="worldData.settings.startingVillagers">
                                 <label for="hunter"> Hunter </label>
                             </div>
                             <div>
-                                <input type="checkbox" id="stonemason">
+                                <input type="checkbox" id="stonemason" value="stonemason" v-model="worldData.settings.startingVillagers">
                                 <label for="stonemason"> Stonemason </label>
                             </div>
                             <div>
-                                <input type="checkbox" id="miner">
+                                <input type="checkbox" id="miner" value="miner" v-model="worldData.settings.startingVillagers">
                                 <label for="miner"> Miner </label>
                             </div>
                             <div>
-                                <input type="checkbox" id="merchant">
+                                <input type="checkbox" id="merchant" value="merchant" v-model="worldData.settings.startingVillagers">
                                 <label for="merchant"> Merchant </label>
                             </div>
                             <div>
-                                <input type="checkbox" id="researcher">
+                                <input type="checkbox" id="researcher" value="researcher" v-model="worldData.settings.startingVillagers">
                                 <label for="researcher"> Researcher </label>
                             </div>
                             <div>
-                                <input type="checkbox" id="warrior">
+                                <input type="checkbox" id="warrior" value="warrior" v-model="worldData.settings.startingVillagers">
                                 <label for="warrior"> Warrior </label>
                             </div>
                         </div>
@@ -54,7 +54,7 @@ export const WorldView = {
                 {{worldData}}`,
     data() {
         return {
-            worldData: {'settings':{'days':1, 'maxVillagersPerVillage': 1, 'maxBuildingsPerVillage': 1}}
+            worldData: {'settings':{'days':1, 'maxVillagersPerVillage': 1, 'maxBuildingsPerVillage': 1, 'startingVillagers': []}}
         }
     },    
     methods: {    
