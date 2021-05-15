@@ -1,6 +1,6 @@
 export const VilligerView = {
-    template: `<div class="d-flex flex-column width flex-fill">
-                    <div class="d-flex justify-content-between ">
+    template: `<div class="d-flex width flex-fill">
+                    <div class="d-flex flex-column justify-content-between ">
                         <div class="flex-fill">Type</div>
                         <div class="flex-fill">Speed</div>
                         <div class="flex-fill">Max Health</div>
@@ -11,8 +11,8 @@ export const VilligerView = {
                         <div class="flex-fill">Production Speed</div>
                         <div class="flex-fill">Spawn Time</div>
                     </div>
-                    <div v-for="(item, type) in villagerData" class="d-flex justify-content-around ">
-                            <div class="flex-fill float-right">{{type}}</div>
+                    <div v-for="(item, type) in villagerData" class="d-flex flex-column justify-content-around ">
+                            <div class="flex-fill ">{{type}}</div>
                             <div><input type="number" class="form-control flex-fill" v-model="item.settings.speed"></div>
                             <div><input type="number" class="form-control flex-fill" v-model="item.settings.maxHealth"></div>
                             <div><input type="number" class="form-control flex-fill" v-model="item.settings.enhancemntCost"></div>
