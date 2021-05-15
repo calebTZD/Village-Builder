@@ -1,9 +1,9 @@
 export const LocationView = {
     template: `<div v-for="item in locationData">
                     <h5>{{item.fixed.type}}:</h5>
-                    <label>Amount per Village: </label><input type="number" v-model="item.settings.numPerVillage"><br>
-                    <label>Average Distance: </label><input type="number" v-model="item.settings.aveDistance"><br>
-                    <label>Upgrade Cost: </label><input type="number" v-model="item.settings.enhancemntCost">
+                    <label>Amount per Village: </label><input type="number" class="form-control" v-model="item.settings.numPerVillage"><br>
+                    <label>Average Distance: </label><input type="number" class="form-control" v-model="item.settings.aveDistance"><br>
+                    <label>Upgrade Cost: </label><input type="number" class="form-control" v-model="item.settings.enhancemntCost">
                     <br><br>
                 </div>`,
     data() {

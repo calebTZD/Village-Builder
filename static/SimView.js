@@ -10,7 +10,7 @@ export const SimulationView = {
                     <VillagesView></VillagesView>  
                 </div>
             </div>
-            <div class="d-flex">
+            
                 <div id="villagers" class="flex-fill">
                 <h4> Villager Settings: </h4><br>
                 <VilligerView></VilligerView>
@@ -23,7 +23,7 @@ export const SimulationView = {
                 <h4> building Settings: </h4><br>
                 <BuildingView></BuildingView>
                 </div>
-            </div>
+            
         </div>
     </div>
     `,

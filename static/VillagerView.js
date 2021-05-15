@@ -1,24 +1,28 @@
 export const VilligerView = {
-    template: `<div v-for="(item, type) in villagerData">
-                    <div>
-                        <div>
-                            <h5>{{type}}:</h5>
-                            <label>Speed: </label><input type="number" v-model="item.settings.speed"><br>
-                            <label>Max health: </label><input type="number" v-model="item.settings.maxHealth"><br>
-                            <label>Upgrade Cost: </label><input type="number" v-model="item.settings.enhancemntCost"><br>
-                            <label>Carry Capacity: </label><input type="number" v-model="item.settings.carryCapacity"><br>
-                            <label>Attack: </label><input type="number" v-model="item.settings.attack"><br>
-                            <label>Defence Cost: </label><input type="number" v-model="item.settings.defense"><br>
-                            <label>Production Speed: </label><input type="number" v-model="item.settings.productionSpeed"><br>
-                            <label>Spawn Time: </label><input type="number" v-model="item.settings.spawnTime">
-                        </div>
-                        <h6> Spawn Cost: </h6>
-                        <div v-for="(cost, typea) in item.settings.spawnCost">
-                            {{typea}}:  
-                            <input type="number" v-model="item.settings.spawnCost[typea]">
-                        </div>
+    template: `<div class="d-flex flex-column width flex-fill">
+                    <div class="d-flex justify-content-between ">
+                        <div class="flex-fill">Type</div>
+                        <div class="flex-fill">Speed</div>
+                        <div class="flex-fill">Max Health</div>
+                        <div class="flex-fill">Upgrade Cost</div>
+                        <div class="flex-fill">Carry Capacity</div>
+                        <div class="flex-fill"> Attack</div>
+                        <div class="flex-fill">Defence</div>
+                        <div class="flex-fill">Production Speed</div>
+                        <div class="flex-fill">Spawn Time</div>
                     </div>
-                    <br>
+                    <div v-for="(item, type) in villagerData" class="d-flex justify-content-around ">
+                            <div class="flex-fill float-right">{{type}}</div>
+                            <div><input type="number" class="form-control flex-fill" v-model="item.settings.speed"></div>
+                            <div><input type="number" class="form-control flex-fill" v-model="item.settings.maxHealth"></div>
+                            <div><input type="number" class="form-control flex-fill" v-model="item.settings.enhancemntCost"></div>
+                            <div><input type="number" class="form-control flex-fill" v-model="item.settings.carryCapacity"></div>
+                            <div><input type="number" class="form-control flex-fill" v-model="item.settings.attack"></div>
+                            <div><input type="number" class="form-control flex-fill" v-model="item.settings.defense"></div>
+                            <div><input type="number" class="form-control flex-fill" v-model="item.settings.productionSpeed"></div>
+                            <div><input type="number" class="form-control flex-fill" v-model="item.settings.spawnTime"></div>
+
+                    </div>
                 </div>`,
     data() {
         return {

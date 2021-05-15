@@ -1,10 +1,10 @@
 export const BuildingView = {
     template: `<div v-for="(item, type) in buildingData">
                     <h5>{{type}}:</h5>
-                    Max health: <input type="number" v-model="item.settings.maxHealth"><br>
-                    Time to Build: <input type="number" v-model="item.settings.buildTime"><br>
-                    Starting Amount of Resources: <input type="number" v-model="item.settings.resourceAmount"><br>
-                    Upgrade Cost: <input type="number" v-model="item.settings.enhancemntCost">
+                    Max health: <input type="number" class="form-control" v-model="item.settings.maxHealth"><br>
+                    Time to Build: <input type="number" class="form-control" v-model="item.settings.buildTime"><br>
+                    Starting Amount of Resources: <input type="number" class="form-control" v-model="item.settings.resourceAmount"><br>
+                    Upgrade Cost: <input type="number" class="form-control" v-model="item.settings.enhancemntCost">
                     <br><br>
                 </div>`,
     data() {
