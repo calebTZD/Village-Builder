@@ -47,10 +47,7 @@ def getVillages():
     sData = ""
     for line in lines:
         sData += line.rstrip()
-    data = json.loads(sData)
-    villages = {}
-    for village in data:
-        villages[village['fixed']['name']] = village
+    villages = json.loads(sData)
     return json.dumps(villages)
 
 class InvalidUsageExeption(Exception):
