@@ -1,16 +1,17 @@
 from pymongo import MongoClient
 
-class villageData:
+class DBaccess:
     def __init__(self):
         self.client = MongoClient("mongodb://localhost:27017/admin")
-        self.villageDB = self.client["villageBuilder"]
-        self.initalValCol = self.villageDB["initalValues"]
+        self.villageDB = self.client["RTSDB"]
+        self.SimCol = self.villageDB["Sims"]
+        self.VillageCol = self.villageDB["Villages"]
+        self.StatCol = self.villageDB["Stats"]
 
-    def initGamesCollection(self):
-        initalValCol = self.villageDB["villageBuilder"]
-        initalValCol.drop()
-        initalValCol.create_index('VillageId')
+    def initSimCollection(self):
+        self.SimCol.drop()
+        self.SimCol.create_index("name", unique=True)
         
 
 
-VillageDB = villageData()
+DB = DBaccess()
