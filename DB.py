@@ -12,6 +12,4 @@ class DBaccess:
         self.SimCol.drop()
         self.SimCol.create_index("name", unique=True)
         
-
-
 DB = DBaccess()
