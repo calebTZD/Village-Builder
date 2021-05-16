@@ -1,4 +1,4 @@
-from DB import VillageDB
+from DB import DB
 
 class villageDataClass:
     def __init__(self):

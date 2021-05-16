@@ -1,7 +1,7 @@
 {
+    "name": "The Myst",
     "world": {
         "fixed": {
-            "name": "My Simulation"
         },
         "settings": {
             "days": 5,        
