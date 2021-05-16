@@ -1,23 +1,37 @@
 from DB import DB
 
-class villageDataClass:
+class SimDataClass:
     def __init__(self):
-        self.db = VillageDB
+        self.db = DB
 
-    def getInitalVals(self, villageid):
-        return self.db.initalValCol.find_one({'vId': villageid})
+    def getSimByName(self, name):
+        pass     
+        #return self.db.initalValCol.find_one({'vId': villageid})
 
-    def storeVals(self, valData):
-        self.db.initalValCol.replace_one({"vId": valData["vId"]}, valData, upsert=True) 
+    def createSim(self, simData):
+        pass
+        #self.db.initalValCol.replace_one({"vId": valData["vId"]}, valData, upsert=True) 
 
-    def getInitalResources(self):
-        return self.db.initalValCol.find_one()
+    def deleteSim(self):
+        pass
+        #return self.db.initalValCol.find_one()
+    
+    def updateSimWorld(self, name, wordData):
+        pass
 
-villageData = villageDataClass()
+    def updateSimVillages(self, name, villagesData):
+        pass
 
-if __name__== "__main__":
-    from initDB import *
-    from pprint import pprint
-    villageData.db.initGamesCollection()
-    villageData.storeVals(inVals)
-    pprint(villageData.getInitalResources())
+    def updateSimVillagers(self, name, villagersData):
+        pass
+
+    def updateSimLocations(self, name, locationsData):
+        pass
+    
+    def updateSimBuildings(self, name, buildingsData):
+        pass
+
+
+
+
+SimData = SimDataClass()
