@@ -1,6 +1,6 @@
 from flask import Flask, request, make_response, render_template, redirect, url_for, after_this_request, jsonify
 from flask_socketio import SocketIO
-import traceback, json
+import sys, traceback, json
 from bson import json_util
 
 from SimData import SimData
@@ -40,16 +40,28 @@ def getResource():
 
 @app.route('/updateVillages', methods = ['POST'])
 def updateVillages():
-    simName = request.args.get('simName')
-    villages = json.loads(request.data)
-    results = SimData.updateVillages(simName, villages)
-    return "Success" if results == True else "Failed"
+    try:
+        simName = request.args.get('simName')
+        villages = json.loads(request.data)
+        results = SimData.updateVillages(simName, villages)
+        if results == True:
+            return "Success"
+        else:
+            raise Exception("Failure")
+    except:
+        traceback.print_exc(file=sys.stdout)
+        raise InvalidUsageExeption("Failed to update Villages.", status_code=400)
 
 @app.route('/getVillages', methods = ['GET'])
 def getVillages():
-    simName = request.args.get('simName')
-    villages = SimData.getVillages(simName)
-    return json.dumps(villages)
+    try:
+        simName = request.args.get('simName')
+        villages = SimData.getVillages(simName)
+        return json.dumps(villages)
+    except Exception:
+        traceback.print_exc(file=sys.stdout)
+        raise InvalidUsageExeption("Failed to get Villages.", status_code=400)
+    
 
 class InvalidUsageExeption(Exception):
     def __init__(self, message, status_code=400, data={}):
