@@ -1,4 +1,4 @@
-from pymongo import MongoClient
+from pymongo import MongoClient, ASCENDING
 
 class DBaccess:
     def __init__(self):
@@ -14,7 +14,7 @@ class DBaccess:
     
     def initVillagesCollection(self):
         self.VillageCol.drop()
-        self.VillageCol.create_index(["villageName", "simulationName"], unique=True)
+        self.VillageCol.create_index([("name", ASCENDING), ("simulationName", ASCENDING)], unique=True)
 
     def initStatsCollection(self):
         self.StatCol.drop()

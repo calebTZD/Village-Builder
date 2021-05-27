@@ -4,43 +4,73 @@ class SimDataClass:
     def __init__(self):
         self.db = DB
 
-    def getSimByName(self, name):
+    def getByName(self, name):
         return self.db.SimCol.find_one({'name': name})
 
-    def createSim(self, simData):
-        pass
-        #self.db.initalValCol.replace_one({"vId": valData["vId"]}, valData, upsert=True) 
+    def create(self, simData):
+        sim = self.db.SimCol.insert_one(simData) 
+        if sim:
+            return True
+        else:
+            return False
 
-    def deleteSim(self):
-        pass
-        #return self.db.initalValCol.find_one()
-    
+    def delete(self, name):
+        sim = self.db.SimCol.delete_one({"name": name})
+        if sim:
+            return True
+        else:
+            return False
+
     def getWorld(self, simName):
         sim = self.db.SimCol.find_one({'name': simName})
         if sim:
-            return sim["world"]
-        else:
-            return None
+            return sim["world"]            
 
     def updateWorld(self, simName, wordData):
-        results = DB.SimCol.update_one({"name": simName}, {"$set": {"world": wordData}})
+        results =  DB.SimCol.update_one({"name": simName}, {"$set": {"world": wordData}})
         if results and results.matched_count == 1:
             return True
         else:
             return False
 
-    def updateSimVillages(self, name, villagesData):
-        pass
+    def updateVillages(self, simName, villagesData):
+        results =  DB.SimCol.update_one({"name": simName}, {"$set": {"villages": villagesData}})
+        if results and results.matched_count == 1:
+            for v in villagesData:
+                self.updateVillage(simName, v)
+            return True
+        else:
+            return False
 
-    def updateSimVillagers(self, name, villagersData):
-        pass
+    def updateVillagers(self, simName, villData):
+        results =  DB.SimCol.update_one({"name": simName}, {"$set": {"villagers": villData}})
+        if results and results.matched_count == 1:
+            return True
+        else:
+            return False
 
-    def updateSimLocations(self, name, locationsData):
-        pass
+
+    def updateLocations(self, simName, locationsData):
+        results =  DB.SimCol.update_one({"name": simName}, {"$set": {"villagers": locationsData}})
+        if results and results.matched_count == 1:
+            return True
+        else:
+            return False
+
     
-    def updateSimBuildings(self, name, buildingsData):
-        pass
+    def updateBuildings(self, simName, buildingsData):
+        results =  DB.SimCol.update_one({"name": simName}, {"$set": {"villagers": buildingsData}})
+        if results and results.matched_count == 1:
+            return True
+        else:
+            return False
 
+    def getAllVillages(self):
+        return list(DB.VillageCol.find())
+
+    def updateVillage(self, simulationName, villageData):
+        villageData['simulationName'] = simulationName
+        results =  DB.VillageCol.replace_one({"name": villageData['name'], "simulationName": simulationName}, villageData, upsert=True)           
 
 
 
@@ -49,11 +79,25 @@ SimData = SimDataClass()
 if __name__ == '__main__':
     from pprint import pprint
     import json
-    world = SimData.getWorld("The Myst")
-    pprint(world)
-    world["settings"]["days"] = 55
-    resulst = SimData.updateWorld("The Myst2", world)
-    pprint(resulst)
-    world = SimData.getWorld("The Myst")
-    pprint(world)
+    # world = SimData.getWorld("The Myst")
+    # pprint(world)
+    # world["settings"]["days"] = 55
+    # resulst = SimData.updateWorld("The Myst", world)
+    # pprint(resulst)
+    # world = SimData.getWorld("The Myst")
+    # pprint(SimData.delete("The Myst"))
 
+#########################################################   
+# Villages
+#########################################################
+    villages = SimData.getAllVillages()
+    pprint(len(villages))
+    v = villages[0]
+    v.pop('_id', None)
+    SimData.updateVillage("test", v)
+    villages = SimData.getAllVillages()
+    pprint(len(villages))
+    v["priorities"]["FoodProduction"] = 77
+    SimData.updateVillage("test", v)
+    villages = SimData.getAllVillages()
+    pprint(villages)
