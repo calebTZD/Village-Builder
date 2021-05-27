@@ -38,6 +38,13 @@ def getResource():
     data = json.loads(sData)
     return serializeToJSON(data)
 
+@app.route('/updateVillages', methods = ['POST'])
+def updateVillages():
+    simName = request.args.get('simName')
+    villages = json.loads(request.data)
+    results = SimData.updateVillages(simName, villages)
+    return "Success" if results == True else "Failed"
+
 @app.route('/getVillages', methods = ['GET'])
 def getVillages():
     simName = request.args.get('simName')
