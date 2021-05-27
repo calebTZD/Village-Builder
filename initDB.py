@@ -19,11 +19,12 @@ pprint(data["name"])
 
 #UPDATE
 wObj = obj["world"]
-wObj["settings"]["days"] = 50
+wObj["days"] = 50
 results = DB.SimCol.update_one({"name": obj["name"]}, {"$set": {"world": wObj}})
 pprint(results.modified_count) #If 0 update did not happen
 data = DB.SimCol.find_one({'name': obj["name"]})
 pprint(data["world"])
+pprint(data)
 
 #DELETE
 # results = DB.SimCol.delete_one({"name": obj["name"]})

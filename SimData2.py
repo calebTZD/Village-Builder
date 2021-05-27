@@ -18,10 +18,16 @@ class SimDataClass:
     def getWorld(self, simName):
         sim = self.db.SimCol.find_one({'name': simName})
         if sim:
-            return sim["world"]            
+            return sim["world"]
+        else:
+            return None
 
     def updateWorld(self, simName, wordData):
-        return DB.SimCol.update_one({"name": simName}, {"$set": {"world": wordData}})
+        results = DB.SimCol.update_one({"name": simName}, {"$set": {"world": wordData}})
+        if results and results.matched_count == 1:
+            return True
+        else:
+            return False
 
     def updateSimVillages(self, name, villagesData):
         pass
@@ -46,7 +52,7 @@ if __name__ == '__main__':
     world = SimData.getWorld("The Myst")
     pprint(world)
     world["settings"]["days"] = 55
-    resulst = SimData.updateWorld("The Myst", world)
+    resulst = SimData.updateWorld("The Myst2", world)
     pprint(resulst)
     world = SimData.getWorld("The Myst")
     pprint(world)
