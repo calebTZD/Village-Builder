@@ -26,10 +26,10 @@ data = DB.SimCol.find_one({'name': obj["name"]})
 pprint(data["world"])
 
 #DELETE
-results = DB.SimCol.delete_one({"name": obj["name"]})
-pprint(results.deleted_count) #If 0 update did not happen
-data = DB.SimCol.find_one({'name': obj["name"]})
-pprint(data["name"])
+# results = DB.SimCol.delete_one({"name": obj["name"]})
+# pprint(results.deleted_count) #If 0 update did not happen
+# data = DB.SimCol.find_one({'name': obj["name"]})
+# pprint(data["name"])
 
 # obj["name"] = "Riven"
 # DB.SimCol.replace_one({"name": obj["name"]}, obj, upsert=True)
