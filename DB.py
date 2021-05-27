@@ -11,5 +11,13 @@ class DBaccess:
     def initSimCollection(self):
         self.SimCol.drop()
         self.SimCol.create_index("name", unique=True)
+    
+    def initVillagesCollection(self):
+        self.VillageCol.drop()
+        self.VillageCol.create_index(["villageName", "simulationName"], unique=True)
+
+    def initStatsCollection(self):
+        self.StatCol.drop()
+        self.StatCol.create_index("simulationName", unique=True)
         
 DB = DBaccess()
