@@ -1,3 +1,4 @@
+from warnings import simplefilter
 from DB import DB
 
 class SimDataClass:
@@ -41,9 +42,12 @@ class SimDataClass:
     def updateVillages(self, simName, villagesData):
         results =  DB.SimCol.update_one({"name": simName}, {"$set": {"villages": villagesData}})
         if results and results.matched_count == 1:
+            for v in villagesData:
+                self.updateVillage(simName, v)
             return True
         else:
             return False
+
 
     def getVillagers(self, simName):
         sim = self.db.SimCol.find_one({'name': simName})
@@ -81,7 +85,12 @@ class SimDataClass:
         else:
             return False
 
+    def getAllVillages(self):
+        return list(DB.VillageCol.find())
 
+    def updateVillage(self, simulationName, villageData):
+        villageData['simulationName'] = simulationName
+        results =  DB.VillageCol.replace_one({"name": villageData['name'], "simulationName": simulationName}, villageData, upsert=True)
 
 
 
@@ -137,3 +146,23 @@ if __name__ == '__main__':
     # pprint(resulst)
     # bul = SimData.getBuildings("The Myst")
     # pprint(bul)
+
+#########################################################   
+# Villages
+#########################################################
+    # villages = SimData.getAllVillages()
+    # pprint(len(villages))
+    # v = villages[0]
+    # v.pop('_id', None)
+    # SimData.updateVillage("test", v)
+    # villages = SimData.getAllVillages()
+    # pprint(len(villages))
+    # v["priorities"]["FoodProduction"] = 77
+    # SimData.updateVillage("test", v)
+    # villages = SimData.getAllVillages()
+    # pprint(villages)
+
+    vill = SimData.getVillages("The Myst")
+    SimData.updateVillages("The Myst", vill)
+    villages = SimData.getAllVillages()
+    pprint(villages)

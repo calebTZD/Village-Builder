@@ -9,15 +9,15 @@ export const BuildingView = {
                     </div>
                     <div v-for="(item, type) in buildingData" class="d-flex flex-column">
                         <h5>{{type}}</h5>
-                        <input type="number" class="form-control" v-model="item.settings.maxHealth">
-                        <input type="number" class="form-control" v-model="item.settings.buildTime">
-                        <input type="number" class="form-control" v-model="item.settings.resourceAmount">
-                        <input type="number" class="form-control" v-model="item.settings.enhancemntCost">
+                        <input type="number" class="form-control" v-model="item.maxHealth">
+                        <input type="number" class="form-control" v-model="item.buildTime">
+                        <input type="number" class="form-control" v-model="item.resourceAmount">
+                        <input type="number" class="form-control" v-model="item.enhancemntCost">
                     </div>
                 </div>`,
     data() {
         return {
-            buildingData: {'type': {'settings':{'maxHealth': 100, 'buildTime': 9, 'resourceAmount': 2000, 'enhancemntCost': 200}}}
+            buildingData: {'type': {'maxHealth': 100, 'buildTime': 9, 'resourceAmount': 2000, 'enhancemntCost': 200}}
         }
     },    
     methods: {    

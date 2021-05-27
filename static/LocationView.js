@@ -8,14 +8,14 @@ export const LocationView = {
                     </div>
                     <div v-for="(item, type) in locationData" class="d-flex flex-column">
                         <h5>{{type}}</h5>
-                        </label><input type="number" class="form-control" v-model="item.settings.numPerVillage">
-                        </label><input type="number" class="form-control" v-model="item.settings.aveDistance">
-                        </label><input type="number" class="form-control" v-model="item.settings.enhancemntCost">
+                        </label><input type="number" class="form-control" v-model="item.numPerVillage">
+                        </label><input type="number" class="form-control" v-model="item.aveDistance">
+                        </label><input type="number" class="form-control" v-model="item.enhancemntCost">
                     </div>
                 </div>`,
     data() {
         return {
-            locationData: {'type':{'fixed':{'name': ""},'settings':{'numPerVillage': 1, 'aveDistance': 1, 'enhancemntCost': 200}}}
+            locationData: {'type':{'name': "",'numPerVillage': 1, 'aveDistance': 1, 'enhancemntCost': 200}}
         }
     },    
     methods: {    

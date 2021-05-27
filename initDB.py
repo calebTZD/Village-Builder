@@ -13,9 +13,9 @@ sData = ""
 for line in lines:
     sData += line.rstrip()
 obj = json.loads(sData)
-results = DB.SimCol.insert_one({"name": obj["name"]}, obj)
+results = DB.SimCol.insert_one(obj)
 data = DB.SimCol.find_one()
-pprint(data["name"])
+pprint(data)
 
 
 #################################################################

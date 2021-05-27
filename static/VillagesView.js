@@ -25,10 +25,10 @@ export const VillagesView = {
                             </div>
                         </div>
                         <div class="flex-column" v-if="villageData" :key="villageData">                                
-                            <label>Name: </label><input type="text" v-model="villageData.fixed.name"><br>
-                            <div v-for="(value, priority) in villageData.settings.priorities">
+                            <label>Name: </label><input type="text" v-model="villageData.name"><br>
+                            <div v-for="(value, priority) in villageData.priorities">
                                 {{priority}}:  
-                                <input type="number" v-model="villageData.settings.priorities[priority]">
+                                <input type="number" v-model="villageData.priorities[priority]">
                             </div>
                         </div>
                         <div class="flex-column" v-else> 
