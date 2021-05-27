@@ -3,8 +3,7 @@ from flask_socketio import SocketIO
 import traceback, json
 from bson import json_util
 
-
-from villageMongo import villageData
+from SimData import SimData
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!' #TODO: Change this
@@ -39,15 +38,10 @@ def getResource():
     data = json.loads(sData)
     return serializeToJSON(data)
 
-@app.route('/getVillages')
+@app.route('/getVillages', methods = ['GET'])
 def getVillages():
-    #data = villageData.getInitalResources() #TODO: remove hardcoded data
-    f = open("iDataVillages.json","r")
-    lines = f.readlines()
-    sData = ""
-    for line in lines:
-        sData += line.rstrip()
-    villages = json.loads(sData)
+    simName = request.args.get('simName')
+    villages = SimData.getVillages(simName)
     return json.dumps(villages)
 
 class InvalidUsageExeption(Exception):
