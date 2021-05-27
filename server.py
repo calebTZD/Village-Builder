@@ -4,7 +4,7 @@ import traceback, json
 from bson import json_util
 
 
-from villageMongo import villageData
+from SimData import SimData
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!' #TODO: Change this
@@ -21,7 +21,7 @@ def serializeToJSON(data):
 gamesocket = SocketIO(app)
 
 ##############################################################################
-#                        REST API
+#                       REST API
 ##############################################################################
 
 @app.route('/') #root redirect
@@ -30,13 +30,8 @@ def index():
 
 @app.route('/getData')
 def getResource():
-    #data = villageData.getInitalResources() #TODO: remove hardcoded data
-    f = open("iData.json","r")
-    lines = f.readlines()
-    sData = ""
-    for line in lines:
-        sData += line.rstrip()
-    data = json.loads(sData)
+    data = SimData.getByName() 
+
     return serializeToJSON(data)
 
 @app.route('/getVillages')
