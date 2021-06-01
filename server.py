@@ -28,11 +28,20 @@ gamesocket = SocketIO(app)
 def index():
     return redirect(url_for('static', filename='Simulation.html'))
 
+@app.route('/getSims', methods = ['GET'])
+def getSims():
+    try:
+        sims = SimData.getAllSimNames()
+        return json.dumps(sims)
+    except:
+        traceback.print_exc(file=sys.stdout)
+        raise InvalidUsageExeption("Failed to update Villages.", status_code=400)
+
 @app.route('/getSim', methods = ['GET'])
 def getSim():
     try:
         simName = request.args.get('simName')
-        sim = SimData.getByName(simName)
+        sim = SimData.getSymByName(simName)
         return json.dumps(sim)
     except:
         traceback.print_exc(file=sys.stdout)
@@ -42,7 +51,7 @@ def getSim():
 def createSim():
     try:
         simName = request.args.get('simName')
-        SimData.create(simName)
+        SimData.createSym(simName)
         sim = SimData.getByName(simName)
         return json.dumps(sim)
     except:
@@ -53,7 +62,7 @@ def createSim():
 def deletSim():
     try:
         simName = request.args.get('simName')
-        results = SimData.delete(simName)
+        results = SimData.deleteSim(simName)
         if results == True:
             return "Success"
         else:
