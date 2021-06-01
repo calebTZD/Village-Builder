@@ -27,6 +27,7 @@ def testSimulations():
     # world = SimData.getSymByName("The Myst")
     # pprint(world)
 
+def testSymVillages():
     vill = SimData.getVillages("The Myst")
     pprint(vill)
     vill[0]["priorities"]["FoodProduction"] = 55
@@ -35,6 +36,7 @@ def testSimulations():
     vill = SimData.getVillages("The Myst")
     pprint(vill)
 
+def testSymVillagers():
     gers = SimData.getVillagers("The Myst")
     pprint(gers)
     gers["Farmer"]["speed"] = 55
@@ -43,6 +45,7 @@ def testSimulations():
     gers = SimData.getVillagers("The Myst")
     pprint(gers)
 
+def testSymLocations():
     loc = SimData.getLocations("The Myst")
     pprint(loc)
     loc["Grassland"]["numPerVillage"] = 55
@@ -51,6 +54,7 @@ def testSimulations():
     loc = SimData.getLocations("The Myst")
     pprint(loc)
 
+def testSymBuildings():
     bul = SimData.getBuildings("The Myst")
     pprint(bul)
     bul["LoggingCamp"]["maxHealth"] = 55
@@ -87,4 +91,8 @@ if __name__ == '__main__':
     initDB.initVillagesCollection()
     initDB.addSampleData()
     testSimulations()
+    testSymVillages()
+    testSymVillagers()
+    testSymLocations()
+    testSymBuildings()
     testVillages()
