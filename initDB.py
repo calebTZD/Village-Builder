@@ -20,7 +20,8 @@ def addSampleData():
 
     #Villages
     for v in Defaults.villages:
-        v['simulationName'] = "The Myst"
+        village = dict(v)
+        village['simulationName'] = "The Myst"
         DB.VillageCol.insert_one(v)
 
 
