@@ -5,17 +5,27 @@ class SimDataClass:
     def __init__(self):
         self.db = DB
 
-    def getByName(self, name):
-        return self.db.SimCol.find_one({'name': name})
+    def getAllSimNames(self):
+        cursor = DB.SimCol.find({}, {"name": 1})
+        simNames = []
+        for sim in cursor:
+            simNames.append(sim["name"])
+        return simNames
+    
+    def getSymByName(self, name):
+        sim = self.db.SimCol.find_one({'name': name})
+        if sim:
+            sim.pop('_id', None)
+        return sim
 
-    def create(self, simData):
+    def createSym(self, simData):
         sim = self.db.SimCol.insert_one(simData) 
         if sim:
             return True
         else:
             return False
 
-    def delete(self, name):
+    def deleteSym(self, name):
         sim = self.db.SimCol.delete_one({"name": name})
         if sim:
             return True
@@ -23,7 +33,7 @@ class SimDataClass:
             return False
 
     def getWorld(self, simName):
-        sim = self.db.SimCol.find_one({'name': simName})
+        sim = self.db.SimCol.find_one({'name': simName}, {"world": 1})
         if sim:
             return sim["world"]            
 
@@ -35,7 +45,7 @@ class SimDataClass:
             return False
 
     def getVillages(self, simName):
-        sim = self.db.SimCol.find_one({'name': simName})
+        sim = self.db.SimCol.find_one({'name': simName}, {"villages": 1})
         if sim:
             return sim["villages"]
 
@@ -50,7 +60,7 @@ class SimDataClass:
 
 
     def getVillagers(self, simName):
-        sim = self.db.SimCol.find_one({'name': simName})
+        sim = self.db.SimCol.find_one({'name': simName}, {"villagers": 1})
         if sim:
             return sim["villagers"]
 
@@ -62,7 +72,7 @@ class SimDataClass:
             return False
 
     def getLocations(self, simName):
-        sim = self.db.SimCol.find_one({'name': simName})
+        sim = self.db.SimCol.find_one({'name': simName}, {"locations": 1})
         if sim:
             return sim["locations"]
 
@@ -74,7 +84,7 @@ class SimDataClass:
             return False
 
     def getBuildings(self, simName):
-        sim = self.db.SimCol.find_one({'name': simName})
+        sim = self.db.SimCol.find_one({'name': simName}, {"buildings": 1})
         if sim:
             return sim["buildings"]
 
@@ -99,6 +109,11 @@ SimData = SimDataClass()
 if __name__ == '__main__':
     from pprint import pprint
     import json
+
+    # simNames = SimData.getAllSimNames()
+    # pprint(simNames)
+    # sim = SimData.getSymByName("The Myst2")
+    # pprint(sim)
     # world = SimData.getWorld("The Myst")
     # pprint(world)
     # world["days"] = 55
@@ -107,12 +122,12 @@ if __name__ == '__main__':
     # world = SimData.getWorld("The Myst")
     # pprint(world)
 
-    # SimData.create({"name": "Boldune"})
-    # sim = SimData.getByName("Boldune")
+    # SimData.createSym({"name": "Boldune"})
+    # sim = SimData.getSymByName("Boldune")
     # pprint(sim)
 
-    # SimData.delete("The Myst")
-    # world = SimData.getByName"The Myst")
+    # SimData.deleteSym("The Myst")
+    # world = SimData.getSymByName"The Myst")
     # pprint(world)
 
     # vill = SimData.getVillages("The Myst")
@@ -162,7 +177,7 @@ if __name__ == '__main__':
     # villages = SimData.getAllVillages()
     # pprint(villages)
 
-    vill = SimData.getVillages("The Myst")
-    SimData.updateVillages("The Myst", vill)
-    villages = SimData.getAllVillages()
-    pprint(villages)
+    # vill = SimData.getVillages("The Myst")
+    # SimData.updateVillages("The Myst", vill)
+    # villages = SimData.getAllVillages()
+    # pprint(villages)
