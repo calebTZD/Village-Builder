@@ -31,6 +31,6 @@ export const BuildingView = {
         }
     },
     created(){
-        this.getData();
+        //this.getData();
     }
 };

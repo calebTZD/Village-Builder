@@ -3,14 +3,14 @@ export const LocationView = {
                     <div class="d-flex flex-column justify-content-between">
                         <div>Type</div>
                         <div>Amount per Village</div>
-                        <div>Avewrage Distance</div>
+                        <div>Average Distance</div>
                         <div>Upgrade Cost</div>
                     </div>
                     <div v-for="(item, type) in locationData" class="d-flex flex-column">
                         <h5>{{type}}</h5>
-                        </label><input type="number" class="form-control" v-model="item.numPerVillage">
-                        </label><input type="number" class="form-control" v-model="item.aveDistance">
-                        </label><input type="number" class="form-control" v-model="item.enhancemntCost">
+                        <input type="number" class="form-control" v-model="item.numPerVillage">
+                        <input type="number" class="form-control" v-model="item.aveDistance">
+                        <input type="number" class="form-control" v-model="item.enhancemntCost">
                     </div>
                 </div>`,
     data() {
@@ -29,6 +29,6 @@ export const LocationView = {
         }
     },
     created(){
-        this.getData();
+        //this.getData();
     }
 };

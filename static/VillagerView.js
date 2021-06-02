@@ -40,6 +40,6 @@ export const VilligerView = {
         }
     },
     created(){
-        this.getData();
+        //this.getData();
     }
 };

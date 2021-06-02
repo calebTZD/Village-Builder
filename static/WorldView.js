@@ -33,7 +33,7 @@ export const WorldView = {
                                 <label for="stonemason"> Stonemason </label>
                             </div>
                             <div>
-                                <input type="checkbox" id="miner" value="miner" v-model="worldData.settings.startingVillagers">
+                                <input type="checkbox" id="miner" value="miner" v-model="worldData.startingVillagers">
                                 <label for="miner"> Miner </label>
                             </div>
                             <div>
@@ -56,16 +56,34 @@ export const WorldView = {
             worldData: {'days':1, 'maxVillagersPerVillage': 1, 'maxBuildingsPerVillage': 1, 'startingVillagers': []}
         }
     },    
-    methods: {    
-            getData: function(){
-                fetch("/getData")
-                .then(response => response.json())
-                .then(results => {
-                    this.worldData = results.world;
-                })
-            }
+    methods: {       
+        loadWorld: function(simName){
+            console.log("LOAD WORLD");
+            let url = new URL('../getWorld', window.location.href);
+            let params = {'simName': simName};
+            url.search = new URLSearchParams(params).toString();
+            fetch(url)
+            .then(response => response.json())
+            .then(results => { 
+                this.worldData = results;
+                console.log(this.worldData);
+            })
+        },
+        updateWorld: function(simName){            
+            console.log("UPDATE WORLD");
+            let url = new URL('../updateWorld', window.location.href);
+            let params = {'simName': simName};
+            url.search = new URLSearchParams(params).toString();
+            fetch(url, {
+                method: 'post',
+                headers: {'Content-Type' : 'application/json'},
+                body: JSON.stringify(this.worldData)})
+            .then(response => response.json())
+            .then(results => { 
+                let r = results;
+            })
+        }
     },
     created(){
-        this.getData();
     }
   };

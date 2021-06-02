@@ -35,7 +35,7 @@ def getSims():
         return json.dumps(sims)
     except:
         traceback.print_exc(file=sys.stdout)
-        raise InvalidUsageExeption("Failed to update Villages.", status_code=400)
+        raise InvalidUsageExeption("Failed to load simulation.", status_code=400)
 
 @app.route('/getSim', methods = ['GET'])
 def getSim():
@@ -45,7 +45,7 @@ def getSim():
         return json.dumps(sim)
     except:
         traceback.print_exc(file=sys.stdout)
-        raise InvalidUsageExeption("Failed to update Villages.", status_code=400)
+        raise InvalidUsageExeption("Failed to update simulation.", status_code=400)
 
 @app.route('/createSim', methods = ['GET'])
 def createSim():
@@ -56,7 +56,7 @@ def createSim():
         return json.dumps(sim)
     except:
         traceback.print_exc(file=sys.stdout)
-        raise InvalidUsageExeption("Failed to update Villages.", status_code=400)
+        raise InvalidUsageExeption("Failed to create simulation.", status_code=400)
 
 @app.route('/deletSim', methods = ['GET'])
 def deletSim():
@@ -69,7 +69,7 @@ def deletSim():
             raise Exception("Failure")    
     except:
         traceback.print_exc(file=sys.stdout)
-        raise InvalidUsageExeption("Failed to update Villages.", status_code=400)
+        raise InvalidUsageExeption("Failed to delete simulation.", status_code=400)
 
 @app.route('/getWorld', methods = ['GET'])
 def getWorld():
@@ -79,7 +79,7 @@ def getWorld():
         return json.dumps(world)
     except:
         traceback.print_exc(file=sys.stdout)
-        raise InvalidUsageExeption("Failed to update Villages.", status_code=400)
+        raise InvalidUsageExeption("Failed to load World.", status_code=400)
 
 @app.route('/updateWorld', methods = ['POST'])
 def updateWorld():
@@ -93,7 +93,7 @@ def updateWorld():
             raise Exception("Failure")
     except:
         traceback.print_exc(file=sys.stdout)
-        raise InvalidUsageExeption("Failed to update Villages.", status_code=400)
+        raise InvalidUsageExeption("Failed to update World.", status_code=400)
 
 @app.route('/getVillages', methods = ['GET'])
 def getVillages():
@@ -127,7 +127,7 @@ def getVillagers():
         return json.dumps(villagers)
     except:
         traceback.print_exc(file=sys.stdout)
-        raise InvalidUsageExeption("Failed to update Villages.", status_code=400)
+        raise InvalidUsageExeption("Failed to load Villagers.", status_code=400)
 
 @app.route('/updateVillagers', methods = ['POST'])
 def updateVillagers():
@@ -141,7 +141,7 @@ def updateVillagers():
             raise Exception("Failure")
     except:
         traceback.print_exc(file=sys.stdout)
-        raise InvalidUsageExeption("Failed to update Villages.", status_code=400)
+        raise InvalidUsageExeption("Failed to update Villagers.", status_code=400)
 
 @app.route('/getLocations', methods = ['GET'])
 def getLocations():
@@ -151,7 +151,7 @@ def getLocations():
         return json.dumps(locations)
     except:
         traceback.print_exc(file=sys.stdout)
-        raise InvalidUsageExeption("Failed to update Villages.", status_code=400)
+        raise InvalidUsageExeption("Failed to load locations.", status_code=400)
 
 @app.route('/updateLocations', methods = ['POST'])
 def updateLocations():
@@ -165,7 +165,7 @@ def updateLocations():
             raise Exception("Failure")
     except:
         traceback.print_exc(file=sys.stdout)
-        raise InvalidUsageExeption("Failed to update Villages.", status_code=400)
+        raise InvalidUsageExeption("Failed to update locations.", status_code=400)
 
 @app.route('/getBuildings', methods = ['GET'])
 def getBuildings():
@@ -175,7 +175,7 @@ def getBuildings():
         return json.dumps(buildings)
     except:
         traceback.print_exc(file=sys.stdout)
-        raise InvalidUsageExeption("Failed to update Villages.", status_code=400)
+        raise InvalidUsageExeption("Failed to load buildings.", status_code=400)
 
 @app.route('/updateBuildings', methods = ['POST'])
 def updateBuildings():
@@ -189,7 +189,7 @@ def updateBuildings():
             raise Exception("Failure")
     except:
         traceback.print_exc(file=sys.stdout)
-        raise InvalidUsageExeption("Failed to update Villages.", status_code=400)
+        raise InvalidUsageExeption("Failed to update buildings.", status_code=400)
 
 @app.route('/getAllVillages')
 def getAllVillages():
@@ -198,7 +198,7 @@ def getAllVillages():
         return json.dumps(villages)
     except:
         traceback.print_exc(file=sys.stdout)
-        raise InvalidUsageExeption("Failed to update Villages.", status_code=400)
+        raise InvalidUsageExeption("Failed to load Villages.", status_code=400)
 
 @app.route('/updateVillage', methods = ['POST'])
 def updateVillage():
@@ -212,7 +212,7 @@ def updateVillage():
             raise Exception("Failure")
     except:
         traceback.print_exc(file=sys.stdout)
-        raise InvalidUsageExeption("Failed to update Villages.", status_code=400)
+        raise InvalidUsageExeption("Failed to update Village.", status_code=400)
 
 
 class InvalidUsageExeption(Exception):

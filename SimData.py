@@ -95,8 +95,13 @@ class SimDataClass:
         else:
             return False
 
-    def getAllVillages(self):
-        return list(DB.VillageCol.find())
+    def getAllVillages(self):        
+        cursor = DB.VillageCol.find()
+        villages = []
+        for village in cursor:
+            village.pop('_id', None)
+            villages.append(village)
+        return villages
 
     def updateVillage(self, simulationName, villageData):
         villageData['simulationName'] = simulationName
