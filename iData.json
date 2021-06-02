@@ -1,5 +1,6 @@
 {
     "name": "Default",
+    "status": {"state": "new"},
     "world": {
             "days": 5,        
             "statValues": {},

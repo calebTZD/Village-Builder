@@ -12,25 +12,30 @@ class SimDataClass:
             simNames.append(sim["name"])
         return simNames
     
-    def getSymByName(self, name):
+    def getSimByName(self, name):
         sim = self.db.SimCol.find_one({'name': name})
         if sim:
             sim.pop('_id', None)
         return sim
 
-    def createSym(self, simData):
+    def createSim(self, simData):
         sim = self.db.SimCol.insert_one(simData) 
         if sim:
             return True
         else:
             return False
 
-    def deleteSym(self, name):
+    def deleteSim(self, name):
         sim = self.db.SimCol.delete_one({"name": name})
         if sim:
             return True
         else:
             return False
+
+    def getSimStatus(self, name):
+        sim = self.db.SimCol.find_one({'name': name}, {"status": 1})
+        if sim:
+            return sim["status"]
 
     def getWorld(self, simName):
         sim = self.db.SimCol.find_one({'name': simName}, {"world": 1})

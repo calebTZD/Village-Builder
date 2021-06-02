@@ -1,11 +1,15 @@
 export const SimulationView = {
     template: 
     `<div>
-        <div class="flex-column">              
-            <div v-on:click="load()">LOAD</div>              
+        <div class="flex-column" v-if="showList">              
+            <div id="simlist" class="flex-fill">                
+                <SimListView ref="simlist" @edit="onEdit"></SimListView>
+            </div>
+        </div> 
+
+        <div class="d-flex flex-column" v-if="showEdit">
+            <h4>{{simName}}</h4>
             <div v-on:click="update()">UPDATE</div>
-        </div>                  
-        <div class="d-flex flex-column">
             <div class="d-flex">
                 <div id="sim" class="flex-fill">                
                     <WorldView ref="world"></WorldView>
@@ -13,8 +17,7 @@ export const SimulationView = {
                 <div id="villages" class="flex-fill">                  
                     <VillagesView ref="villages"></VillagesView>  
                 </div>
-            </div>
-            
+            </div>            
             <div id="villagers" class="flex-fill">
                 <h4> Villager Settings: </h4><br>
                 <VilligerView ref="villagers"></VilligerView>
@@ -33,10 +36,19 @@ export const SimulationView = {
     data() {
       return {
         simName: "The Myst",
-        simData: {}
+        simData: {},
+        showEdit: false,
+        showList: true
       }
     },
-    methods: {      
+    methods: {
+        onEdit: function(simName){
+            console.log("EDIT EVENT: " + simName);
+            this.simName = simName;
+            this.showList = false;
+            this.showEdit = true;
+            this.load();
+        },   
         load: function(){
             console.log("LOAD");
             this.$refs.world.loadWorld(this.simName);
@@ -52,6 +64,8 @@ export const SimulationView = {
             this.$refs.villagers.updateVillagers(this.simName);
             this.$refs.locations.updateLocations(this.simName);
             this.$refs.buildings.updateBuildings(this.simName);
+            this.showList = true;
+            this.showEdit = false;
         }
     },
     mount(){

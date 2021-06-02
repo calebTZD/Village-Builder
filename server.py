@@ -3,8 +3,9 @@ from flask_socketio import SocketIO
 import sys, traceback, json
 from bson import json_util
 
-
 from SimData import SimData
+
+from Defaults import Defaults
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!' #TODO: Change this
@@ -43,7 +44,7 @@ def getSims():
 def getSim():
     try:
         simName = request.args.get('simName')
-        sim = SimData.getSymByName(simName)
+        sim = SimData.getSimByName(simName)
         if not sim:
                 raise NameError("Simulation not found: " + simName)
         return json.dumps(sim)
@@ -55,8 +56,10 @@ def getSim():
 def createSim():
     try:
         simName = request.args.get('simName')
-        SimData.createSym(simName)
-        sim = SimData.getByName(simName)
+        newSim = dict(Defaults.simulation)
+        newSim["name"] = simName
+        SimData.createSim(newSim)
+        sim = SimData.getSimByName(simName)
         if not sim:
                 raise NameError("Simulation not created: " + simName)
         return json.dumps(sim)
@@ -64,8 +67,8 @@ def createSim():
         traceback.print_exc(file=sys.stdout)
         raise InvalidUsageExeption("Failed to create simulation.", status_code=400)
 
-@app.route('/deletSim', methods = ['GET'])
-def deletSim():
+@app.route('/deleteSim', methods = ['GET'])
+def deleteSim():
     try:
         simName = request.args.get('simName')
         results = SimData.deleteSim(simName)
@@ -76,6 +79,18 @@ def deletSim():
     except:
         traceback.print_exc(file=sys.stdout)
         raise InvalidUsageExeption("Failed to delete simulation.", status_code=400)
+
+@app.route('/getSimStatus', methods = ['GET'])
+def getSimStatus():
+    try:
+        simName = request.args.get('simName')
+        status = SimData.getSimStatus(simName)
+        if not status:
+                raise NameError("Simulation not found: " + simName)
+        return json.dumps(status)
+    except:
+        traceback.print_exc(file=sys.stdout)
+        raise InvalidUsageExeption("Failed to load status.", status_code=400)
 
 @app.route('/getWorld', methods = ['GET'])
 def getWorld():
