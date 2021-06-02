@@ -5,10 +5,7 @@ import json
 
 def initSimulationsCollection():
     DB.initSimCollection()
-    
-#################################################################
-# Villages
-################################################################
+
 def initVillagesCollection():
     DB.initVillagesCollection()
 
@@ -22,7 +19,7 @@ def addSampleData():
     for v in Defaults.villages:
         village = dict(v)
         village['simulationName'] = "The Myst"
-        DB.VillageCol.insert_one(v)
+        DB.VillageCol.insert_one(village)
 
 
 if __name__ == '__main__':

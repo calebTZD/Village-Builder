@@ -107,7 +107,5 @@ class SimDataClass:
         villageData['simulationName'] = simulationName
         results =  DB.VillageCol.replace_one({"name": villageData['name'], "simulationName": simulationName}, villageData, upsert=True)
 
-
-
 SimData = SimDataClass()
 

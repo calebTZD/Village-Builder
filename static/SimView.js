@@ -17,45 +17,43 @@ export const SimulationView = {
             
             <div id="villagers" class="flex-fill">
                 <h4> Villager Settings: </h4><br>
-                <VilligerView></VilligerView>
+                <VilligerView ref="villagers"></VilligerView>
             </div>
             <div id='locations' class="flex-fill">
                 <h4> Location Settings: </h4><br>
-                <LocationView></LocationView>
+                <LocationView ref="locations"></LocationView>
             </div>
             <div id="buildings" class="flex-fill">
                 <h4> building Settings: </h4><br>
-                <BuildingView></BuildingView>
-            </div>
-            
+                <BuildingView ref="buildings"></BuildingView>
+            </div>            
         </div>
     </div>
     `,
     data() {
       return {
+        simName: "The Myst",
         simData: {}
       }
     },
     methods: {      
         load: function(){
             console.log("LOAD");
-            this.$refs.world.loadWorld("The Myst");
-            this.$refs.villages.loadVillages("The Myst");
+            this.$refs.world.loadWorld(this.simName);
+            this.$refs.villages.loadVillages(this.simName);
+            this.$refs.villagers.loadVillagers(this.simName);
+            this.$refs.locations.loadLocations(this.simName);
+            this.$refs.buildings.loadBuildings(this.simName);
         },      
         update: function(){
             console.log("UPDATE");
-            this.$refs.world.updateWorld("The Myst");
-            this.$refs.villages.updateVillages("The Myst");
-        },
-        getData: function(){
-            fetch("/getData")
-            .then(response => response.json())
-            .then(results => {
-                this.simData = results;
-            })
+            this.$refs.world.updateWorld(this.simName);
+            this.$refs.villages.updateVillages(this.simName);
+            this.$refs.villagers.updateVillagers(this.simName);
+            this.$refs.locations.updateLocations(this.simName);
+            this.$refs.buildings.updateBuildings(this.simName);
         }
     },
     mount(){
-        this.getData();
     }
   }  

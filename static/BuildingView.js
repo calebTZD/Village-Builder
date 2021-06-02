@@ -20,17 +20,34 @@ export const BuildingView = {
             buildingData: {'type': {'maxHealth': 100, 'buildTime': 9, 'resourceAmount': 2000, 'enhancemntCost': 200}}
         }
     },    
-    methods: {    
-        getData: function(){
-            fetch("/getData")
+    methods: {     
+        loadBuildings: function(simName){
+            console.log("LOAD BUILDINGS");
+            let url = new URL('../getBuildings', window.location.href);
+            let params = {'simName': simName};
+            url.search = new URLSearchParams(params).toString();
+            fetch(url)
             .then(response => response.json())
-            .then(results => {
-                this.buildingData = results.buildings;
-
+            .then(results => { 
+                this.buildingData = results;
+                console.log(this.buildingData);
+            })
+        },
+        updateBuildings: function(simName){            
+            console.log("UPDATE BUILDINGS");
+            let url = new URL('../updateBuildings', window.location.href);
+            let params = {'simName': simName};
+            url.search = new URLSearchParams(params).toString();
+            fetch(url, {
+                method: 'post',
+                headers: {'Content-Type' : 'application/json'},
+                body: JSON.stringify(this.buildingData)})
+            .then(response => response.json())
+            .then(results => { 
+                let r = results;
             })
         }
     },
     created(){
-        //this.getData();
     }
 };

@@ -52,12 +52,12 @@ export const VillagesView = {
             this.showAll = false;
         },
         isNotInSim: function(village){
-            let index = this.simVillages.indexOf(village);
-            return (index === -1);
+            let found = this.simVillages.find(e => e["name"] == village["name"]);
+            return (!found);
         },
         addVillage: function(village){
-            let index = this.simVillages.indexOf(village);
-            if (index === -1){
+            let found = this.simVillages.find(e => e["name"] == village["name"]);
+            if (!found){
                 this.simVillages.push(village);
             }
         },

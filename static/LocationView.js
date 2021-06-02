@@ -19,16 +19,33 @@ export const LocationView = {
         }
     },    
     methods: {    
-        getData: function(){
-            fetch("/getData")
+        loadLocations: function(simName){
+            console.log("LOAD LOCATIONS");
+            let url = new URL('../getLocations', window.location.href);
+            let params = {'simName': simName};
+            url.search = new URLSearchParams(params).toString();
+            fetch(url)
             .then(response => response.json())
-            .then(results => {
-                this.locationData = results.locations;
-
+            .then(results => { 
+                this.locationData = results;
+                console.log(this.locationData);
+            })
+        },
+        updateLocations: function(simName){            
+            console.log("UPDATE LOCATIONS");
+            let url = new URL('../updateLocations', window.location.href);
+            let params = {'simName': simName};
+            url.search = new URLSearchParams(params).toString();
+            fetch(url, {
+                method: 'post',
+                headers: {'Content-Type' : 'application/json'},
+                body: JSON.stringify(this.locationData)})
+            .then(response => response.json())
+            .then(results => { 
+                let r = results;
             })
         }
     },
     created(){
-        //this.getData();
     }
 };

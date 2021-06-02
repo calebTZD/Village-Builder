@@ -32,6 +32,8 @@ def index():
 def getSims():
     try:
         sims = SimData.getAllSimNames()
+        if not sims:
+                raise NameError("Simulations not found")
         return json.dumps(sims)
     except:
         traceback.print_exc(file=sys.stdout)
@@ -42,6 +44,8 @@ def getSim():
     try:
         simName = request.args.get('simName')
         sim = SimData.getSymByName(simName)
+        if not sim:
+                raise NameError("Simulation not found: " + simName)
         return json.dumps(sim)
     except:
         traceback.print_exc(file=sys.stdout)
@@ -53,6 +57,8 @@ def createSim():
         simName = request.args.get('simName')
         SimData.createSym(simName)
         sim = SimData.getByName(simName)
+        if not sim:
+                raise NameError("Simulation not created: " + simName)
         return json.dumps(sim)
     except:
         traceback.print_exc(file=sys.stdout)
@@ -64,7 +70,7 @@ def deletSim():
         simName = request.args.get('simName')
         results = SimData.deleteSim(simName)
         if results == True:
-            return "Success"
+            return json.dumps({'status': "Success"})
         else:
             raise Exception("Failure")    
     except:
@@ -76,6 +82,8 @@ def getWorld():
     try:
         simName = request.args.get('simName')
         world = SimData.getWorld(simName)
+        if not world:
+                raise NameError("Simulation not found: " + simName)
         return json.dumps(world)
     except:
         traceback.print_exc(file=sys.stdout)
@@ -88,7 +96,7 @@ def updateWorld():
         world = json.loads(request.data)
         results = SimData.updateWorld(simName, world)
         if results == True:
-            return "Success"
+            return json.dumps({'status': "Success"})
         else:
             raise Exception("Failure")
     except:
@@ -100,6 +108,9 @@ def getVillages():
     try:
         simName = request.args.get('simName')
         villages = SimData.getVillages(simName)
+
+        if not villages:
+                raise NameError("Simulation not found: " + simName)
         return json.dumps(villages)
     except:
         traceback.print_exc(file=sys.stdout)
@@ -112,7 +123,7 @@ def updateVillages():
         villages = json.loads(request.data)
         results = SimData.updateVillages(simName, villages)
         if results == True:
-            return "Success"
+            return json.dumps({'status': "Success"})
         else:
             raise Exception("Failure")
     except:
@@ -124,6 +135,8 @@ def getVillagers():
     try:
         simName = request.args.get('simName')
         villagers = SimData.getVillagers(simName)
+        if not villagers:
+                raise NameError("Simulation not found: " + simName)
         return json.dumps(villagers)
     except:
         traceback.print_exc(file=sys.stdout)
@@ -136,7 +149,7 @@ def updateVillagers():
         villagers = json.loads(request.data)
         results = SimData.updateVillagers(simName, villagers)
         if results == True:
-            return "Success"
+            return json.dumps({'status': "Success"})
         else:
             raise Exception("Failure")
     except:
@@ -148,6 +161,8 @@ def getLocations():
     try:
         simName = request.args.get('simName')
         locations = SimData.getLocations(simName)
+        if not locations:
+                raise NameError("Simulation not found: " + simName)
         return json.dumps(locations)
     except:
         traceback.print_exc(file=sys.stdout)
@@ -160,7 +175,7 @@ def updateLocations():
         locations = json.loads(request.data)
         results = SimData.updateLocations(simName, locations)
         if results == True:
-            return "Success"
+            return json.dumps({'status': "Success"})
         else:
             raise Exception("Failure")
     except:
@@ -172,6 +187,8 @@ def getBuildings():
     try:
         simName = request.args.get('simName')
         buildings = SimData.getBuildings(simName)
+        if not buildings:
+                raise NameError("Simulation not found: " + simName)
         return json.dumps(buildings)
     except:
         traceback.print_exc(file=sys.stdout)
@@ -184,7 +201,7 @@ def updateBuildings():
         building = json.loads(request.data)
         results = SimData.updateBuildings(simName, building)
         if results == True:
-            return "Success"
+            return json.dumps({'status': "Success"})
         else:
             raise Exception("Failure")
     except:
@@ -195,6 +212,8 @@ def updateBuildings():
 def getAllVillages():
     try:
         villages = SimData.getAllVillages()
+        if not villages:
+                raise NameError("Villages not found")
         return json.dumps(villages)
     except:
         traceback.print_exc(file=sys.stdout)
@@ -207,7 +226,7 @@ def updateVillage():
         vData = json.loads(request.data)
         results = SimData.updateVillage(simName, vData)
         if results == True:
-            return "Success"
+            return json.dumps({'status': "Success"})
         else:
             raise Exception("Failure")
     except:
@@ -218,13 +237,13 @@ def updateVillage():
 class InvalidUsageExeption(Exception):
     def __init__(self, message, status_code=400, data={}):
         Exception.__init__(self)
-        self.message = message
+        self.error = message
         self.status_code = status_code
         self.data = data
 
     def to_dict(self):
         result = dict(self.data or ())
-        result['message'] = self.message
+        result['error'] = self.error
         return result
 
 @app.errorhandler(InvalidUsageExeption)

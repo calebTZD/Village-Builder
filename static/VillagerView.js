@@ -37,9 +37,34 @@ export const VilligerView = {
                 this.villagerData = results.villagers;
 
             })
+        },     
+        loadVillagers: function(simName){
+            console.log("LOAD VILLAGERS");
+            let url = new URL('../getVillagers', window.location.href);
+            let params = {'simName': simName};
+            url.search = new URLSearchParams(params).toString();
+            fetch(url)
+            .then(response => response.json())
+            .then(results => { 
+                this.villagerData = results;
+                console.log(this.villagerData);
+            })
+        },
+        updateVillagers: function(simName){            
+            console.log("UPDATE VILLAGERS");
+            let url = new URL('../updateVillagers', window.location.href);
+            let params = {'simName': simName};
+            url.search = new URLSearchParams(params).toString();
+            fetch(url, {
+                method: 'post',
+                headers: {'Content-Type' : 'application/json'},
+                body: JSON.stringify(this.villagerData)})
+            .then(response => response.json())
+            .then(results => { 
+                let r = results;
+            })
         }
     },
     created(){
-        //this.getData();
     }
 };
