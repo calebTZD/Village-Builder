@@ -14,5 +14,3 @@ class Building:
         self.currentResources = int(self.resourceAmount)
         self.villagers = 0
 
-    def takeDamage(self, dmg):
-        self.currentHealth -= dmg

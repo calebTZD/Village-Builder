@@ -13,17 +13,5 @@ class Villager:
         self.enhancemntCost = Defaults.simulation["villagers"][type]["enhancemntCost"]
         self.spawnCost = Defaults.simulation["villagers"][type]["spawnCost"]
         self.currentHealth = int(self.maxHealth)
-        self.currentLoad = 0
-
-
-    def takeDamage(self, dmg):
-        self.currentHealth -= dmg
-
-villager = Villager("Farmer")
-
-if __name__ == '__main__':
-    from pprint import pprint
-    # pprint(villager.currentHealth)
-    # villager.takeDamage(12)
-    # pprint(villager.currentHealth)
-    # pprint(villager.maxHealth)
+        self.currentLoad = {"": 0}
+        self.status = "waiting"
