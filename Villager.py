@@ -1,17 +1,35 @@
 from Defaults import Defaults
 
-class Villager:
-    def __init__(self, type):
-        self.enhancemntFactor = Defaults.villagers[type]["enhancemntFactor"]
-        self.speed = Defaults.simulation["villagers"][type]["speed"]
-        self.maxHealth = Defaults.simulation["villagers"][type]["maxHealth"]
-        self.carryCapacity = Defaults.simulation["villagers"][type]["carryCapacity"]
-        self.attack = Defaults.simulation["villagers"][type]["attack"]
-        self.defense = Defaults.simulation["villagers"][type]["defense"]
-        self.productionSpeed = Defaults.simulation["villagers"][type]["productionSpeed"]
-        self.spawnTime = Defaults.simulation["villagers"][type]["spawnTime"]
-        self.enhancemntCost = Defaults.simulation["villagers"][type]["enhancemntCost"]
-        self.spawnCost = Defaults.simulation["villagers"][type]["spawnCost"]
+class VillagerClass:
+    def __init__(self, vType, villagerSettings):
+        self.type = vType
+
+        #Defaults
+        self.enhancemntFactor = Defaults.villagersConfig[self.type]["enhancemntFactor"]
+
+        #Settings
+        self.speed = villagerSettings["speed"]
+        self.maxHealth = villagerSettings["maxHealth"]
+        self.carryCapacity = villagerSettings["carryCapacity"]
+        self.attack = villagerSettings["attack"]
+        self.defense = villagerSettings["defense"]
+        self.productionSpeed = villagerSettings["productionSpeed"]
+        self.spawnTime = villagerSettings["spawnTime"]
+        self.enhancemntCost = villagerSettings["enhancemntCost"]
+        self.spawnCost = villagerSettings["spawnCost"]
+
+        #Initial Values
+        self.village = None
         self.currentHealth = int(self.maxHealth)
         self.currentLoad = {"": 0}
         self.status = "waiting"
+
+        #Stats
+        self.stats = {}
+
+
+if __name__ == '__main__':    
+    from pprint import pprint
+    for vType, villagerSettings in Defaults.simulation["villagers"].items():
+        v = VillagerClass(vType, villagerSettings)
+        pprint(v.__dict__)

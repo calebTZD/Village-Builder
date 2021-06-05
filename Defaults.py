@@ -6,9 +6,11 @@ class DefaultsClass:
         self.villages = self.initDefaultVillages()
         self.simulation["villages"] = self.villages
         config = self.readConfig()
-        self.villagers = config["villagers"]
-        self.buildings = config["buildings"]
-        self.locations = config["locations"]
+        self.worldConfig = config["world"]
+        self.villagesConfig = config["villages"]
+        self.villagersConfig = config["villagers"]
+        self.buildingsConfig = config["buildings"]
+        self.locationsConfig = config["locations"]
 
 
     def initDefaultSimulation(self):
@@ -47,6 +49,8 @@ Defaults = DefaultsClass()
 if __name__ == '__main__':
     from pprint import pprint
     # pprint(Defaults.simulation)
-    pprint(Defaults.villagers)
-    pprint(Defaults.buildings)
-    pprint(Defaults.locations)
+    pprint(Defaults.worldConfig)
+    pprint(Defaults.villagesConfig)
+    pprint(Defaults.villagersConfig)
+    pprint(Defaults.buildingsConfig)
+    pprint(Defaults.locationsConfig)
