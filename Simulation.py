@@ -7,7 +7,6 @@ class SimulationClass:
         self.villagerlist = []
         self.world = SimData.getSimByName(name)
 
-
     def getVillagers(self):
         for village in self.world.villages:
             for villager in village:
@@ -15,6 +14,32 @@ class SimulationClass:
         
         random.shuffle(self.villagerlist)
 
+    def doTick(self):
+        pass #TODO
+
+    def takeAction(self, villager):
+        pass #TODO
+
+    def postTick(self):
+        pass #TODO
+
+    def upgrade(self):
+        pass #TODO
+
+    def build(self):
+        pass #TODO
+
+    def createVillager(self):
+        pass #TODO
+
+    def reassignVillager(self):
+        pass #TODO
+
+    def sendArmy(self):
+        pass #TODO
+
+    def runSimulation(self):
+        pass #TODO
 
 Simulation = SimulationClass(Defaults.simulation.name)
 
