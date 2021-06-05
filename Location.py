@@ -12,14 +12,19 @@ class LocationClass:
         #Settings
         self.numPerVillage = locationSettings["numPerVillage"]
         self.aveDistance = locationSettings["aveDistance"]
-        self.enhancemntCost = locationSettings["enhancemntCost"]
+        self.enhancemntCost = locationSettings["enhancemntCost"]        
 
         #Initial Values
         self.village = None
         self.buildings = []
+        self.distance = self.calcDistance()
 
         #Stats
         self.stats = {}
+    
+    def calcDistance(self):
+        #TODO: Need to finish this
+        return self.aveDistance
     
     def addBuilding(self, building):
         #TODO: Need to validate building type and max buildings, etc.

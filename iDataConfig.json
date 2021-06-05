@@ -3,6 +3,8 @@
     "world": {
     },
     "villages": {
+        "startingLocations": ["Village", "Grassland", "Forest", "StoneDeposit", "OreDeposit"],
+        "startingBuildings": ["Townhall", "Farm", "LoggingCamp", "Quarry", "Mine"]
     },
     "villagers":{
         "Farmer": {
@@ -28,6 +30,11 @@
         }
     },
     "locations": {
+        "Village": {
+                "buildingTypes": [ "Market", "Library", "Barracks", "Townhall" ],
+                "maxBuildings": 5,
+                "enhancemntFactor": 2
+        },
         "Grassland": {
                 "buildingTypes": [ "Farm", "HuntingHut" ],
                 "maxBuildings": 3,
@@ -119,7 +126,7 @@
                     "gold": 50
                 },
                 "villagersAbleToSupport": 5,
-                "resource": "Warrior",
+                "resource": "warrior",
                 "enhancemntFactor": 2
         },
         "Townhall":{

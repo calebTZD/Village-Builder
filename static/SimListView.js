@@ -20,16 +20,16 @@ export const SimListView = {
                             <div class="flex-fill" v-if="simulation">
                                 <h4>{{simulation}}</h4>
                                 <div class="d-flex flex-column">
-                                    <button type="button" v-on:click="deleteSimulation()">
+                                    <button type="button" class="btn btn-primary" v-on:click="deleteSimulation()">
                                         Delete
                                     </button>                                    
-                                    <button type="button" v-on:click="editSimulation()">
+                                    <button type="button" class="btn btn-primary" v-on:click="editSimulation()">
                                         Edit
                                     </button>
-                                    <button type="button" v-on:click="runSimulation()">
+                                    <button type="button" class="btn btn-primary"  v-on:click="runSimulation()">
                                         Run Simulation ({{simState}})
                                     </button>
-                                    <button type="button" v-on:click="viewSimulation()" v-if="simComplete">
+                                    <button type="button" class="btn btn-primary"  v-on:click="viewSimulation()" v-if="simComplete">
                                         View Results
                                     </button>
                                 </div>

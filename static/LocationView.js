@@ -8,8 +8,10 @@ export const LocationView = {
                     </div>
                     <div v-for="(item, type) in locationData" class="d-flex flex-column">
                         <h5>{{type}}</h5>
-                        <input type="number" class="form-control" v-model="item.numPerVillage">
-                        <input type="number" class="form-control" v-model="item.aveDistance">
+                        <input type="number" class="form-control" v-model="item.numPerVillage" v-if="type==='Village'" readonly>
+                        <input type="number" class="form-control" v-model="item.numPerVillage" v-else>
+                        <input type="number" class="form-control" v-model="item.aveDistance" v-if="type==='Village'" readonly>
+                        <input type="number" class="form-control" v-model="item.aveDistance" v-else>
                         <input type="number" class="form-control" v-model="item.enhancemntCost">
                     </div>
                 </div>`,

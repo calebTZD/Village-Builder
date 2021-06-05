@@ -9,63 +9,39 @@ from Location import LocationClass
 
 class SimulationClass:
     def __init__(self, name):
-        self.villagerList = []
-        self.world = WorldClass(SimData.getWorld(name))
-
-    def getVillagers(self):
-        self.villagerList = []
-        for village in self.world.villages:
-            for villager in village:
-                self.villagerList += villager
+        self.name = name
+        self.config = SimData.getSimByName(name)
+        self.world = self.initWorld()
         
-        random.shuffle(self.villagerList)
+    def initWorld(self):
+        #World
+        world = WorldClass(self.config["world"])
 
-    def doTick(self):
-        self.getVillagers()
+        #Villages
+        for villageSettings in self.config["villages"]:
+            village = VillageClass(villageSettings)
 
-        for villager in self.villagerList:
-            self.takeAction(villager)
-
-    def takeAction(self, villager):
-        if villager.status == "gathering":
-            villager.currentLoad[villager.gatheringType] += villager.producionSpeed
-
-        elif villager.status == "traveling to village":
-            villager.distance -= villager.speed
-
-        elif villager.status == "traveling to building":
-            villager.distance -= villager.speed
-
-        elif villager.status == "attacking":
-            pass 
-
-        elif villager.status == "searching":
-            pass
-
-    def postTick(self):
-        for village in self.world.villages:
-            pass
-
-    def upgrade(self):
-        pass #TODO
-
-    def build(self):
-        pass #TODO
-
-    def createVillager(self):
-        pass #TODO
-
-    def reassignVillager(self):
-        pass #TODO
-
-    def sendArmy(self):
-        pass #TODO
-
-    def runSimulation(self):
-        tick = 0
-        while tick < self.world.days:
-            self.doTick()
-            self.postTick()
-
+            #Villagers
+            for vType in world.startingVillagers:
+                villager = VillagerClass(vType, self.config["villagers"][vType])
+                village.addVillager(villager)            
+        
+            #Locations
+            for lType in village.startingLocations:
+                location = LocationClass(lType, self.config['locations'][lType])
+                village.addLocation(location)
+            
+            #Buildings
+            for bType in village.startingBuildings:
+                building = BuildingClass(bType, self.config['buildings'][bType])
+                location = village.findLocationForBuilding(bType)
+                village.addBuilding(building, location)
+            
+            world.addVillage(village) 
+            
+        return world
+    
 if __name__ == '__main__':
-    pass
+    from pprint import pprint 
+    sim = SimulationClass("The Myst")
+    pprint(sim.__dict__)

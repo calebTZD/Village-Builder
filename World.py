@@ -3,7 +3,7 @@ from Defaults import Defaults
 class WorldClass:
     def __init__(self, worldSettings):
         #Defaults
-
+        
         #Settings
         self.days = worldSettings["days"]
         self.statValues = worldSettings["statValues"]

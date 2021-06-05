@@ -3,6 +3,8 @@ from Defaults import Defaults
 class VillageClass:
     def __init__(self, settings):
         #Defaults
+        self.startingLocations = Defaults.villagesConfig["startingLocations"]
+        self.startingBuildings = Defaults.villagesConfig["startingBuildings"]
 
         #Settings
         self.name = settings["name"]
@@ -37,6 +39,14 @@ class VillageClass:
     def addLocation(self, location):
         self.locations.append(location)
         location.village = self
+    
+    def findLocationForBuilding(self, bType):
+        #TODO: Need to check to make sure we have enough space and if it is the closest type, etc.
+        for location in self.locations:
+            if bType in location.buildingTypes:
+                return location
+
+
 
 if __name__ == '__main__':    
     from pprint import pprint 

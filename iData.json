@@ -1,12 +1,12 @@
 {
     "name": "Default",
-    "status": {"state": "new"},
+    "status": "new",
     "world": {
             "days": 5,        
             "statValues": {},
             "numVillages": 5,
             "maxVillagersPerVillage": 99,
-            "startingVillagers": ["Farmer", "Farmer", "Lumberjack"],
+            "startingVillagers": ["Farmer", "Hunter", "Lumberjack"],
             "maxBuildingsPerVillage": 10
     },
     "villages": [{
@@ -117,6 +117,11 @@
         }
     },
     "locations": {
+        "Village": {
+                "numPerVillage": 1,
+                "aveDistance": 0,
+                "enhancemntCost": 500
+        },
         "Grassland": {
                 "numPerVillage": 3,
                 "aveDistance": 1,

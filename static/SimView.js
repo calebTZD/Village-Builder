@@ -9,7 +9,8 @@ export const SimulationView = {
         <div v-show="showEdit">
             <div class="d-flex flex-column" >
                 <h4>{{simName}}</h4>
-                <div v-on:click="update()">UPDATE</div>
+                <button type="button" class="btn btn-primary" v-on:click="done()">Done</button>
+                <button type="button" class="btn btn-success" v-on:click="update()">UPDATE</button>
                 <div class="d-flex">
                     <div id="sim" class="flex-fill">                
                         <WorldView ref="world"></WorldView>
@@ -49,7 +50,11 @@ export const SimulationView = {
             this.showList = false;
             this.showEdit = true;
             this.load();
-        },   
+        },
+        done: function(){
+            this.showList = true;
+            this.showEdit = false;            
+        },
         load: function(){
             console.log("LOAD");
             this.$refs.world.loadWorld(this.simName);
@@ -65,8 +70,6 @@ export const SimulationView = {
             this.$refs.villagers.updateVillagers(this.simName);
             this.$refs.locations.updateLocations(this.simName);
             this.$refs.buildings.updateBuildings(this.simName);
-            this.showList = true;
-            this.showEdit = false;
         }
     },
     mounted(){

@@ -1,4 +1,5 @@
 from Defaults import Defaults
+from util import V_Status
 
 class VillagerClass:
     def __init__(self, vType, villagerSettings):
@@ -20,9 +21,9 @@ class VillagerClass:
 
         #Initial Values
         self.village = None
+        self.status = V_Status.UNASSIGNED
         self.currentHealth = int(self.maxHealth)
         self.currentLoad = {"": 0}
-        self.status = "waiting"
         self.distance = 0
         self.gatheringType = ""
         self.assignedBuilding = None
