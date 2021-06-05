@@ -23,6 +23,9 @@ class VillagerClass:
         self.currentHealth = int(self.maxHealth)
         self.currentLoad = {"": 0}
         self.status = "waiting"
+        self.distance = 0
+        self.gatheringType = ""
+        self.assignedBuilding = None
 
         #Stats
         self.stats = {}

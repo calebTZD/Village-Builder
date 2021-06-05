@@ -1,27 +1,50 @@
 import random
 from SimData import SimData
 from Defaults import Defaults
+from World import WorldClass
+from Villager import VillagerClass
+from Village import VillageClass
+from Building import BuildingClass
+from Location import LocationClass
 
 class SimulationClass:
     def __init__(self, name):
-        self.villagerlist = []
-        self.world = SimData.getSimByName(name)
+        self.villagerList = []
+        self.world = WorldClass(SimData.getWorld(name))
 
     def getVillagers(self):
+        self.villagerList = []
         for village in self.world.villages:
             for villager in village:
-                self.villagerlist += villager
+                self.villagerList += villager
         
-        random.shuffle(self.villagerlist)
+        random.shuffle(self.villagerList)
 
     def doTick(self):
-        pass #TODO
+        self.getVillagers()
+
+        for villager in self.villagerList:
+            self.takeAction(villager)
 
     def takeAction(self, villager):
-        pass #TODO
+        if villager.status == "gathering":
+            villager.currentLoad[villager.gatheringType] += villager.producionSpeed
+
+        elif villager.status == "traveling to village":
+            villager.distance -= villager.speed
+
+        elif villager.status == "traveling to building":
+            villager.distance -= villager.speed
+
+        elif villager.status == "attacking":
+            pass 
+
+        elif villager.status == "searching":
+            pass
 
     def postTick(self):
-        pass #TODO
+        for village in self.world.villages:
+            pass
 
     def upgrade(self):
         pass #TODO
@@ -39,26 +62,10 @@ class SimulationClass:
         pass #TODO
 
     def runSimulation(self):
-        pass #TODO
-
-Simulation = SimulationClass(Defaults.simulation.name)
+        tick = 0
+        while tick < self.world.days:
+            self.doTick()
+            self.postTick()
 
 if __name__ == '__main__':
-    tick = 0
-    tickMax = 10
-
-    while tick < tickMax:
-        Simulation.getVillagers()
-
-        for villager in Simulation.villagerlist:
-            if villager.status == "gathering":
-                villager.currentLoad[villager.gatheringType] += villager.producionSpeed
-
-            elif villager.status == "traveling to village":
-                villager.distance -= 1
-
-            elif villager.status == "attacking":
-                pass 
-
-            elif villager.status == "searching":
-                pass
+    pass
