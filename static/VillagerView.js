@@ -30,25 +30,26 @@ export const VilligerView = {
         }
     },    
     methods: {    
-        getData: function(){
-            fetch("/getData")
-            .then(response => response.json())
-            .then(results => {
-                this.villagerData = results.villagers;
-
-            })
-        },     
         loadVillagers: function(simName){
             console.log("LOAD VILLAGERS");
             let url = new URL('../getVillagers', window.location.href);
             let params = {'simName': simName};
             url.search = new URLSearchParams(params).toString();
             fetch(url)
-            .then(response => response.json())
+            .then((response) => {
+                if (response.ok){
+                    return response.json();
+                } else {
+                    throw new Error("Failed to Get Sim Villagers");
+                }
+            })
             .then(results => { 
                 this.villagerData = results;
                 console.log(this.villagerData);
             })
+            .catch((error) => {
+              console.log(error);
+            });
         },
         updateVillagers: function(simName){            
             console.log("UPDATE VILLAGERS");
@@ -59,10 +60,19 @@ export const VilligerView = {
                 method: 'post',
                 headers: {'Content-Type' : 'application/json'},
                 body: JSON.stringify(this.villagerData)})
-            .then(response => response.json())
+            .then((response) => {
+                if (response.ok){
+                    return response.json();
+                } else {
+                    throw new Error("Failed to update Sim Villagers");
+                }
+            })
             .then(results => { 
                 let r = results;
             })
+            .catch((error) => {
+              console.log(error);
+            });
         }
     },
     created(){

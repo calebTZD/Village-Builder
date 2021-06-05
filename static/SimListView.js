@@ -52,10 +52,19 @@ export const SimListView = {
             let params = {'simName': this.createName};
             url.search = new URLSearchParams(params).toString();
             fetch(url)
-            .then(response => response.json())
+            .then((response) => {
+                if (response.ok){
+                    return response.json();
+                } else {
+                    throw new Error("Failed to Create Simulation");
+                }
+            })
             .then(results => {
                 this.loadSimulations();
                 this.selectSimulation(this.createName);
+            })
+            .catch((error) => {
+              console.log(error);
             });
         },
         deleteSimulation: function(){
@@ -63,14 +72,23 @@ export const SimListView = {
             let url = new URL('../deleteSim', window.location.href);
             let params = {'simName': this.simulation};
             url.search = new URLSearchParams(params).toString();
-            fetch(url)
-            .then(response => response.json())
+            fetch(url)            
+            .then((response) => {
+                if (response.ok){
+                    return response.json();
+                } else {
+                    throw new Error("Failed to Delete Simulation");
+                }
+            })
             .then(results => {
                 this.createName = "";
                 this.simulation = null;
                 this.simState = "";
                 this.simComplete = false;;
                 this.loadSimulations();
+            })
+            .catch((error) => {
+              console.log(error);
             });
         },
         selectSimulation: function(sim){
@@ -78,8 +96,14 @@ export const SimListView = {
             let url = new URL('../getSimStatus', window.location.href);
             let params = {'simName': sim};
             url.search = new URLSearchParams(params).toString();
-            fetch(url)
-            .then(response => response.json())
+            fetch(url)            
+            .then((response) => {
+                if (response.ok){
+                    return response.json();
+                } else {
+                    throw new Error("Failed to Select Simulation");
+                }
+            })
             .then(results => {
                 this.simState = results.state;
                 if (this.simState == "complete"){
@@ -88,16 +112,28 @@ export const SimListView = {
                     this.simComplete = false;
                 }
                 this.simulation = sim;
+            })
+            .catch((error) => {
+              console.log(error);
             });
         },
         editSimulation: function(){
             this.$emit('edit', this.simulation);
         },
         loadSimulations: function(){
-            fetch("/getSims")
-            .then(response => response.json())
+            fetch("/getSims")           
+            .then((response) => {
+                if (response.ok){
+                    return response.json();
+                } else {
+                    throw new Error("Failed to Get Simulations");
+                }
+            })
             .then(results => {
                 this.simulations = results;
+            })
+            .catch((error) => {
+              console.log(error);
             });
         }
     },

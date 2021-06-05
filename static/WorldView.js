@@ -63,11 +63,20 @@ export const WorldView = {
             let params = {'simName': simName};
             url.search = new URLSearchParams(params).toString();
             fetch(url)
-            .then(response => response.json())
+            .then((response) => {
+                if (response.ok){
+                    return response.json();
+                } else {
+                    throw new Error("Failed to Get Sim World");
+                }
+            })
             .then(results => { 
                 this.worldData = results;
                 console.log(this.worldData);
             })
+            .catch((error) => {
+              console.log(error);
+            });
         },
         updateWorld: function(simName){            
             console.log("UPDATE WORLD");
@@ -78,10 +87,19 @@ export const WorldView = {
                 method: 'post',
                 headers: {'Content-Type' : 'application/json'},
                 body: JSON.stringify(this.worldData)})
-            .then(response => response.json())
+            .then((response) => {
+                if (response.ok){
+                    return response.json();
+                } else {
+                    throw new Error("Failed to Update Sim World");
+                }
+            })
             .then(results => { 
                 let r = results;
             })
+            .catch((error) => {
+              console.log(error);
+            });
         }
     },
     created(){

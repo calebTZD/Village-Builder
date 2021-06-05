@@ -25,11 +25,20 @@ export const LocationView = {
             let params = {'simName': simName};
             url.search = new URLSearchParams(params).toString();
             fetch(url)
-            .then(response => response.json())
+            .then((response) => {
+                if (response.ok){
+                    return response.json();
+                } else {
+                    throw new Error("Failed to Get Sim Locations");
+                }
+            })
             .then(results => { 
                 this.locationData = results;
                 console.log(this.locationData);
             })
+            .catch((error) => {
+              console.log(error);
+            });
         },
         updateLocations: function(simName){            
             console.log("UPDATE LOCATIONS");
@@ -40,10 +49,19 @@ export const LocationView = {
                 method: 'post',
                 headers: {'Content-Type' : 'application/json'},
                 body: JSON.stringify(this.locationData)})
-            .then(response => response.json())
+            .then((response) => {
+                if (response.ok){
+                    return response.json();
+                } else {
+                    throw new Error("Failed to Update Sim Locations");
+                }
+            })
             .then(results => { 
                 let r = results;
             })
+            .catch((error) => {
+              console.log(error);
+            });
         }
     },
     created(){

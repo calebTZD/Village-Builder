@@ -129,7 +129,7 @@ def getVillages():
         return json.dumps(villages)
     except:
         traceback.print_exc(file=sys.stdout)
-        raise InvalidUsageExeption("Failed to update Villages.", status_code=400)
+        raise InvalidUsageExeption("Failed to load Villages.", status_code=400)
 
 @app.route('/updateVillages', methods = ['POST'])
 def updateVillages():

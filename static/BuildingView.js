@@ -27,11 +27,20 @@ export const BuildingView = {
             let params = {'simName': simName};
             url.search = new URLSearchParams(params).toString();
             fetch(url)
-            .then(response => response.json())
+            .then((response) => {
+                if (response.ok){
+                    return response.json();
+                } else {
+                    throw new Error("Failed to Get Sim Buildings");
+                }
+            })
             .then(results => { 
                 this.buildingData = results;
                 console.log(this.buildingData);
             })
+            .catch((error) => {
+              console.log(error);
+            });
         },
         updateBuildings: function(simName){            
             console.log("UPDATE BUILDINGS");
@@ -42,10 +51,20 @@ export const BuildingView = {
                 method: 'post',
                 headers: {'Content-Type' : 'application/json'},
                 body: JSON.stringify(this.buildingData)})
-            .then(response => response.json())
+            
+            .then((response) => {
+                if (response.ok){
+                    return response.json();
+                } else {
+                    throw new Error("Failed to Update Sim Buildings");
+                }
+            })
             .then(results => { 
                 let r = results;
             })
+            .catch((error) => {
+              console.log(error);
+            });
         }
     },
     created(){

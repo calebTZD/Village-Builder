@@ -75,20 +75,38 @@ export const VillagesView = {
             console.log("LOAD VILLAGES");
 
             fetch("/getAllVillages")
-            .then(response => response.json())
+            .then((response) => {
+                if (response.ok){
+                    return response.json();
+                } else {
+                    throw new Error("Failed to Get All Villages");
+                }
+            })
             .then(results => {
                 this.allVillages = results;
+            })
+            .catch((error) => {
+              console.log(error);
             });
 
             let url = new URL('../getVillages', window.location.href);
             let params = {'simName': simName};
             url.search = new URLSearchParams(params).toString();
             fetch(url)
-            .then(response => response.json())
+            .then((response) => {
+                if (response.ok){
+                    return response.json();
+                } else {
+                    throw new Error("Failed to Get Sim Villages");
+                }
+            })
             .then(results => { 
                 this.simVillages = results;
                 console.log(this.simVillages);
             })
+            .catch((error) => {
+              console.log(error);
+            });
         },
         updateVillages: function(simName){            
             console.log("UPDATE VILLAGES");
@@ -99,10 +117,19 @@ export const VillagesView = {
                 method: 'post',
                 headers: {'Content-Type' : 'application/json'},
                 body: JSON.stringify(this.simVillages)})
-            .then(response => response.json())
+            .then((response) => {
+                if (response.ok){
+                    return response.json();
+                } else {
+                    throw new Error("Failed to Update Sim Villages");
+                }
+            })
             .then(results => { 
                 let r = results;
             })
+            .catch((error) => {
+              console.log(error);
+            });
         }
     },
     created(){
