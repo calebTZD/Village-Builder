@@ -1,40 +1,36 @@
 export const SimListView = {
     template: `
-                <div class="d-flex flex-column">
-                    <h4>Simulations</h4>
-                    <div class="d-flex">                        
-                            <div class="flex-fill">
-                                <div class="d-flex flex-column">
-                                    <label>Create</label>
-                                    <input v-model="createName">                            
-                                    <i class="bi bi bi-plus-square" style="font-size: 1rem; color: blue;" v-on:click="createSimulation()"></i>
-                                    <div class="list-group">
-                                        <div v-for="sim in simulations" >
-                                            <button class="list-group-item list-group-item-action" type="button" v-on:click="selectSimulation(sim)">
-                                                {{sim}}
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>                                               
-                            <div class="flex-fill" v-if="simulation">
-                                <h4>{{simulation}}</h4>
-                                <div class="d-flex flex-column">
-                                    <button type="button" class="btn btn-primary" v-on:click="deleteSimulation()">
-                                        Delete
-                                    </button>                                    
-                                    <button type="button" class="btn btn-primary" v-on:click="editSimulation()">
-                                        Edit
-                                    </button>
-                                    <button type="button" class="btn btn-primary"  v-on:click="runSimulation()">
-                                        Run Simulation ({{simState}})
-                                    </button>
-                                    <button type="button" class="btn btn-primary"  v-on:click="viewSimulation()" v-if="simComplete">
-                                        View Results
-                                    </button>
-                                </div>
+                <div id="sim-list-pane" >
+                    <div id="sim-list-items">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="New Simulation Name"  v-model="createName" v-on:keyup.enter="createSimulation()">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" v-on:click="createSimulation()">Create</button>
                             </div>
                         </div>
+                        <div class="list-group">
+                            <div v-for="sim in simulations" >
+                                <button class="list-group-item list-group-item-primary list-group-item-action" type="button" v-on:click="selectSimulation(sim)">
+                                    {{sim}}
+                                </button>
+                            </div>
+                        </div>
+                    </div>                                               
+                    <div id="sim-list-options" v-if="simulation!==null">
+                        <h4>{{simulation}}</h4>
+                        <button type="button" class="btn btn-primary" v-on:click="deleteSimulation()">
+                            Delete
+                        </button>                                    
+                        <button type="button" class="btn btn-primary" v-on:click="editSimulation()">
+                            Edit
+                        </button>
+                        <button type="button" class="btn btn-primary"  v-on:click="runSimulation()">
+                            Run Simulation ({{simState}})
+                        </button>
+                        <button type="button" class="btn btn-primary"  v-on:click="viewSimulation()" v-if="simComplete">
+                            View Results
+                        </button>
+                    </div>
                 </div>`,
     data() {
         return {

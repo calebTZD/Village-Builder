@@ -1,0 +1,77 @@
+#sim-main {
+    width: 100%;
+    height: 100vh;
+    background: aqua;
+    display: grid;
+    grid-template-rows: 60px auto;
+}
+
+#banner {
+    grid-row: 1;
+    background: blue;
+    color: white;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+
+#sim-list-pane{
+    border: 1px solid red;
+    grid-row: 2;
+    display: grid;
+    grid-template-columns: 400px auto;
+}
+
+#sim-list-items{
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#sim-list-options{
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#sim-list-options button{
+    width:200px;
+    margin: 2px;
+}
+
+#edit-pane{
+    grid-row: 2;
+    display: grid;
+    grid-template-columns: 200px auto;
+}
+
+#edit-options{
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#edit-simulation{
+    grid-column: 2;
+}
+
+#edit-villages{
+    display: grid;    
+    grid-template-columns: 20px 250px auto;
+}
+
+#edit-villages-icons{
+    grid-column: 1;
+}
+
+#edit-villages-list{
+    grid-column: 2;
+}
+
+#edit-villages-data{
+    grid-column: 3;
+}
+#edit-villages-data label{
+    text-align: right;
+}

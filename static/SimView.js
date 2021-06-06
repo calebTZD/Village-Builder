@@ -1,37 +1,41 @@
 export const SimulationView = {
     template: 
-    `<div>
-        <div class="flex-column" v-show="showList">              
-            <div id="simlist" class="flex-fill">                
-                <SimListView ref="simlist" @edit="onEdit"></SimListView>
-            </div>
+    `<div id="sim-main">
+        <div id="banner">
+            <h2>RPG Simulation: {{simName}}</h2>
+        </div>
+        <div v-show="showList">
+            <SimListView ref="simlist" @edit="onEdit"></SimListView>
         </div> 
-        <div v-show="showEdit">
-            <div class="d-flex flex-column" >
-                <h4>{{simName}}</h4>
+        <div v-show="showEdit" id="edit-pane">            
+            <div id="edit-options">
+                <h4>Edit</h4>
+                <div class="list-group">
+                    <button type="button" class="list-group-item list-group-item-primary list-group-item-action" v-on:click="setEdit('WorldView')">World</button>
+                    <button type="button" class="list-group-item list-group-item-primary list-group-item-action" v-on:click="setEdit('VillagesView')">Village</button>
+                    <button type="button" class="list-group-item list-group-item-primary list-group-item-action" v-on:click="setEdit('VillagerView')">Villagers</button>
+                    <button type="button" class="list-group-item list-group-item-primary list-group-item-action" v-on:click="setEdit('LocationView')">Locations</button>
+                    <button type="button" class="list-group-item list-group-item-primary list-group-item-action" v-on:click="setEdit('BuildingView')">Buildings</button>
+                </div>
                 <button type="button" class="btn btn-primary" v-on:click="done()">Done</button>
                 <button type="button" class="btn btn-success" v-on:click="update()">UPDATE</button>
-                <div class="d-flex">
-                    <div id="sim" class="flex-fill">                
-                        <WorldView ref="world"></WorldView>
-                    </div>
-                    <div id="villages" class="flex-fill">                  
-                        <VillagesView ref="villages"></VillagesView>  
-                    </div>
-                </div>            
-                <div id="villagers" class="flex-fill">
-                    <h4> Villager Settings: </h4><br>
-                    <VilligerView ref="villagers"></VilligerView>
+            </div>
+            <div id="edit-simulation">
+                <div v-show="editView==='WorldView'">
+                    <WorldView ref="world" ></WorldView>
                 </div>
-                <div id='locations' class="flex-fill">
-                    <h4> Location Settings: </h4><br>
+                <div v-show="editView==='VillagesView'">
+                    <VillagesView ref="villages"></VillagesView> 
+                </div> 
+                <div v-show="editView==='VillagerView'">
+                    <VillagerView ref="villagers"></VillagerView>
+                </div>
+                <div v-show="editView==='LocationView'">
                     <LocationView ref="locations"></LocationView>
                 </div>
-                <div id="buildings" class="flex-fill">
-                    <h4> building Settings: </h4><br>
+                <div v-show="editView==='BuildingView'">
                     <BuildingView ref="buildings"></BuildingView>
-                </div>            
-            </div>
+                </div>
         </div>
     </div>
     `,
@@ -40,7 +44,8 @@ export const SimulationView = {
         simName: "The Myst",
         simData: {},
         showEdit: false,
-        showList: true
+        showList: true,
+        editView: "WorldView"
       }
     },
     methods: {
@@ -51,9 +56,12 @@ export const SimulationView = {
             this.showEdit = true;
             this.load();
         },
+        setEdit: function(view){
+            this.editView = view;
+        },
         done: function(){
             this.showList = true;
-            this.showEdit = false;            
+            this.showEdit = false;          
         },
         load: function(){
             console.log("LOAD");

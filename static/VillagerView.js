@@ -1,4 +1,4 @@
-export const VilligerView = {
+export const VillagerView = {
     template: `<div class="d-flex">
                     <div class="d-flex flex-column justify-content-between">
                         <div>Type</div>

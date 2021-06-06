@@ -1,22 +1,22 @@
 export const VillagesView = {
     template: `
-                <div class="d-flex flex-column">
-                    <h4>Villages</h4>
-                    <div class="d-flex">
-                        <div class="flex-column">                            
+                <div id="edit-villages">
+                    <div id="edit-villages-icons">                           
                             <i class="bi bi bi-plus-square" style="font-size: 1rem; color: blue;" v-on:click="showAllVillages()" v-show="!showAll"></i>
-                            <i class="bi bi-chevron-double-left" style="font-size: 1rem; color: blue;" v-on:click="hideAllVillages()" v-show="showAll"></i>
-                        </div>                    
-                        <div class="flex-column" v-show="showAll">
+                    </div> 
+                    <div v-if="showAll">                   
+                        <div id="edit-villages-list">
                             <div class="list-group">
-                                <div v-for="village in allVillages" >
+                                <div v-for="village in allVillages">
                                     <button class="list-group-item list-group-item-action" type="button" v-if="isNotInSim(village)" v-on:click="addVillage(village)">
-                                        {{village.name}}(Sim1)
+                                        {{village.name}}({{village.simulationName}})
                                     </button>
                                 </div>
                             </div>
                         </div>
-                        <div class="flex-column">
+                    </div>
+                    <div v-else>
+                        <div id="edit-villages-list">
                             <div class="list-group">
                                 <button type="button" class="list-group-item list-group-item-action" v-for="village in simVillages" v-on:click="setVillage(village)">
                                     {{village.name}}
@@ -24,16 +24,21 @@ export const VillagesView = {
                                 </button>
                             </div>
                         </div>
-                        <div class="flex-column" v-if="villageData" :key="villageData">                                
-                            <label>Name: </label><input type="text" v-model="villageData.name"><br>
-                            <div v-for="(value, priority) in villageData.priorities">
-                                {{priority}}:  
-                                <input type="number" v-model="villageData.priorities[priority]">
+                    </div>
+                    <div id="edit-villages-data" class="form-group" v-if="villageData">
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Name: </label>
+                            <input class="form-control col-sm-2" type="text" v-model="villageData.name"><br>
+                        </div>
+                        <div v-for="(value, priority) in villageData.priorities">
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">{{priority}}: </label>  
+                                <input type="number" class="form-control col-sm-2" v-model="villageData.priorities[priority]">
                             </div>
                         </div>
-                        <div class="flex-column" v-else> 
-                            <p>No Village Selected</p> 
-                        </div>
+                    </div>
+                    <div id="edit-villages-data" v-else> 
+                        <p>No Village Selected</p> 
                     </div>
                 </div>`,
     data() {
@@ -48,9 +53,6 @@ export const VillagesView = {
         showAllVillages: function(){
             this.showAll = true;
         },
-        hideAllVillages: function(){
-            this.showAll = false;
-        },
         isNotInSim: function(village){
             let found = this.simVillages.find(e => e["name"] == village["name"]);
             return (!found);
@@ -60,6 +62,7 @@ export const VillagesView = {
             if (!found){
                 this.simVillages.push(village);
             }
+            this.showAll = false;
         },
         setVillage: function(village){
             this.villageData = village;
