@@ -7,6 +7,7 @@ class VillagerClass:
 
         #Defaults
         self.enhancemntFactor = Defaults.villagersConfig[self.type]["enhancemntFactor"]
+        self.preferredBuilding = Defaults.villagersConfig[self.type]["preferredBuilding"]
 
         #Settings
         self.speed = villagerSettings["speed"]
@@ -31,6 +32,11 @@ class VillagerClass:
         #Stats
         self.stats = {}
 
+    def findBuilding(self):
+        #TODO: Need to check to make sure we have enough space and if it is the closest building, etc.
+        for building in self.village.buildings:
+            if building.type == self.preferredBuilding:
+                building.assignVillager(self)
 
 if __name__ == '__main__':    
     from pprint import pprint

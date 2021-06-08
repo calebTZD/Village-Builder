@@ -21,10 +21,14 @@ class BuildingClass:
         self.location = None
         self.currentHealth = int(self.maxHealth)
         self.currentResources = int(self.resourceAmount)
-        self.villagers = 0
+        self.villagers = []
 
         #Stats
         self.stats = {}
+
+    def assignVillager(self, villager):
+        self.villagers.append(villager)
+        villager.assignedBuilding = self
 
 
 if __name__ == '__main__':    

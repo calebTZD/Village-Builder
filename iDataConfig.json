@@ -8,24 +8,31 @@
     },
     "villagers":{
         "Farmer": {
+                "preferredBuilding": "Farm",
                 "enhancemntFactor": 2
         },
         "Lumberjack": {
+                "preferredBuilding": "LoggingCamp",
                 "enhancemntFactor": 2              
         },
         "Stonemason": {
+                "preferredBuilding": "Quarry",
                 "enhancemntFactor": 2
         },
         "Miner": {
+                "preferredBuilding": "Mine",
                 "enhancemntFactor": 2
         },
         "Hunter": {
+                "preferredBuilding": "HuntingHut",
                 "enhancemntFactor": 2
         },
         "Warrior": {
+                "preferredBuilding": "Barracks",
                 "enhancemntFactor": 2
         },
         "Merchant": {
+                "preferredBuilding": "Market",
                 "enhancemntFactor": 2
         }
     },
