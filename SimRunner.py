@@ -31,26 +31,44 @@ class SimRunnerClass:
             #self.takeAction(villager)
 
     def takeAction(self, villager):
+        if villager.status == V_Status.UNASSIGNED:
+            villager.findBuilding()
+            villager.status = V_Status.TO_LOCATION
+            
         if villager.status == V_Status.HARVESTING:
             villager.currentLoad[villager.gatheringType] += villager.producionSpeed
-        
+            villager.assignedBuilding.currentResources -= villager.producionSpeed
+            if villager.currentLoad[villager.gatheringType] >= villager.carryCapacity:
+                villager.status = V_Status.TO_VILLAGE
+                villager.distance = villager.assignedBuilding.location.distance
 
         if villager.status == V_Status.BUILDING:
-            pass
+            villager.assignedBuilding.buildTimeLeft -= 1
+            if villager.assignedBuilding.buildTimeLeft <= 0:
+                villager.status = V_Status.UNASSIGNED
 
         elif villager.status == V_Status.TO_LOCATION:
             villager.distance -= villager.speed
-            #TODO: if there change to harvesting or whatever
+            if villager.distance == 0:
+                if villager.assignedBuilding.buildTimeLeft <= 0:
+                    villager.status = V_Status.HARVESTING
+                else:
+                    villager.status = V_Status.BUILDING
         
         elif villager.status == V_Status.TO_VILLAGE:
             villager.distance -= villager.speed
-            #TODO: if there return resources and move to unassigned
+            if villager.distance == 0:
+                villager.village.resources[villager.gatheringType] += villager.carryCapacity
+                villager.currentLoad[villager.gatheringType] = 0
+                villager.status = V_Status.TO_LOCATION
+                villager.distance = villager.assignedBuilding.location.distance
 
         elif villager.status == V_Status.ATTACKING:
             pass 
 
         elif villager.status == V_Status.SEARCHING:
-            pass
+            villager.distance += 1
+
 
     def postTick(self):
         for village in self.sim.world.villages:

@@ -20,6 +20,7 @@ class BuildingClass:
         self.village = None
         self.location = None
         self.currentHealth = int(self.maxHealth)
+        self.buildTimeLeft = self.buildTime
         self.currentResources = int(self.resourceAmount)
         self.villagers = []
 
