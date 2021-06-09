@@ -17,7 +17,8 @@
                     "StoneProduction": 1,
                     "OreProduction": 1,
                     "Commerce": 1,
-                    "War": 1,
+                    "attack": 1,
+                    "defense": 1,
                     "Research": 1,
                     "Searching": 1
                 }

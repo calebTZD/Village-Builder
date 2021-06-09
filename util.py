@@ -7,3 +7,5 @@ class V_Status(Enum):
     TO_VILLAGE = 5
     ATTACKING = 6
     SEARCHING = 7
+    DEAD = 8
+    TO_WAR = 9

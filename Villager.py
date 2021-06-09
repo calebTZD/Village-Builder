@@ -1,5 +1,6 @@
 from Defaults import Defaults
 from util import V_Status
+import random
 
 class VillagerClass:
     def __init__(self, vType, villagerSettings):
@@ -33,10 +34,94 @@ class VillagerClass:
         self.stats = {}
 
     def findBuilding(self):
-        #TODO: Need to check to make sure we have enough space and if it is the closest building, etc.
+        self.assignedBuilding = None
         for building in self.village.buildings:
             if building.type == self.preferredBuilding:
-                building.assignVillager(self)
+                if building.villagersAbleToSupport < len(building.villagers):
+                    building.assignVillager(self)
+                    self.distance = building.location.distance
+        if self.assignedBuilding == None:
+            return False
+        return True
+
+    def canBuild(self):
+        cost = Defaults.buildingsConfig[self.preferredBuilding]["cost"]
+        for resource in cost:
+            for reso in self.village.resources:
+                if resource == reso:
+                    if self.village.resources[reso] < cost[resource]:
+                        return False
+        return True
+
+    def build(self, building):
+        # take resources away from village
+        cost = Defaults.buildingsConfig[self.preferredBuilding]["cost"]
+        for resource in cost:
+            for reso in self.village.resources:
+                if resource == reso:
+                    self.village.resources[reso] -= cost[resource]
+
+        # add building to village
+        location = self.village.findLocationForBuilding(self.preferredBuilding)
+        self.village.addBuilding(building, location)
+        self.assignedBuilding = building
+
+    def attacking(self):
+        if len(self.assignedBuilding.villagers) >= 0:
+            target = self.building.villagers[0]
+            target.currentHealth -= self.attack
+            self.currentHealth -= target.defense
+            if target.currentHealth <= 0:
+                target.status = V_Status.DEAD
+        else:
+            self.building.currentHealth -= self.attack
+            if self.assignedBuilding.currentHealth <= 0:
+                self.status = V_Status.TO_WAR
+
+    def findTarget(self):
+        target = self.village.enemies[0]
+        targets = list(target.buildings)
+        random.shuffle(targets)
+        self.assignedBuilding = targets[0]
+        self.distance = self.assignedBuilding.location.distance
+
+    def toWar(self):
+        self.distance -= self.speed
+        if self.distance <= 0:
+            self.status = V_Status.ATTACKING
+
+    def setToVillage(self):
+        self.status = V_Status.TO_VILLAGE
+        self.distance = self.assignedBuilding.location.distance
+
+    def harvest(self):
+        self.currentLoad[self.gatheringType] += self.producionSpeed
+        self.assignedBuilding.currentResources -= self.producionSpeed
+
+    def toLocation(self):
+        self.distance -= self.speed
+        if self.distance == 0:
+            if self.assignedBuilding.buildTimeLeft <= 0:
+                self.status = V_Status.HARVESTING
+            else:
+                self.status = V_Status.BUILDING
+
+    def toVillage(self):
+        self.distance -= self.speed
+        if self.distance == 0:
+            self.village.resources[self.gatheringType] += self.carryCapacity
+            self.currentLoad[self.gatheringType] = 0
+            self.status = V_Status.TO_LOCATION
+            self.distance = self.assignedBuilding.location.distance
+
+    def search(self):
+        self.distance += 1
+        if self.distance >= 9:
+            self.status = V_Status.TO_VILLAGE
+            enemy = "enemy"
+            self.village.enemies[enemy]
+            # TODO get another village
+    
 
 if __name__ == '__main__':    
     from pprint import pprint

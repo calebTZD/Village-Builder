@@ -32,43 +32,40 @@ class SimRunnerClass:
 
     def takeAction(self, villager):
         if villager.status == V_Status.UNASSIGNED:
-            villager.findBuilding()
-            villager.status = V_Status.TO_LOCATION
-            
-        if villager.status == V_Status.HARVESTING:
-            villager.currentLoad[villager.gatheringType] += villager.producionSpeed
-            villager.assignedBuilding.currentResources -= villager.producionSpeed
-            if villager.currentLoad[villager.gatheringType] >= villager.carryCapacity:
-                villager.status = V_Status.TO_VILLAGE
-                villager.distance = villager.assignedBuilding.location.distance
+            if villager.findBuilding():
+                villager.status = V_Status.TO_LOCATION
+            elif villager.canBuild():
+                building = BuildingClass(villager.preferredBuilding, self.sim.config['buildings'][villager.preferredBuilding])
+                villager.build(building)
+                villager.status = V_Status.TO_LOCATION
 
-        if villager.status == V_Status.BUILDING:
+        elif villager.status == V_Status.HARVESTING:
+            villager.harvest()
+            if villager.currentLoad[villager.gatheringType] >= villager.carryCapacity:
+                villager.setToVillage()
+
+        elif villager.status == V_Status.BUILDING:
             villager.assignedBuilding.buildTimeLeft -= 1
             if villager.assignedBuilding.buildTimeLeft <= 0:
-                villager.status = V_Status.UNASSIGNED
+                villager.status = V_Status.HARVESTING
 
         elif villager.status == V_Status.TO_LOCATION:
-            villager.distance -= villager.speed
-            if villager.distance == 0:
-                if villager.assignedBuilding.buildTimeLeft <= 0:
-                    villager.status = V_Status.HARVESTING
-                else:
-                    villager.status = V_Status.BUILDING
+            villager.toLocation()
         
         elif villager.status == V_Status.TO_VILLAGE:
-            villager.distance -= villager.speed
-            if villager.distance == 0:
-                villager.village.resources[villager.gatheringType] += villager.carryCapacity
-                villager.currentLoad[villager.gatheringType] = 0
-                villager.status = V_Status.TO_LOCATION
-                villager.distance = villager.assignedBuilding.location.distance
+            villager.toVillage()
 
         elif villager.status == V_Status.ATTACKING:
-            pass 
+            villager.attacking()
 
         elif villager.status == V_Status.SEARCHING:
-            villager.distance += 1
+            villager.search()
 
+        elif villager.status == V_Status.TO_WAR:
+            if villager.assignedBuilding.currentHealth <= 0 and villager.assignedBuilding.type != "Barracks":
+                villager.findTarget()
+
+            villager.toWar()
 
     def postTick(self):
         for village in self.sim.world.villages:

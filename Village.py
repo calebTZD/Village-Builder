@@ -23,6 +23,7 @@ class VillageClass:
         self.locations = []
         self.buildings = []
         self.villagers = []
+        self.enemies = []
 
         #Stats
         self.stats = {}
