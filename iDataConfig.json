@@ -9,43 +9,53 @@
     "villagers":{
         "Farmer": {
                 "preferredBuilding": "Farm",
-                "enhancemntFactor": 2
+                "enhancemntFactor": 2,
+                "gatheringType": "Food"
         },
         "Lumberjack": {
                 "preferredBuilding": "LoggingCamp",
-                "enhancemntFactor": 2              
+                "enhancemntFactor": 2,
+                "gatheringType": "Wood"              
         },
         "Stonemason": {
                 "preferredBuilding": "Quarry",
-                "enhancemntFactor": 2
+                "enhancemntFactor": 2,
+                "gatheringType": "Stone"
         },
         "Miner": {
                 "preferredBuilding": "Mine",
-                "enhancemntFactor": 2
+                "enhancemntFactor": 2,
+                "gatheringType": "Ore"
         },
         "Hunter": {
                 "preferredBuilding": "HuntingHut",
-                "enhancemntFactor": 2
+                "enhancemntFactor": 2,
+                "gatheringType": "Food"
         },
         "Warrior": {
                 "preferredBuilding": "Barracks",
-                "enhancemntFactor": 2
+                "enhancemntFactor": 2,
+                "gatheringType": "None"
         },
         "Guard": {
                 "preferredBuilding": "Barracks",
-                "enhancemntFactor": 2
+                "enhancemntFactor": 2,
+                "gatheringType": "None"
         },
         "Merchant": {
                 "preferredBuilding": "Market",
-                "enhancemntFactor": 2
+                "enhancemntFactor": 2,
+                "gatheringType": "Gold"
         },
         "Researcher": {
                 "preferredBuilding": "Library",
-                "enhancemntFactor": 2
+                "enhancemntFactor": 2,
+                "gatheringType": "Research"
         },
         "Scout": {
                 "preferredBuilding": "Townhall",
-                "enhancemntFactor": 2
+                "enhancemntFactor": 2,
+                "gatheringType": "None"
         }
     },
     "locations": {

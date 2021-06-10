@@ -9,6 +9,8 @@ class VillagerClass:
         #Defaults
         self.enhancemntFactor = Defaults.villagersConfig[self.type]["enhancemntFactor"]
         self.preferredBuilding = Defaults.villagersConfig[self.type]["preferredBuilding"]
+        self.gatheringType = Defaults.villagersConfig[self.type]["gatheringType"]
+
 
         #Settings
         self.speed = villagerSettings["speed"]
@@ -25,25 +27,28 @@ class VillagerClass:
         self.village = None
         self.status = V_Status.UNASSIGNED
         self.currentHealth = int(self.maxHealth)
-        self.currentLoad = {"": 0}
+        self.currentLoad = {
+            "Food": 0,
+            "Stone": 0,
+            "Wood": 0,
+            "Ore": 0,
+            "Gold": 0,
+            "Research": 0,
+            }
         self.distance = 0
-        self.gatheringType = ""
         self.assignedBuilding = None
 
         #Stats
         self.stats = {}
 
     def findBuilding(self):
-        self.assignedBuilding = None
         for building in self.village.buildings:
             if building.type == self.preferredBuilding:
-                if building.villagersAbleToSupport < len(building.villagers):
+                if len(building.villagers) < building.villagersAbleToSupport:
                     building.assignVillager(self)
                     self.distance = building.location.distance
-        if self.assignedBuilding == None:
-            return False
-        return True
-
+                    return True
+        return False      
 
     def build(self, building):
         self.village.build(self.preferredBuilding)
@@ -53,14 +58,14 @@ class VillagerClass:
         self.assignedBuilding = building
 
     def attacking(self):
-        if len(self.assignedBuilding.villagers) >= 0:
-            target = self.building.villagers[0]
+        if len(self.assignedBuilding.villagers) > 0:
+            target = self.assignedBuilding.villagers[0]
             target.currentHealth -= self.attack
             self.currentHealth -= target.defense
             if target.currentHealth <= 0:
                 target.status = V_Status.DEAD
         else:
-            self.building.currentHealth -= self.attack
+            self.assignedBuilding.currentHealth -= self.attack
             
     def findTarget(self):
         target = self.village.enemies[0]
@@ -77,12 +82,12 @@ class VillagerClass:
         self.distance = self.assignedBuilding.location.distance
 
     def harvest(self):
-        self.currentLoad[self.gatheringType] += self.producionSpeed
-        self.assignedBuilding.currentResources -= self.producionSpeed
+        self.currentLoad[self.gatheringType] += self.productionSpeed
+        self.assignedBuilding.currentResources -= self.productionSpeed
 
     def toLocation(self):
         self.distance -= self.speed
-        if self.distance == 0:
+        if self.distance <= 0:
             if self.assignedBuilding.buildTimeLeft <= 0:
                 self.status = V_Status.HARVESTING
             else:
@@ -90,7 +95,7 @@ class VillagerClass:
 
     def toVillage(self):
         self.distance -= self.speed
-        if self.distance == 0:
+        if self.distance <= 0:
             self.village.resources[self.gatheringType] += self.carryCapacity
             self.currentLoad[self.gatheringType] = 0
             self.status = V_Status.TO_LOCATION
