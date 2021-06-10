@@ -74,7 +74,17 @@ class SimRunnerClass:
 
             villager.toWar()
             if villager.distance <= 0:
+                villager.assignedBuilding.enemies.append(villager)
                 villager.status = V_Status.ATTACKING
+
+        elif villager.status == V_Status.DEFENDING:
+            building = villager.underAttack()
+            if building:
+                if villager.assignedBuilding.bType == "Barracks":
+                    villager.assignedBuilding = building
+                    villager.distance = building.location.distance
+                else:
+                    villager.defending()
 
     def postTick(self):
         for village in self.sim.world.villages:

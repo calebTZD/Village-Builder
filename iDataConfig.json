@@ -27,11 +27,7 @@
                 "enhancemntFactor": 2,
                 "gatheringType": "Ore"
         },
-        "Hunter": {
-                "preferredBuilding": "HuntingHut",
-                "enhancemntFactor": 2,
-                "gatheringType": "Food"
-        },
+        
         "Warrior": {
                 "preferredBuilding": "Barracks",
                 "enhancemntFactor": 2,
@@ -65,12 +61,12 @@
                 "enhancemntFactor": 2
         },
         "Grassland": {
-                "buildingTypes": [ "Farm", "HuntingHut" ],
+                "buildingTypes": [ "Farm" ],
                 "maxBuildings": 3,
                 "enhancemntFactor": 2
         },
         "Forest": {
-                "buildingTypes": [ "LoggingCamp", "HuntingHut" ],
+                "buildingTypes": [ "LoggingCamp" ],
                 "maxBuildings": 3,
                 "enhancemntFactor": 2
         },
@@ -122,15 +118,7 @@
                 "resource": "Food",
                 "enhancemntFactor": 2
         },
-        "HuntersHut":{
-                "cost": {
-                    "Wood": 50,
-                    "Gold": 50
-                },
-                "villagersAbleToSupport": 5,
-                "resource": "Food",
-                "enhancemntFactor": 2
-        },
+        
         "Market":{
                 "cost": {
                     "Wood": 50,

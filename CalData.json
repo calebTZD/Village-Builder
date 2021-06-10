@@ -52,18 +52,7 @@
             }
       
         },
-        "HuntersHut":{
-            "settings": { 
-                "type": "huntersHut",
-                "cost": 275
-             },
-            "fixed": { },
-            "simValues": {
-                "currentLevel": 1,
-                "enhanced": "huntersHut",
-                "enhancement": 2
-            }      
-        },
+        
         "Market":{
             "settings": { 
                 "type": "market",
@@ -161,18 +150,7 @@
                 "enhancement": 2
             }      
         },
-        "Hunter":{
-            "settings": { 
-                "type": "hunter",
-                "cost": 275
-             },
-            "fixed": { },
-            "simValues": {
-                "currentLevel": 1,
-                "enhanced": "hunter",
-                "enhancement": 2
-            }      
-        },
+        
         "Merchant":{
             "settings": { 
                 "type": "merchant",
@@ -290,28 +268,7 @@
                 "level": 1             
             }
         },
-        "HuntersHut":{
-            "settings": { 
-                "maxHealth": 100,
-                "buildTime": 24,
-                "resourceAmount": 2000
-
-             },
-            "fixed": { 
-                "cost": {
-                    "wood": 50,
-                    "gold": 50
-                },
-                "type": "huntersHut",
-                "villagersAbleToSupport": 5,
-                "resource": "food"
-            },
-            "simValues": {
-                "percentBuilt": 0,
-                "currentHealth": 100, 
-                "level": 1             
-            } 
-        },
+        
         "Market":{
             "settings": { 
                 "maxHealth": 100,
@@ -377,7 +334,7 @@
                 "currentHealth": 100, 
                 "level": 1             
             }   
-        }
+        
         },
         "Townhall":{
             "settings": { 

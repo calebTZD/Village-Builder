@@ -25,10 +25,6 @@ export const WorldView = {
                                 <label for="farmer"> Farmer </label>
                             </div>
                             <div>
-                                <input type="checkbox" id="hunter" value="hunter" v-model="worldData.startingVillagers">
-                                <label for="hunter"> Hunter </label>
-                            </div>
-                            <div>
                                 <input type="checkbox" id="stonemason" value="stonemason" v-model="worldData.startingVillagers">
                                 <label for="stonemason"> Stonemason </label>
                             </div>

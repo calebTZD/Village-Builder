@@ -6,7 +6,7 @@
             "statValues": {},
             "numVillages": 5,
             "maxVillagersPerVillage": 99,
-            "startingVillagers": ["Farmer", "Hunter", "Lumberjack"],
+            "startingVillagers": ["Farmer", "Lumberjack"],
             "maxBuildingsPerVillage": 10
     },
     "villages": [{
@@ -77,19 +77,7 @@
                     "Food": 50
                 }
         },
-        "Hunter": {
-                "speed": 3,
-                "maxHealth": 50,
-                "carryCapacity": 5,
-                "attack": 3,
-                "defense": 3,
-                "productionSpeed": 3,
-                "spawnTime": 2,
-                "enhancemntCost": 300,
-                "spawnCost": {
-                    "Food": 50
-                }
-        },
+        
         "Warrior": {
                 "speed": 3,
                 "maxHealth": 50,
@@ -207,12 +195,7 @@
                 "resourceAmount": 2000,
                 "enhancemntCost": 300
         },
-        "HuntersHut":{
-                "maxHealth": 100,
-                "buildTime": 24,
-                "resourceAmount": 2000,
-                "enhancemntCost": 300
-        },
+        
         "Market":{
                 "maxHealth": 100,
                 "buildTime": 24,

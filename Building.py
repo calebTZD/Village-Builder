@@ -32,6 +32,11 @@ class BuildingClass:
         self.villagers.append(villager)
         villager.assignedBuilding = self
 
+    def enemyPresent(self):
+        if len(self.enemies) > 0:
+            return True
+        return False
+
 
 if __name__ == '__main__':    
     from pprint import pprint

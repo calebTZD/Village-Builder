@@ -24,7 +24,7 @@ class VillageClass:
         self.locations = []
         self.buildings = []
         self.villagers = []
-        self.enemies = []
+        self.enemyVilages = []
 
         #Stats
         self.stats = {}
@@ -65,13 +65,9 @@ class VillageClass:
                     self.resources[reso] -= cost[resource]
 
     def addEnemy(self, village):
-        present = False
-        for enemy in self.enemies:
-            if enemy == village:
-                present = True
-        if not present:
-            self.enemies.append(village)
-
+        if not village in self.enemyVilages:
+            self.enemyVilages.append(village)
+        
 if __name__ == '__main__':    
     from pprint import pprint 
     from Villager import VillagerClass       

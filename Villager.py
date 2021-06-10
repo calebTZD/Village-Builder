@@ -69,7 +69,7 @@ class VillagerClass:
             self.assignedBuilding.currentHealth -= self.attack
             
     def findTarget(self):
-        target = self.village.enemies[0]
+        target = self.village.enemyVilages[0]
         targets = list(target.buildings)
         random.shuffle(targets)
         self.assignedBuilding = targets[0]
@@ -77,7 +77,31 @@ class VillagerClass:
         self.distance = self.assignedBuilding.location.distance
 
     def toWar(self):
-        self.distance -= self.speed        
+        self.distance -= self.speed  
+    
+    def underAttack(self):
+        for building in self.village.buildings:
+            if building.enemyPresent():
+                
+                return building
+        return None
+            
+    def defending(self):
+        if self.distance <= 0:
+            if (self.assignedBuilding.enemies > 0):
+                target = self.assignedBuilding.enemies[0]
+                target.currentHealth -= self.attack
+            elif self.underAttack():
+                building = self.underAttack()
+                self.assignedBuilding = building
+                self.distance = building.location.distance
+            else:
+                for building in self.village.buildings:
+                    if building.bType == "Barracks":
+                        self.assignedBuilding = building
+                        return
+        else:
+            self.distance -= self.speed
 
     def setToVillage(self):
         self.status = V_Status.TO_VILLAGE

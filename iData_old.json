@@ -164,35 +164,7 @@
                 "distance": 3
             }
         },
-        "Hunter": {
-            "fixed": {
-                "type": "Hunter",
-                "enhancemntFactor": 2              
-            },
-            "settings": {
-                "speed": 3,
-                "maxHealth": 50,
-                "carryCapacity": 5,
-                "attack": 3,
-                "defense": 3,
-                "productionSpeed": 3,
-                "spawnTime": 2,
-                "enhancemntCost": 300,
-                "spawnCost": {
-                    "Food": 50
-                }
-            },
-            "simValues":{
-                "level": 1,
-                "health": 50,
-                "resourcePayload":{
-                    "type": "Food",
-                    "amount": 0
-                },
-                "status": "toVillage",
-                "distance": 3
-            }
-        },
+        
         "Warrior": {
             "fixed": {
                 "type": "Warrior",
@@ -256,7 +228,7 @@
         "Grassland": {
             "fixed": {
                 "type": "Grassland",
-                "buildingTypes": [ "Farm", "HuntingHut" ],
+                "buildingTypes": [ "Farm" ],
                 "maxBuildings": 3,
                 "enhancemntFactor": 2
             },
@@ -274,7 +246,7 @@
         "Forest": {
             "fixed": {
                 "type": "Forest",
-                "buildingTypes": [ "LoggingCamp", "HuntingHut" ],
+                "buildingTypes": [ "LoggingCamp" ],
                 "maxBuildings": 3,
                 "enhancemntFactor": 2
             },
@@ -417,28 +389,7 @@
                 "level": 1             
             }
         },
-        "HuntersHut":{
-            "settings": { 
-                "maxHealth": 100,
-                "buildTime": 24,
-                "resourceAmount": 2000,
-                "enhancemntCost": 300
-             },
-            "fixed": { 
-                "cost": {
-                    "wood": 50,
-                    "gold": 50
-                },
-                "villagersAbleToSupport": 5,
-                "resource": "food",
-                "enhancemntFactor": 2
-            },
-            "simValues": {
-                "percentBuilt": 0,
-                "currentHealth": 100, 
-                "level": 1             
-            } 
-        },
+        
         "Market":{
             "settings": { 
                 "maxHealth": 100,
