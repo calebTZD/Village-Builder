@@ -10,11 +10,13 @@ from Location import LocationClass
 
 from util import V_Status
 
+from Priority import PriorityClass
 
 class SimRunnerClass:
     def __init__(self, name):
         self.villagerList = []
         self.sim = SimulationClass(name)
+        self.priority = PriorityClass()
 
     def randomizeVillagers(self):
         self.villagerList = []
@@ -72,7 +74,7 @@ class SimRunnerClass:
 
     def postTick(self):
         for village in self.sim.world.villages:
-            pass
+            print(village)
 
     def upgrade(self):
         pass #TODO

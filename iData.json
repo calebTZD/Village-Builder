@@ -12,15 +12,15 @@
     "villages": [{
                 "name": "Default",
                 "priorities": {
-                    "FoodProduction": 1,
-                    "WoodProduction": 1,
-                    "StoneProduction": 1,
-                    "OreProduction": 1,
+                    "Food": 1,
+                    "Wood": 1,
+                    "Stone": 1,
+                    "Ore": 1,
                     "Commerce": 1,
                     "attack": 1,
                     "defense": 1,
                     "Research": 1,
-                    "Searching": 1
+                    "Exploring": 1
                 }
     }],
     "villagers":{
@@ -103,7 +103,46 @@
                     "Food": 50
                 }
         },
+        "Guard": {
+                "speed": 3,
+                "maxHealth": 50,
+                "carryCapacity": 5,
+                "attack": 3,
+                "defense": 3,
+                "productionSpeed": 3,
+                "spawnTime": 2,
+                "enhancemntCost": 300,
+                "spawnCost": {
+                    "Food": 50
+                }
+        },
         "Merchant": {
+                "speed": 3,
+                "maxHealth": 50,
+                "carryCapacity": 5,
+                "attack": 3,
+                "defense": 3,
+                "productionSpeed": 3,
+                "spawnTime": 2,
+                "enhancemntCost": 300,
+                "spawnCost": {
+                    "Food": 50
+                }
+        },
+        "Researcher": {
+                "speed": 3,
+                "maxHealth": 50,
+                "carryCapacity": 5,
+                "attack": 3,
+                "defense": 3,
+                "productionSpeed": 3,
+                "spawnTime": 2,
+                "enhancemntCost": 300,
+                "spawnCost": {
+                    "Food": 50
+                }
+        },
+        "Scout": {
                 "speed": 3,
                 "maxHealth": 50,
                 "carryCapacity": 5,
