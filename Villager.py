@@ -33,6 +33,7 @@ class VillagerClass:
             "Wood": 0,
             "Ore": 0,
             "Gold": 0,
+            "ProjectX": 0,
             "Research": 0,
             }
         self.distance = 0

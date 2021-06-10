@@ -18,18 +18,24 @@ class TestTakeAction(unittest.TestCase):
 
     def test_priorities(self):
         self.village.villagers = []
-        #self.village.addVillager( VillagerClass(V_Type.FARMER.value, self.sim.config["villagers"][V_Type.FARMER.value]))
-        self.village.addVillager( VillagerClass(V_Type.HUNTER.value, self.sim.config["villagers"][V_Type.HUNTER.value]))
-        self.village.addVillager( VillagerClass(V_Type.LUMBERJACK.value, self.sim.config["villagers"][V_Type.LUMBERJACK.value]))
-        self.village.addVillager( VillagerClass(V_Type.MINER.value, self.sim.config["villagers"][V_Type.MINER.value]))
-        self.village.addVillager( VillagerClass(V_Type.STONEMASON.value, self.sim.config["villagers"][V_Type.STONEMASON.value]))
-        self.village.addVillager( VillagerClass(V_Type.WARRIOR.value, self.sim.config["villagers"][V_Type.WARRIOR.value]))
-        self.village.addVillager( VillagerClass(V_Type.GUARD.value, self.sim.config["villagers"][V_Type.GUARD.value]))
-        self.village.addVillager( VillagerClass(V_Type.MERCHANT.value, self.sim.config["villagers"][V_Type.MERCHANT.value]))
-        self.village.addVillager( VillagerClass(V_Type.SCOUT.value, self.sim.config["villagers"][V_Type.SCOUT.value]))
-        self.village.addVillager( VillagerClass(V_Type.RESEARCHER.value, self.sim.config["villagers"][V_Type.RESEARCHER.value]))
+        self.sim.createVillager(V_Type.HUNTER.value, self.village)
+        self.sim.createVillager(V_Type.LUMBERJACK.value, self.village)
+        self.sim.createVillager(V_Type.MINER.value, self.village)
+        self.sim.createVillager(V_Type.STONEMASON.value, self.village)
+        self.sim.createVillager(V_Type.WARRIOR.value, self.village)
+        self.sim.createVillager(V_Type.GUARD.value, self.village)
+        self.sim.createVillager(V_Type.MERCHANT.value, self.village)
+        self.sim.createVillager(V_Type.SCOUT.value, self.village)
+        self.sim.createVillager(V_Type.RESEARCHER.value, self.village)
    
         self.village.buildings = []
+        self.sim.createBuilding(B_Type.FARM.value, self.village)
+        self.sim.createBuilding(B_Type.LOGGINGCAMP.value, self.village)
+        self.sim.createBuilding(B_Type.MINE.value, self.village)
+        self.sim.createBuilding(B_Type.QUARRY.value, self.village)
+        self.sim.createBuilding(B_Type.BARRACKS.value, self.village)
+        self.sim.createBuilding(B_Type.MARKET.value, self.village)
+        self.sim.createBuilding(B_Type.LIBRARY.value, self.village)
 
         self.village.priorities = {
             "Food": 10,
@@ -40,6 +46,7 @@ class TestTakeAction(unittest.TestCase):
             "Attack": 10,
             "Defense": 10,
             "Research": 10,
+            "ProjectX": 10,
             "Exploring": 10
         } 
 
@@ -49,15 +56,17 @@ class TestTakeAction(unittest.TestCase):
             "Stone": 200,
             "Ore": 100,
             "Gold": 200,
+            "ProjectX": 200,
             "Research": 100
         }
 
-        print(self.village.priorities)
-        diff = Priority.calcVillageDiff(self.village)
-
-        print(diff)
-        diff = Priority.calcResourcesDiff(self.village)
-        print(diff)
+        diff = Priority.calcPriorities(self.village)
+        self.assertEqual(diff['Food'], -7)
+        self.assertEqual(diff['Wood'], 2)
+        self.assertEqual(diff['Stone'], -7)
+        self.assertEqual(diff['Defense'], 9)
+        self.assertEqual(diff['ProjectX'], -5)
+        self.assertEqual(diff['Research'], 2)
 
 
 

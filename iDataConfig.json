@@ -155,12 +155,12 @@
                     "Gold": 50
                 },
                 "villagersAbleToSupport": 5,
-                "resource": "Warrior",
+                "resource": "ProjectX",
                 "enhancemntFactor": 2
         },
         "Townhall":{
                 "cost": {
-                    "ood": 50,
+                    "Food": 50,
                     "Gold": 50
                 },
                 "villagersAbleToSupport": 5,

@@ -19,7 +19,7 @@ class SimulationClass:
 
         #Villages
         for villageSettings in self.config["villages"]:
-            village = VillageClass(villageSettings, self.config)
+            village = VillageClass(villageSettings)
 
             #Villagers
             for vType in world.startingVillagers:

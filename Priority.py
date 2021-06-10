@@ -15,6 +15,7 @@ class PRIORITIES(Enum):
     GOLD = "Gold"
     ATTACK = "Attack"
     DEFENSE = "Defense"
+    PROJECTX = "ProjectX"
     RESEARCH = "Research"
     EXPLORE = "Exploring"
 
@@ -38,7 +39,7 @@ BUILDING_PRIORITY_MAP = {
     B_Type.QUARRY.value: "STONE",
     B_Type.MINE.value: "ORE",
     B_Type.MARKET.value: "GOLD",
-    B_Type.BARRACKS.value: "WAR",
+    B_Type.BARRACKS.value: "PROJECTX",
     B_Type.LIBRARY.value: "RESEARCH",
     B_Type.TOWNHALL.value: "FOOD"
 }
@@ -76,18 +77,18 @@ class PriorityClass:
         return priorities
     
     def calcVillageDiff(self, village):
-        priorities = [PRIORITIES.FOOD.value, PRIORITIES.WOOD.value, PRIORITIES.STONE.value, PRIORITIES.ORE.value, PRIORITIES.GOLD.value, PRIORITIES.ATTACK.value, PRIORITIES.DEFENSE.value, PRIORITIES.RESEARCH.value]
+        priorities = [PRIORITIES.FOOD.value, PRIORITIES.WOOD.value, PRIORITIES.STONE.value, PRIORITIES.ORE.value, PRIORITIES.GOLD.value, PRIORITIES.ATTACK.value, PRIORITIES.DEFENSE.value, PRIORITIES.PROJECTX.value, PRIORITIES.RESEARCH.value]
         configSet = village.priorities
         currSet = self.getVillagePriorityValues(village)
-        return self.calcPDiff(priorities, configSet, currSet)   
+        return self.calcPriorityDiff(priorities, configSet, currSet)   
 
     def calcResourcesDiff(self, village):
-        priorities = [PRIORITIES.FOOD.value, PRIORITIES.WOOD.value, PRIORITIES.STONE.value, PRIORITIES.ORE.value, PRIORITIES.GOLD.value, PRIORITIES.RESEARCH.value]
+        priorities = [PRIORITIES.FOOD.value, PRIORITIES.WOOD.value, PRIORITIES.STONE.value, PRIORITIES.ORE.value, PRIORITIES.GOLD.value, PRIORITIES.PROJECTX.value, PRIORITIES.RESEARCH.value]
         configSet = village.priorities
         currSet = village.resources
-        return self.calcPDiff(priorities, configSet, currSet)
+        return self.calcPriorityDiff(priorities, configSet, currSet)
 
-    def calcPDiff(self, priorities, configSet, currSet):
+    def calcPriorityDiff(self, priorities, configSet, currSet):
         #Resource percentages from configuration
         configTotal = 0
         currTotal = 0
@@ -103,11 +104,11 @@ class PriorityClass:
         return diff
 
     def calcPriorities(self, village):
-        vDiff = Priority.calcVillageDiff(self.village)
-        print(diff)
-        rDiff = Priority.calcResourcesDiff(self.village)
-        print(diff)
+        vDiff = Priority.calcVillageDiff(village)
+        rDiff = Priority.calcResourcesDiff(villag
         for priority in rDiff:
+            vDiff[priority] += rDiff[priority]*RESOURCE_MULTIPLIER
+        return vDiff
 
 Priority = PriorityClass()
 
