@@ -23,6 +23,7 @@ class BuildingClass:
         self.buildTimeLeft = self.buildTime
         self.currentResources = int(self.resourceAmount)
         self.villagers = []
+        self.enemies = []
 
         #Stats
         self.stats = {}

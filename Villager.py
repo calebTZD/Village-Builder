@@ -73,6 +73,7 @@ class VillagerClass:
         targets = list(target.buildings)
         random.shuffle(targets)
         self.assignedBuilding = targets[0]
+        self.assignedBuilding.enemies.append(self)
         self.distance = self.assignedBuilding.location.distance
 
     def toWar(self):
