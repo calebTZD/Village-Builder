@@ -9,3 +9,27 @@ class V_Status(Enum):
     SEARCHING = 7
     DEAD = 8
     TO_WAR = 9
+
+
+class V_Type(Enum):
+    FARMER = "Farmer"
+    LUMBERJACK = "Lumberjack"
+    STONEMASON = "Stonemason"
+    MINER = "Miner"
+    HUNTER = "Hunter"
+    WARRIOR = "Warrior"
+    GUARD = "Guard"
+    MERCHANT = "Merchant"
+    SCOUT = "Scout"
+    RESEARCHER = "Researcher"
+
+class B_Type(Enum):
+    FARM = "Farm"
+    LOGGINGCAMP = "LoggingCamp"
+    MINE = "Mine"
+    QUARRY = "Quarry"
+    HUNTINGHUT = "HuntingHut"
+    MARKET = "Market"
+    LIBRARY = "Library"
+    BARRACKS = "Barracks"
+    TOWNHALL = "Townhall"

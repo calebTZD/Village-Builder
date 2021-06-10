@@ -31,8 +31,20 @@
                 "preferredBuilding": "Barracks",
                 "enhancemntFactor": 2
         },
+        "Guard": {
+                "preferredBuilding": "Barracks",
+                "enhancemntFactor": 2
+        },
         "Merchant": {
                 "preferredBuilding": "Market",
+                "enhancemntFactor": 2
+        },
+        "Researcher": {
+                "preferredBuilding": "Library",
+                "enhancemntFactor": 2
+        },
+        "Scout": {
+                "preferredBuilding": "Townhall",
                 "enhancemntFactor": 2
         }
     },
@@ -66,17 +78,17 @@
     "buildings": {
         "LoggingCamp":{
                 "cost": {
-                    "wood": 50,
-                    "gold": 50
+                    "Wood": 50,
+                    "Gold": 50
                 },
                 "villagersAbleToSupport": 5,
-                "resource": "wood",
+                "resource": "Wood",
                 "enhancemntFactor": 2
         },
         "Mine":{
                 "cost": {
-                    "wood": 50,
-                    "gold": 50
+                    "Wood": 50,
+                    "Gold": 50
                 },
                 "villagersAbleToSupport": 5,
                 "resource": "Ore",
@@ -84,62 +96,62 @@
         },
         "Quarry":{
                 "cost": {
-                    "wood": 50,
-                    "gold": 50
+                    "Wood": 50,
+                    "Gold": 50
                 },
                 "villagersAbleToSupport": 5,
-                "resource": "stone",
+                "resource": "Stone",
                 "enhancemntFactor": 2
         },
         "Farm":{
                 "cost": {
-                    "wood": 50,
-                    "gold": 50
+                    "Wood": 50,
+                    "Gold": 50
                 },
                 "villagersAbleToSupport": 5,
-                "resource": "food",
+                "resource": "Food",
                 "enhancemntFactor": 2
         },
         "HuntersHut":{
                 "cost": {
-                    "wood": 50,
-                    "gold": 50
+                    "Wood": 50,
+                    "Gold": 50
                 },
                 "villagersAbleToSupport": 5,
-                "resource": "food",
+                "resource": "Food",
                 "enhancemntFactor": 2
         },
         "Market":{
                 "cost": {
-                    "wood": 50,
-                    "gold": 50
+                    "Wood": 50,
+                    "Gold": 50
                 },
                 "villagersAbleToSupport": 5,
-                "resource": "gold",
+                "resource": "Gold",
                 "enhancemntFactor": 2
         },  
         "Library":{
                 "cost": {
-                    "wood": 50,
-                    "gold": 50
+                    "Wood": 50,
+                    "Gold": 50
                 },
                 "villagersAbleToSupport": 5,
-                "resource": "research",
+                "resource": "Research",
                 "enhancemntFactor": 2
         }, 
         "Barracks":{
                 "cost": {
-                    "wood": 50,
-                    "gold": 50
+                    "Wood": 50,
+                    "Gold": 50
                 },
                 "villagersAbleToSupport": 5,
-                "resource": "warrior",
+                "resource": "Warrior",
                 "enhancemntFactor": 2
         },
         "Townhall":{
                 "cost": {
-                    "wood": 50,
-                    "gold": 50
+                    "ood": 50,
+                    "Gold": 50
                 },
                 "villagersAbleToSupport": 5,
                 "resource": "villager",
