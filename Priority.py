@@ -44,6 +44,13 @@ BUILDING_PRIORITY_MAP = {
     B_Type.TOWNHALL.value: "FOOD"
 }
 
+RESOURCE_PRIORITY_LIST = [PRIORITIES.FOOD.value, PRIORITIES.WOOD.value, PRIORITIES.STONE.value, \
+                          PRIORITIES.ORE.value, PRIORITIES.GOLD.value, PRIORITIES.PROJECTX.value, \
+                          PRIORITIES.RESEARCH.value]
+VILLAGE_PRIORITY_LIST = [PRIORITIES.FOOD.value, PRIORITIES.WOOD.value, PRIORITIES.STONE.value, \
+                         PRIORITIES.ORE.value, PRIORITIES.GOLD.value, PRIORITIES.ATTACK.value, \
+                         PRIORITIES.DEFENSE.value, PRIORITIES.PROJECTX.value, PRIORITIES.RESEARCH.value]
+
 class PriorityClass:
     def __init__(self):
         self.rotationPriorities = {}
@@ -77,13 +84,13 @@ class PriorityClass:
         return priorities
     
     def calcVillageDiff(self, village):
-        priorities = [PRIORITIES.FOOD.value, PRIORITIES.WOOD.value, PRIORITIES.STONE.value, PRIORITIES.ORE.value, PRIORITIES.GOLD.value, PRIORITIES.ATTACK.value, PRIORITIES.DEFENSE.value, PRIORITIES.PROJECTX.value, PRIORITIES.RESEARCH.value]
+        priorities = VILLAGE_PRIORITY_LIST
         configSet = village.priorities
         currSet = self.getVillagePriorityValues(village)
         return self.calcPriorityDiff(priorities, configSet, currSet)   
 
     def calcResourcesDiff(self, village):
-        priorities = [PRIORITIES.FOOD.value, PRIORITIES.WOOD.value, PRIORITIES.STONE.value, PRIORITIES.ORE.value, PRIORITIES.GOLD.value, PRIORITIES.PROJECTX.value, PRIORITIES.RESEARCH.value]
+        priorities = RESOURCE_PRIORITY_LIST
         configSet = village.priorities
         currSet = village.resources
         return self.calcPriorityDiff(priorities, configSet, currSet)
@@ -105,7 +112,7 @@ class PriorityClass:
 
     def calcPriorities(self, village):
         vDiff = Priority.calcVillageDiff(village)
-        rDiff = Priority.calcResourcesDiff(villag
+        rDiff = Priority.calcResourcesDiff(village)
         for priority in rDiff:
             vDiff[priority] += rDiff[priority]*RESOURCE_MULTIPLIER
         return vDiff
