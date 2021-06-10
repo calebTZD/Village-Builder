@@ -23,6 +23,9 @@ class TestTakeAction(unittest.TestCase):
         self.assertIsNotNone(self.villager.assignedBuilding)
         pprint(self.villager.status)
 
+    def test_UnassignedBuild(self):
+        pass
+
     def test_testy(self):
         self.village
         for x in range(20):

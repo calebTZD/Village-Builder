@@ -34,7 +34,7 @@ class SimRunnerClass:
         if villager.status == V_Status.UNASSIGNED:
             if villager.findBuilding():
                 villager.status = V_Status.TO_LOCATION
-            elif villager.canBuild():
+            elif villager.village.canBuild(villager.preferredBuilding):
                 building = BuildingClass(villager.preferredBuilding, self.sim.config['buildings'][villager.preferredBuilding])
                 villager.build(building)
                 villager.status = V_Status.TO_LOCATION
@@ -57,15 +57,24 @@ class SimRunnerClass:
 
         elif villager.status == V_Status.ATTACKING:
             villager.attacking()
+            if villager.assignedBuilding.currentHealth <= 0:
+                villager.status = V_Status.TO_WAR
 
         elif villager.status == V_Status.SEARCHING:
-            villager.search()
+            if villager.search():
+                villager.status = V_Status.TO_VILLAGE
+                enemies = list(self.sim.world.villages)
+                random.shuffle(enemies)
+                enemy = enemies[0]
+                villager.village.addEnemy(enemy)
 
         elif villager.status == V_Status.TO_WAR:
             if villager.assignedBuilding.currentHealth <= 0 and villager.assignedBuilding.type != "Barracks":
                 villager.findTarget()
 
             villager.toWar()
+            if villager.distance <= 0:
+                villager.status = V_Status.ATTACKING
 
     def postTick(self):
         for village in self.sim.world.villages:

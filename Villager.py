@@ -44,23 +44,9 @@ class VillagerClass:
             return False
         return True
 
-    def canBuild(self):
-        cost = Defaults.buildingsConfig[self.preferredBuilding]["cost"]
-        for resource in cost:
-            for reso in self.village.resources:
-                if resource == reso:
-                    if self.village.resources[reso] < cost[resource]:
-                        return False
-        return True
 
     def build(self, building):
-        # take resources away from village
-        cost = Defaults.buildingsConfig[self.preferredBuilding]["cost"]
-        for resource in cost:
-            for reso in self.village.resources:
-                if resource == reso:
-                    self.village.resources[reso] -= cost[resource]
-
+        self.village.build(self.preferredBuilding)
         # add building to village
         location = self.village.findLocationForBuilding(self.preferredBuilding)
         self.village.addBuilding(building, location)
@@ -75,9 +61,7 @@ class VillagerClass:
                 target.status = V_Status.DEAD
         else:
             self.building.currentHealth -= self.attack
-            if self.assignedBuilding.currentHealth <= 0:
-                self.status = V_Status.TO_WAR
-
+            
     def findTarget(self):
         target = self.village.enemies[0]
         targets = list(target.buildings)
@@ -86,9 +70,7 @@ class VillagerClass:
         self.distance = self.assignedBuilding.location.distance
 
     def toWar(self):
-        self.distance -= self.speed
-        if self.distance <= 0:
-            self.status = V_Status.ATTACKING
+        self.distance -= self.speed        
 
     def setToVillage(self):
         self.status = V_Status.TO_VILLAGE
@@ -117,10 +99,9 @@ class VillagerClass:
     def search(self):
         self.distance += 1
         if self.distance >= 9:
-            self.status = V_Status.TO_VILLAGE
-            enemy = "enemy"
-            self.village.enemies[enemy]
-            # TODO get another village
+            return True
+        return False
+            # TODO make more complicated
     
 
 if __name__ == '__main__':    

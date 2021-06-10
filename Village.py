@@ -11,12 +11,12 @@ class VillageClass:
         self.priorities = settings["priorities"]
         #TODO Add resources to default data and UI
         self.resources = {
-            "food": 0,
-            "wood": 0,
-            "stone": 0,
-            "iron": 0,
-            "gold": 0,
-            "research": 0
+            "Food": 0,
+            "Wood": 0,
+            "Stone": 0,
+            "Ore": 0,
+            "Gold": 0,
+            "Research": 0
         }
 
         #Initial Values
@@ -42,12 +42,34 @@ class VillageClass:
         location.village = self
     
     def findLocationForBuilding(self, bType):
-        #TODO: Need to check to make sure we have enough space and if it is the closest type, etc.
         for location in self.locations:
-            if bType in location.buildingTypes:
+            if bType in location.buildingTypes and len(location.buildings) < location.maxBuildings:
                 return location
 
+    def canBuild(self, type):
+        cost = Defaults.buildingsConfig[type]["cost"]
+        for resource in cost:
+            for reso in self.resources:
+                if resource == reso:
+                    if self.resources[reso] < cost[resource]:
+                        return False
+        return True
 
+    def build(self, type):
+        # take resources away from village
+        cost = Defaults.buildingsConfig[type]["cost"]
+        for resource in cost:
+            for reso in self.resources:
+                if resource == reso:
+                    self.resources[reso] -= cost[resource]
+
+    def addEnemy(self, village):
+        present = False
+        for enemy in self.enemies:
+            if enemy == village:
+                present = True
+        if not present:
+            self.enemies.append(village)
 
 if __name__ == '__main__':    
     from pprint import pprint 
