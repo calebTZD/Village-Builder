@@ -5,6 +5,7 @@ from util import *
 
 BUILDING_MULTIPLIER = 5
 VILLAGER_MULTIPLIER = 1
+RESOURCE_MULTIPLIER = 1
 
 class PRIORITIES(Enum):
     FOOD = "Food"
@@ -60,58 +61,53 @@ class PriorityClass:
             self.rotationPriorities[village.name].append(self.rotationPriorities[village.name].pop(0))
         return self.rotationPriorities[village.name]
     
-    def calcPriorities(self, village):
+    def getVillagePriorityValues(self, village):
         priorities = {}
         for p in PRIORITIES:
             priorities[p.value] = 0
 
         for villager in village.villagers:
             priority = VILLAGER_PRIORITY_MAP[villager.type]
-            print(villager.type)
-            print(priority)
             priorities[PRIORITIES[priority].value] += 1*VILLAGER_MULTIPLIER
 
         for building in village.buildings:
             priority = BUILDING_PRIORITY_MAP[building.type]
-            print(building.type)
-            print(priority)
             priorities[PRIORITIES[priority].value] += 1*BUILDING_MULTIPLIER
         return priorities
     
-    def normalizePriorities(self, priorities):
-        total = 0
-        for k in priorities:
-            total += priorities[k]
-        for k in priorities:
-            priorities[k] = round(priorities[k]/total*100)
-
-    def calcDifference(self, currentPriorities, configPriorities):
-        diffPriorities = {}
-        for k in currentPriorities:
-            diffPriorities[k] = configPriorities[k]-currentPriorities[k]
-        return diffPriorities
+    def calcVillageDiff(self, village):
+        priorities = [PRIORITIES.FOOD.value, PRIORITIES.WOOD.value, PRIORITIES.STONE.value, PRIORITIES.ORE.value, PRIORITIES.GOLD.value, PRIORITIES.ATTACK.value, PRIORITIES.DEFENSE.value, PRIORITIES.RESEARCH.value]
+        configSet = village.priorities
+        currSet = self.getVillagePriorityValues(village)
+        return self.calcPDiff(priorities, configSet, currSet)   
 
     def calcResourcesDiff(self, village):
-        resources = [PRIORITIES.FOOD.value, PRIORITIES.WOOD.value, PRIORITIES.STONE.value, PRIORITIES.ORE.value, PRIORITIES.GOLD.value, PRIORITIES.RESEARCH.value]
+        priorities = [PRIORITIES.FOOD.value, PRIORITIES.WOOD.value, PRIORITIES.STONE.value, PRIORITIES.ORE.value, PRIORITIES.GOLD.value, PRIORITIES.RESEARCH.value]
+        configSet = village.priorities
+        currSet = village.resources
+        return self.calcPDiff(priorities, configSet, currSet)
+
+    def calcPDiff(self, priorities, configSet, currSet):
         #Resource percentages from configuration
-        total = 0
-        for resource in resources:
-            total += village.priorities[resource]
-        percentResourcesConfig = {}
-        for resource in resources:
-            percentResourcesConfig[resource] = round(village.priorities[resource]/total*100)
-
-        #Resource percentages from village object
-        total = 0
-        for resource in resources:
-            total += village.resources[resource]
-        percentResourcesVillage = {}
-        for resource in resources:
-            percentResourcesVillage[resource] = round(village.resources[resource]/total*100)
-
-        diff = self.calcDifference(percentResourcesVillage, percentResourcesConfig)
+        configTotal = 0
+        currTotal = 0
+        for priority in priorities:
+            configTotal += configSet[priority]
+            currTotal += currSet[priority]
+        
+        diff = {}
+        for priority in priorities:
+            configPercent = round(configSet[priority]/configTotal*100)
+            currPercent = round(currSet[priority]/currTotal*100)
+            diff[priority] = configPercent - currPercent
         return diff
-            
+
+    def calcPriorities(self, village):
+        vDiff = Priority.calcVillageDiff(self.village)
+        print(diff)
+        rDiff = Priority.calcResourcesDiff(self.village)
+        print(diff)
+        for priority in rDiff:
 
 Priority = PriorityClass()
 

@@ -18,8 +18,7 @@ class TestTakeAction(unittest.TestCase):
 
     def test_priorities(self):
         self.village.villagers = []
-        #self.village.buildings = []
-        self.village.addVillager( VillagerClass(V_Type.FARMER.value, self.sim.config["villagers"][V_Type.FARMER.value]))
+        #self.village.addVillager( VillagerClass(V_Type.FARMER.value, self.sim.config["villagers"][V_Type.FARMER.value]))
         self.village.addVillager( VillagerClass(V_Type.HUNTER.value, self.sim.config["villagers"][V_Type.HUNTER.value]))
         self.village.addVillager( VillagerClass(V_Type.LUMBERJACK.value, self.sim.config["villagers"][V_Type.LUMBERJACK.value]))
         self.village.addVillager( VillagerClass(V_Type.MINER.value, self.sim.config["villagers"][V_Type.MINER.value]))
@@ -30,6 +29,7 @@ class TestTakeAction(unittest.TestCase):
         self.village.addVillager( VillagerClass(V_Type.SCOUT.value, self.sim.config["villagers"][V_Type.SCOUT.value]))
         self.village.addVillager( VillagerClass(V_Type.RESEARCHER.value, self.sim.config["villagers"][V_Type.RESEARCHER.value]))
    
+        self.village.buildings = []
 
         self.village.priorities = {
             "Food": 10,
@@ -46,17 +46,15 @@ class TestTakeAction(unittest.TestCase):
         self.village.resources = {
             "Food": 200,
             "Wood": 100,
-            "Stone": 100,
+            "Stone": 200,
             "Ore": 100,
-            "Gold": 100,
+            "Gold": 200,
             "Research": 100
         }
 
-        curentPriorities = Priority.calcPriorities(self.village)
-        print(curentPriorities)
-        Priority.normalizePriorities(curentPriorities)
-        print(curentPriorities)   
-        diff = Priority.calcDifference(curentPriorities, self.village.priorities)
+        print(self.village.priorities)
+        diff = Priority.calcVillageDiff(self.village)
+
         print(diff)
         diff = Priority.calcResourcesDiff(self.village)
         print(diff)
