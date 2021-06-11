@@ -2,10 +2,12 @@ export const VillagesView = {
     template: `
                 <div id="edit-villages">
                     <div id="edit-villages-icons">                           
-                            <i class="bi bi bi-plus-square" style="font-size: 1rem; color: blue;" v-on:click="showAllVillages()" v-show="!showAll"></i>
+                            <i class="bi bi bi-plus-square" style="font-size: 1rem; color: blue;" v-on:click="showAllVillages(true)" v-show="!showAll"></i>
+                            <i class="bi bi bi-plus-square" style="font-size: 1rem; color: red;" v-on:click="showAllVillages(false)" v-show="showAll"></i>
                     </div> 
                     <div v-if="showAll">                   
                         <div id="edit-villages-list">
+                            <h4>Add Village</h4>
                             <div class="list-group">
                                 <div v-for="village in allVillages">
                                     <button class="list-group-item list-group-item-action" type="button" v-if="isNotInSim(village)" v-on:click="addVillage(village)">
@@ -17,6 +19,7 @@ export const VillagesView = {
                     </div>
                     <div v-else>
                         <div id="edit-villages-list">
+                            <h4>Select Village</h4>
                             <div class="list-group">
                                 <button type="button" class="list-group-item list-group-item-action" v-for="village in simVillages" v-on:click="setVillage(village)">
                                     {{village.name}}
@@ -25,19 +28,16 @@ export const VillagesView = {
                             </div>
                         </div>
                     </div>
-                    <div id="edit-villages-data" class="form-group" v-if="villageData">
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Name: </label>
-                            <input class="form-control col-sm-2" type="text" v-model="villageData.name"><br>
-                        </div>
-                        <div v-for="(value, priority) in villageData.priorities">
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">{{priority}}: </label>  
-                                <input type="number" class="form-control col-sm-2" v-model="villageData.priorities[priority]">
-                            </div>
-                        </div>
+                    <div id="edit-villages-labels" v-if="villageData">
+                        <label class="col-form-label">Name: </label>
+                        <label class="col-form-label" v-for="(value, priority) in villageData.priorities">
+                            {{priority}}: </label> 
                     </div>
-                    <div id="edit-villages-data" v-else> 
+                    <div id="edit-villages-values" v-if="villageData">
+                        <input class="form-control" type="text" v-model="villageData.name">                          
+                        <input type="number" class="form-control" v-for="(value, priority) in villageData.priorities" v-model="villageData.priorities[priority]">
+                    </div>
+                    <div id="edit-villages-labels v-else> 
                         <p>No Village Selected</p> 
                     </div>
                 </div>`,
@@ -50,8 +50,8 @@ export const VillagesView = {
         }
     },    
     methods: {
-        showAllVillages: function(){
-            this.showAll = true;
+        showAllVillages: function(value){
+            this.showAll = value;
         },
         isNotInSim: function(village){
             let found = this.simVillages.find(e => e["name"] == village["name"]);
@@ -105,6 +105,9 @@ export const VillagesView = {
             })
             .then(results => { 
                 this.simVillages = results;
+                if(this.simVillages.length >0){
+                    this.setVillage(this.simVillages[0]);
+                }
                 console.log(this.simVillages);
             })
             .catch((error) => {

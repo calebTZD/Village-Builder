@@ -1,18 +1,20 @@
 export const LocationView = {
-    template: `<div class="d-flex">
-                    <div class="d-flex flex-column justify-content-between">
-                        <div>Type</div>
-                        <div>Amount per Village</div>
-                        <div>Average Distance</div>
-                        <div>Upgrade Cost</div>
+    template: `<div id="edit-locations">
+                    <div id="edit-locations-labels">
+                        <label class="col-form-label">Type</label>
+                        <label class="col-form-label">Amount per Village</label>
+                        <label class="col-form-label">Average Distance</label>
+                        <label class="col-form-label">Upgrade Cost</label>
                     </div>
-                    <div v-for="(item, type) in locationData" class="d-flex flex-column">
-                        <h5>{{type}}</h5>
-                        <input type="number" class="form-control" v-model="item.numPerVillage" v-if="type==='Village'" readonly>
-                        <input type="number" class="form-control" v-model="item.numPerVillage" v-else>
-                        <input type="number" class="form-control" v-model="item.aveDistance" v-if="type==='Village'" readonly>
-                        <input type="number" class="form-control" v-model="item.aveDistance" v-else>
-                        <input type="number" class="form-control" v-model="item.enhancemntCost">
+                    <div id="edit-locations-values">
+                        <div v-for="(item, type) in locationData" class="d-flex flex-column align-items-center">
+                            <label class="col-form-label">{{type}}</label>
+                            <input type="number" class="form-control text-center" v-model="item.numPerVillage" v-if="type==='Village'" readonly>
+                            <input type="number" class="form-control text-center" v-model="item.numPerVillage" v-else>
+                            <input type="number" class="form-control text-center" v-model="item.aveDistance" v-if="type==='Village'" readonly>
+                            <input type="number" class="form-control text-center" v-model="item.aveDistance" v-else>
+                            <input type="number" class="form-control text-center" v-model="item.enhancemntCost">
+                        </div>
                     </div>
                 </div>`,
     data() {

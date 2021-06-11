@@ -1,18 +1,20 @@
 export const BuildingView = {
-    template: `<div class="d-flex">
-                    <div class="d-flex flex-column justify-content-between">
-                        <div>Type</div>
-                        <div>Max health</div>
-                        <div>Time to Build</div>
-                        <div>Raw Resources</div>
-                        <div>Upgrade Cost</div>
+    template: `<div id="edit-buildings">
+                    <div id="edit-buildings-labels">
+                        <label class="col-form-label">Type</label>
+                        <dilabel class="col-form-label"v>Max health</label>
+                        <label class="col-form-label">Time to Build</label>
+                        <label class="col-form-label">Raw Resources</label>
+                        <label class="col-form-label">Upgrade Cost</label>
                     </div>
-                    <div v-for="(item, type) in buildingData" class="d-flex flex-column">
-                        <h5>{{type}}</h5>
-                        <input type="number" class="form-control" v-model="item.maxHealth">
-                        <input type="number" class="form-control" v-model="item.buildTime">
-                        <input type="number" class="form-control" v-model="item.resourceAmount">
-                        <input type="number" class="form-control" v-model="item.enhancemntCost">
+                    <div id="edit-buildings-values">
+                        <div v-for="(item, type) in buildingData" class="d-flex flex-column align-items-center">
+                            <label class="col-form-label">{{type}}</label>
+                            <input type="number" class="form-control text-center" v-model="item.maxHealth">
+                            <input type="number" class="form-control text-center" v-model="item.buildTime">
+                            <input type="number" class="form-control text-center" v-model="item.resourceAmount">
+                            <input type="number" class="form-control text-center" v-model="item.enhancemntCost">
+                        </div>
                     </div>
                 </div>`,
     data() {

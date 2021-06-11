@@ -185,6 +185,18 @@
         }
     },
     "buildings": {
+        "Townhall":{
+                "maxHealth": 100,
+                "buildTime": 24,
+                "resourceAmount": 2000,
+                "enhancemntCost": 300
+        },
+        "Farm":{
+                "maxHealth": 100,
+                "buildTime": 24,
+                "resourceAmount": 2000,
+                "enhancemntCost": 300
+        },
         "LoggingCamp":{
                 "maxHealth": 100,
                 "buildTime": 24,
@@ -201,14 +213,8 @@
                 "maxHealth": 100,
                 "buildTime": 24,
                 "resourceAmount": 2000,
-                "enhancemntCost": 300        },
-        "Farm":{
-                "maxHealth": 100,
-                "buildTime": 24,
-                "resourceAmount": 2000,
                 "enhancemntCost": 300
-        },
-        
+        },        
         "Market":{
                 "maxHealth": 100,
                 "buildTime": 24,
@@ -228,12 +234,6 @@
                 "enhancemntCost": 300
         }, 
         "BuildingX":{
-                "maxHealth": 100,
-                "buildTime": 24,
-                "resourceAmount": 2000,
-                "enhancemntCost": 300
-        },
-        "Townhall":{
                 "maxHealth": 100,
                 "buildTime": 24,
                 "resourceAmount": 2000,

@@ -2,14 +2,18 @@ export const SimulationView = {
     template: 
     `<div id="sim-main">
         <div id="banner">
-            <h2>RPG Simulation: {{simName}}</h2>
+            <h2>RPG Simulation</h2>
         </div>
         <div v-show="showList">
             <SimListView ref="simlist" @edit="onEdit"></SimListView>
         </div> 
-        <div v-show="showEdit" id="edit-pane">            
-            <div id="edit-options">
-                <h4>Edit</h4>
+        <div v-show="showEdit" id="edit-pane">   
+            <div id="edit-banner">            
+                <h4 class="flex-row-gap">Editing: {{simName}}</h4>    
+                <button type="button" class="btn btn-primary flex-row-gap" v-on:click="done()">Done</button>
+                <button type="button" class="btn btn-success flex-row-gap" v-on:click="update()">Update</button>   
+            </div>
+            <div id="edit-menu">
                 <div class="list-group">
                     <button type="button" class="list-group-item list-group-item-primary list-group-item-action" v-on:click="setEdit('WorldView')">World</button>
                     <button type="button" class="list-group-item list-group-item-primary list-group-item-action" v-on:click="setEdit('VillagesView')">Village</button>
@@ -17,8 +21,6 @@ export const SimulationView = {
                     <button type="button" class="list-group-item list-group-item-primary list-group-item-action" v-on:click="setEdit('LocationView')">Locations</button>
                     <button type="button" class="list-group-item list-group-item-primary list-group-item-action" v-on:click="setEdit('BuildingView')">Buildings</button>
                 </div>
-                <button type="button" class="btn btn-primary" v-on:click="done()">Done</button>
-                <button type="button" class="btn btn-success" v-on:click="update()">UPDATE</button>
             </div>
             <div id="edit-simulation">
                 <div v-show="editView==='WorldView'">

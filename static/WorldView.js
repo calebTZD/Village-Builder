@@ -1,54 +1,30 @@
 export const WorldView = {
-    template: `<div>
-                    <div class="d-flex">
-                        <div class="d-flex flex-column flex-fill">
-                            <h4>Simulation Settings:</h4>
-                            <br><br>
-                            <div>
-                                Days to Run: <input type="number" v-model="worldData.days">
-                            </div>
-                            <div>
-                                Villeger Maximum: <input type="number" v-model="worldData.maxVillagersPerVillage">
-                            </div>
-                            <div>
-                                Building Maximum: <input type="number" v-model="worldData.maxBuildingsPerVillage">
-                            </div>
-                        </div>
-                        <div class="d-flex flex-column flex-fill">
-                            <h5>Starting Villagers</h5>
-                            <div>
-                                <input type="checkbox" id="lumberjack" value="lumberjack" v-model="worldData.startingVillagers">
-                                <label for="lumberjack"> Lumberjack </label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="farmer" value="farmer" v-model="worldData.startingVillagers">
-                                <label for="farmer"> Farmer </label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="stonemason" value="stonemason" v-model="worldData.startingVillagers">
-                                <label for="stonemason"> Stonemason </label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="miner" value="miner" v-model="worldData.startingVillagers">
-                                <label for="miner"> Miner </label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="merchant" value="merchant" v-model="worldData.startingVillagers">
-                                <label for="merchant"> Merchant </label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="researcher" value="researcher" v-model="worldData.startingVillagers">
-                                <label for="researcher"> Researcher </label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="warrior" value="warrior" v-model="worldData.startingVillagers">
-                                <label for="warrior"> Warrior </label>
+    template: `<div id="edit-world">
+                    <div id="edit-world-labels">
+                        <h5>Settings</h5>
+                        <label class="col-form-label">Days to Run: </label>
+                        <label class="col-form-label">Villeger Maximum: </label>
+                        <label class="col-form-label">Building Maximum: </label>
+                    </div>
+                    <div id="edit-world-values">
+                        <h5>:</h5>
+                        <input type="number" class="form-control" v-model="worldData.days">
+                        <input type="number" class="form-control" v-model="worldData.maxVillagersPerVillage">
+                        <input type="number" class="form-control" v-model="worldData.maxBuildingsPerVillage">
+                    </div>
+                    <div id="edit-world-villagers">
+                        <h5>Starting Villagers</h5>
+                        <div class="form-group">
+                            <div v-for="villager in villagers">
+                                <input type="checkbox" v-bind:id="villager" v-bind:value="villager" v-model="worldData.startingVillagers">
+                                <label v-bind:for="villager"> {{villager}} </label>
                             </div>
                         </div>
                     </div>
                 </div>`,
     data() {
         return {
+            villagers: ["Farmer", "Lumberjack", "Stonemason", "Miner", "Warrior", "Guard", "DrX", "Merchant", "Researcher", "Scout"],
             worldData: {'days':1, 'maxVillagersPerVillage': 1, 'maxBuildingsPerVillage': 1, 'startingVillagers': []}
         }
     },    
