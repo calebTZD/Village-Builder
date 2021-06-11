@@ -121,8 +121,8 @@ class PriorityClass:
         
         diff = {}
         for priority in priorities:
-            configPercent = round(configSet[priority]/configTotal*100)
-            currPercent = round(currSet[priority]/currTotal*100)
+            configPercent = 0 if configTotal == 0 else round(configSet[priority]/configTotal*100)
+            currPercent = 0 if currTotal == 0 else round(currSet[priority]/currTotal*100)
             diff[priority] = configPercent - currPercent
         return diff
 

@@ -2,12 +2,15 @@
     {
         "name": "Rohan",
         "priorities": {
-            "FoodProduction": 5,
-            "WoodProduction": 1,
-            "StoneProduction": 1,
-            "OreProduction": 1,
+            "Food": 5,
+            "Wood": 1,
+            "Stone": 1,
+            "Ore": 1,
+            "Gold": 1,
             "Commerce": 1,
-            "War": 10,
+            "Attack": 1,
+            "Defense": 1,
+            "ProjectX": 1,
             "Research": 1,
             "Searching": 1
         }        
@@ -15,12 +18,15 @@
     {
         "name": "Rivendale",
         "priorities": {
-            "FoodProduction": 3,
-            "WoodProduction": 1,
-            "StoneProduction": 1,
-            "OreProduction": 1,
+            "Food": 3,
+            "Wood": 1,
+            "Stone": 1,
+            "Ore": 1,
+            "Gold": 1,
             "Commerce": 1,
-            "War": 9,
+            "Attack": 1,
+            "Defense": 1,
+            "ProjectX": 1,
             "Research": 1,
             "Searching": 1
         }
@@ -28,12 +34,15 @@
     {
         "name": "Moria",
         "priorities": {
-            "FoodProduction": 1,
-            "WoodProduction": 1,
-            "StoneProduction": 10,
-            "OreProduction": 1,
+            "Food": 1,
+            "Wood": 1,
+            "Stone": 10,
+            "Ore": 1,
+            "Gold": 1,
             "Commerce": 1,
-            "War": 8,
+            "Attack": 1,
+            "Defense": 1,
+            "ProjectX": 1,
             "Research": 1,
             "Searching": 1
         }        

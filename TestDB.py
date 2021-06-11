@@ -30,7 +30,7 @@ def testSimulations():
 def testSymVillages():
     vill = SimData.getVillages("The Myst")
     pprint(vill)
-    vill[0]["priorities"]["FoodProduction"] = 55
+    vill[0]["priorities"]["Food"] = 55
     results = SimData.updateVillages("The Myst", vill)
     pprint(results)
     vill = SimData.getVillages("The Myst")
@@ -75,7 +75,7 @@ def testVillages():
     SimData.updateVillage("test", v)
     villages = SimData.getAllVillages()
     pprint(len(villages))
-    v["priorities"]["FoodProduction"] = 77
+    v["priorities"]["Food"] = 77
     SimData.updateVillage("test", v)
     villages = SimData.getAllVillages()
     pprint(villages)

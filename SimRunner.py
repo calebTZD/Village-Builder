@@ -91,19 +91,24 @@ class SimRunnerClass:
 
     def postTick(self):
         for village in self.sim.world.villages:
-            pass
-
-    def upgrade(self):
-        pass #TODO
+            self.createVillager(village)
+            self.reassignVillagers(village)
+            self.createVillager(village)
 
     def createVillager(self):
         pass #TODO
 
-    def reassignVillager(self):
-        pass #TODO
+    def reassignVillagers(self):
+        pass #TODO Until worst priority < threashold, convert villagers
 
     def sendArmy(self):
-        pass #TODO
+        pass #TODO ifmilitary > minAttack create Military based on attach%
+
+    def defendVillage(self):
+        pass #TODO if enemies>guards call back army and convert towns folk
+
+    def upgrade(self):
+        pass #TODO If research or ProjectX > threashold upgrade entitites
 
     def runSimulation(self):
         tick = 0
