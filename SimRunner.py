@@ -47,7 +47,10 @@ class SimRunnerClass:
         elif villager.status == V_Status.BUILDING:
             villager.assignedBuilding.buildTimeLeft -= 1
             if villager.assignedBuilding.buildTimeLeft <= 0:
-                villager.status = V_Status.HARVESTING
+                if villager.type == "Guard" or villager.type == "Warrior":
+                    villager.status = V_Status.DEFENDING
+                else:
+                    villager.status = V_Status.HARVESTING
 
         elif villager.status == V_Status.TO_LOCATION:
             villager.toLocation()
@@ -80,7 +83,7 @@ class SimRunnerClass:
         elif villager.status == V_Status.DEFENDING:
             building = villager.underAttack()
             if building:
-                if villager.assignedBuilding.bType == "Barracks":
+                if villager.assignedBuilding.type == "Barracks":
                     villager.assignedBuilding = building
                     villager.distance = building.location.distance
                 else:
@@ -91,9 +94,6 @@ class SimRunnerClass:
             pass
 
     def upgrade(self):
-        pass #TODO
-
-    def build(self):
         pass #TODO
 
     def createVillager(self):

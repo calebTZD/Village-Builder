@@ -58,13 +58,18 @@ class VillagerClass:
         self.village.addBuilding(building, location)
         self.assignedBuilding = building
 
+    def attacked(self, villager):
+        self.currentHealth -= villager.attack
+        villager.currentHealth -= self.defense
+        self.status = V_Status.DEAD
+        if self.currentHealth <= 0:
+            self.village.dead.append(self)
+            self.village.villagers.pop(self)
+
     def attacking(self):
         if len(self.assignedBuilding.villagers) > 0:
             target = self.assignedBuilding.villagers[0]
-            target.currentHealth -= self.attack
-            self.currentHealth -= target.defense
-            if target.currentHealth <= 0:
-                target.status = V_Status.DEAD
+            target.attacked(self)
         else:
             self.assignedBuilding.currentHealth -= self.attack
             
@@ -88,16 +93,16 @@ class VillagerClass:
             
     def defending(self):
         if self.distance <= 0:
-            if (self.assignedBuilding.enemies > 0):
+            if len(self.assignedBuilding.enemies) > 0:
                 target = self.assignedBuilding.enemies[0]
-                target.currentHealth -= self.attack
+                target.attacked(self)
             elif self.underAttack():
                 building = self.underAttack()
                 self.assignedBuilding = building
                 self.distance = building.location.distance
             else:
                 for building in self.village.buildings:
-                    if building.bType == "Barracks":
+                    if building.type == "Barracks":
                         self.assignedBuilding = building
                         return
         else:
@@ -115,7 +120,10 @@ class VillagerClass:
         self.distance -= self.speed
         if self.distance <= 0:
             if self.assignedBuilding.buildTimeLeft <= 0:
-                self.status = V_Status.HARVESTING
+                if self.type == "Guard" or self.type == "Warrior":
+                    self.status = V_Status.DEFENDING
+                else:
+                    self.status = V_Status.HARVESTING
             else:
                 self.status = V_Status.BUILDING
 

@@ -25,6 +25,7 @@ class VillageClass:
         self.buildings = []
         self.villagers = []
         self.enemyVilages = []
+        self.dead = []
 
         #Stats
         self.stats = {}
