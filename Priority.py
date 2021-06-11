@@ -20,8 +20,7 @@ class PRIORITIES(Enum):
     EXPLORE = "Exploring"
 
 VILLAGER_PRIORITY_MAP = {
-    V_Type.FARMER.value: "FOOD",
-    V_Type.HUNTER.value: "FOOD",    
+    V_Type.FARMER.value: "FOOD",    
     V_Type.LUMBERJACK.value: "WOOD",
     V_Type.STONEMASON.value: "STONE",
     V_Type.MINER.value: "ORE",
@@ -29,17 +28,30 @@ VILLAGER_PRIORITY_MAP = {
     V_Type.WARRIOR.value: "ATTACK",
     V_Type.GUARD.value: "DEFENSE",
     V_Type.RESEARCHER.value: "RESEARCH",
+    V_Type.DRX.value: "PROJECTX",
     V_Type.SCOUT.value: "EXPLORE"
+}
+PRIORITY_VILLAGER_MAP = {
+    "Food": V_Type.FARMER.value,
+    "Wood": V_Type.LUMBERJACK.value,
+    "Stone": V_Type.STONEMASON.value,
+    "Ore": V_Type.MINER.value,
+    "Gold": V_Type.MERCHANT.value,
+    "Attack": V_Type.WARRIOR.value,
+    "Defense": V_Type.GUARD.value,
+    "Research": V_Type.RESEARCHER.value,
+    "ProjectX": V_Type.DRX.value,
+    "Explore": V_Type.SCOUT.value
 }
 
 BUILDING_PRIORITY_MAP = {
-    B_Type.FARM.value: "FOOD",
-    B_Type.HUNTINGHUT.value: "FOOD",    
+    B_Type.FARM.value: "FOOD",   
     B_Type.LOGGINGCAMP.value: "WOOD",
     B_Type.QUARRY.value: "STONE",
     B_Type.MINE.value: "ORE",
     B_Type.MARKET.value: "GOLD",
-    B_Type.BARRACKS.value: "PROJECTX",
+    B_Type.BARRACKS.value: "DEFENSE",
+    B_Type.BUILDINGX.value: "PROJECTX",
     B_Type.LIBRARY.value: "RESEARCH",
     B_Type.TOWNHALL.value: "FOOD"
 }
@@ -116,6 +128,36 @@ class PriorityClass:
         for priority in rDiff:
             vDiff[priority] += rDiff[priority]*RESOURCE_MULTIPLIER
         return vDiff
+
+    def getTopBottomVillagers(self, village):
+        topValue = None
+        topPriority = None
+        bottomValue = None
+        bottomPriority = None
+        priorities = self.calcPriorities(village)
+        for priority in priorities:
+            if (topValue == None) or \
+               (topValue < priorities[priority]) or \
+               (topValue == priorities[priority] and village.priorities[priority] > village.priorities[topPriority]):
+                topPriority = priority
+                topValue = priorities[priority]
+            
+            if (bottomValue == None) or \
+               (bottomValue > priorities[priority]) or \
+               (bottomValue == priorities[priority] and village.priorities[priority] > village.priorities[bottomPriority]):
+                bottomPriority = priority
+                bottomValue = priorities[priority]
+        return topPriority, bottomPriority
+
+    def whichVillagerToCreate(self, village):
+        (topPriority, bottomPriority) = self.getTopBottomVillagers(village)
+        return PRIORITY_VILLAGER_MAP[topPriority]
+
+    def whichVillagerToSwitch(self, village):
+        (topPriority, bottomPriority) = self.getTopBottomVillagers(village)
+        topType = PRIORITY_VILLAGER_MAP[topPriority]
+        bottomType = PRIORITY_VILLAGER_MAP[bottomPriority]
+        return topType, bottomType 
 
 Priority = PriorityClass()
 

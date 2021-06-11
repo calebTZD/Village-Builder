@@ -26,8 +26,7 @@
                 "preferredBuilding": "Mine",
                 "enhancemntFactor": 2,
                 "gatheringType": "Ore"
-        },
-        
+        },        
         "Warrior": {
                 "preferredBuilding": "Barracks",
                 "enhancemntFactor": 2,
@@ -37,6 +36,11 @@
                 "preferredBuilding": "Barracks",
                 "enhancemntFactor": 2,
                 "gatheringType": "None"
+        },
+        "DrX":{
+                "preferredBuilding": "BuildingX",
+                "enhancemntFactor": 2,
+                "gatheringType": "ProjectX"
         },
         "Merchant": {
                 "preferredBuilding": "Market",
@@ -56,8 +60,8 @@
     },
     "locations": {
         "Village": {
-                "buildingTypes": [ "Market", "Library", "Barracks", "Townhall" ],
-                "maxBuildings": 5,
+                "buildingTypes": [ "Market", "Library", "Barracks", "Townhall", "BuildingX" ],
+                "maxBuildings": 15,
                 "enhancemntFactor": 2
         },
         "Grassland": {
@@ -138,6 +142,15 @@
                 "enhancemntFactor": 2
         }, 
         "Barracks":{
+                "cost": {
+                    "Wood": 50,
+                    "Gold": 50
+                },
+                "villagersAbleToSupport": 5,
+                "resource": "Defense",
+                "enhancemntFactor": 2
+        },
+        "BuildingX":{
                 "cost": {
                     "Wood": 50,
                     "Gold": 50

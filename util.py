@@ -22,6 +22,7 @@ class V_Type(Enum):
     MERCHANT = "Merchant"
     SCOUT = "Scout"
     RESEARCHER = "Researcher"
+    DRX = "DrX"
 
 class B_Type(Enum):
     FARM = "Farm"
@@ -31,4 +32,5 @@ class B_Type(Enum):
     MARKET = "Market"
     LIBRARY = "Library"
     BARRACKS = "Barracks"
+    BUILDINGX = "BuildingX"
     TOWNHALL = "Townhall"
