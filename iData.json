@@ -5,6 +5,7 @@
             "days": 5,        
             "statValues": {},
             "numVillages": 5,
+            "distanceBetweenVillages": 15,
             "maxVillagersPerVillage": 99,
             "startingVillagers": ["Farmer", "Lumberjack"],
             "maxBuildingsPerVillage": 10

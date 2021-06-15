@@ -3,12 +3,14 @@ export const WorldView = {
                     <div id="edit-world-labels">
                         <h5>Settings</h5>
                         <label class="col-form-label">Days to Run: </label>
+                        <label class="col-form-label">Days to Run: </label>
                         <label class="col-form-label">Villeger Maximum: </label>
                         <label class="col-form-label">Building Maximum: </label>
                     </div>
                     <div id="edit-world-values">
                         <h5>:</h5>
                         <input type="number" class="form-control" v-model="worldData.days">
+                        <input type="number" class="form-control" v-model="worldData.distanceBetweenVillages">
                         <input type="number" class="form-control" v-model="worldData.maxVillagersPerVillage">
                         <input type="number" class="form-control" v-model="worldData.maxBuildingsPerVillage">
                     </div>

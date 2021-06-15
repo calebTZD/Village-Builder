@@ -7,6 +7,7 @@ from Villager import VillagerClass
 from Village import VillageClass
 from Building import BuildingClass
 from Location import LocationClass
+from Priority import Priority
 
 from util import V_Status
 
