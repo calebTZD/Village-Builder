@@ -1,3 +1,4 @@
+from util import V_Status
 from Defaults import Defaults
 
 class BuildingClass:
@@ -39,6 +40,14 @@ class BuildingClass:
 
     def attacked(self, villager):
         self.currentHealth -= villager.modify(villager.attack)
+        if self.currentHealth <= 0:
+            self.village.destroyed.append(self)
+            self.village.buildings.pop(self)
+            for villager in self.villagers:
+                villager.status = V_Status.UNASSIGNED
+                villager.assignedBuilding = None
+                self.villagers.pop(villager)
+            self.enemies = []
 
 
 if __name__ == '__main__':    
