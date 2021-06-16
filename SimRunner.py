@@ -7,7 +7,7 @@ from Villager import VillagerClass
 from Village import VillageClass
 from Building import BuildingClass
 from Location import LocationClass
-from Priority import Priority
+from Priority import PriorityManager
 
 from util import V_Status
 
@@ -82,7 +82,7 @@ class SimRunnerClass:
                 villager.status = V_Status.ATTACKING
 
         elif villager.status == V_Status.DEFENDING:
-            building = villager.underAttack()
+            building = villager.village.underAttack()
             if building:
                 if villager.assignedBuilding.type == "Barracks":
                     villager.assignedBuilding = building
@@ -109,7 +109,7 @@ class SimRunnerClass:
         pass #TODO if enemies>guards call back army and convert towns folk
 
     def upgrade(self, village):
-        priotiry = Priority.getRotationPriority
+        priotiry = PriorityManager.getRotationPriority
         
         
          #TODO ProjectX > threashold upgrade entitites

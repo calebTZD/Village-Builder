@@ -68,6 +68,13 @@ class VillageClass:
     def addEnemy(self, village):
         if not village in self.enemyVilages:
             self.enemyVilages.append(village)
+
+    def underAttack(self):
+        for building in self.buildings:
+            if building.enemyPresent():
+                
+                return building
+        return None
         
 if __name__ == '__main__':    
     from pprint import pprint 

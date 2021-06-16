@@ -42,6 +42,9 @@ class VillagerClass:
         #Stats
         self.stats = {}
 
+    def modify(self, base):
+        self.village.levelMod
+
     def findBuilding(self):
         for building in self.village.buildings:
             if building.type == self.preferredBuilding:
@@ -84,12 +87,7 @@ class VillagerClass:
     def toWar(self):
         self.distance -= self.speed  
     
-    def underAttack(self):
-        for building in self.village.buildings:
-            if building.enemyPresent():
-                
-                return building
-        return None
+
             
     def defending(self):
         if self.distance <= 0:
