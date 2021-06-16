@@ -26,6 +26,7 @@ class VillageClass:
         self.villagers = []
         self.enemyVilages = []
         self.dead = []
+        self.destroyed =[]
         self.levelMod = {
             "Farmer": 1,
             "Lumberjack": 1,
