@@ -43,7 +43,7 @@ class VillagerClass:
         self.stats = {}
 
     def modify(self, base):
-        self.village.levelMod
+        return self.village.levelMod[self.type] * base
 
     def findBuilding(self):
         for building in self.village.buildings:
@@ -62,8 +62,8 @@ class VillagerClass:
         self.assignedBuilding = building
 
     def attacked(self, villager):
-        self.currentHealth -= villager.attack
-        villager.currentHealth -= self.defense
+        self.currentHealth -= villager.modify(villager.attack)
+        villager.currentHealth -= self.modify(self.defense)
         self.status = V_Status.DEAD
         if self.currentHealth <= 0:
             self.village.dead.append(self)
@@ -74,19 +74,19 @@ class VillagerClass:
             target = self.assignedBuilding.villagers[0]
             target.attacked(self)
         else:
-            self.assignedBuilding.currentHealth -= self.attack
+            self.assignedBuilding.attacked(self)
             
     def findTarget(self):
         target = self.village.enemyVilages[0]
         targets = list(target.buildings)
         random.shuffle(targets)
-        self.assignedBuilding = targets[0]
-        self.assignedBuilding.enemies.append(self)
+        self.assignedBuilding = targets[0]        
         self.distance = self.assignedBuilding.location.distance
 
     def toWar(self):
-        self.distance -= self.speed  
-    
+        self.distance -= self.modify(self.speed)  
+        if self.distance <= 0:
+            self.assignedBuilding.enemies.append(self)
 
             
     def defending(self):
@@ -104,18 +104,18 @@ class VillagerClass:
                         self.assignedBuilding = building
                         return
         else:
-            self.distance -= self.speed
+            self.distance -= self.modify(self.speed) 
 
     def setToVillage(self):
         self.status = V_Status.TO_VILLAGE
         self.distance = self.assignedBuilding.location.distance
 
     def harvest(self):
-        self.currentLoad[self.gatheringType] += self.productionSpeed
-        self.assignedBuilding.currentResources -= self.productionSpeed
+        self.currentLoad[self.gatheringType] += self.modify(self.productionSpeed)
+        self.assignedBuilding.currentResources -= self.modify(self.productionSpeed)
 
     def toLocation(self):
-        self.distance -= self.speed
+        self.distance -= self.modify(self.speed) 
         if self.distance <= 0:
             if self.assignedBuilding.buildTimeLeft <= 0:
                 if self.type == "Guard" or self.type == "Warrior":
@@ -126,9 +126,9 @@ class VillagerClass:
                 self.status = V_Status.BUILDING
 
     def toVillage(self):
-        self.distance -= self.speed
+        self.distance -= self.modify(self.speed) 
         if self.distance <= 0:
-            self.village.resources[self.gatheringType] += self.carryCapacity
+            self.village.resources[self.gatheringType] += self.modify(self.carryCapacity)
             self.currentLoad[self.gatheringType] = 0
             self.status = V_Status.TO_LOCATION
             self.distance = self.assignedBuilding.location.distance

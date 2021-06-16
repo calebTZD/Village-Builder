@@ -26,6 +26,18 @@ class VillageClass:
         self.villagers = []
         self.enemyVilages = []
         self.dead = []
+        self.levelMod = {
+            "Farmer": 1,
+            "Lumberjack": 1,
+            "Miner": 1,
+            "Stonemason": 1,
+            "Merchant": 1,
+            "Warrior": 1,
+            "Guard": 1,
+            "Scout": 1,
+            "DrX": 1,
+            "Researcher": 1
+        }
 
         #Stats
         self.stats = {}
