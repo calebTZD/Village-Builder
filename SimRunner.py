@@ -7,7 +7,7 @@ from Villager import VillagerClass
 from Village import VillageClass
 from Building import BuildingClass
 from Location import LocationClass
-from Priority import PriorityManager
+from Priority import PriorityManagerClass
 
 from util import V_Status
 
@@ -16,6 +16,7 @@ class SimRunnerClass:
     def __init__(self, name):
         self.villagerList = []
         self.sim = SimulationClass(name)
+        self.priorityManager = PriorityManagerClass()
 
     def randomizeVillagers(self):
         self.villagerList = []
@@ -109,7 +110,8 @@ class SimRunnerClass:
         pass #TODO if enemies>guards call back army and convert towns folk
 
     def upgrade(self, village):
-        priotiry = PriorityManager.getRotationPriority
+        #TODO: if we have enough resources
+        priotiryVillager = self.priorityManager.whichVillagerToUpgrade(village)
         
         
          #TODO ProjectX > threashold upgrade entitites

@@ -64,7 +64,7 @@ VILLAGE_PRIORITY_LIST = [PRIORITIES.FOOD.value, PRIORITIES.WOOD.value, PRIORITIE
                          PRIORITIES.ORE.value, PRIORITIES.GOLD.value, \
                          PRIORITIES.DEFENSE.value, PRIORITIES.PROJECTX.value, PRIORITIES.RESEARCH.value]
 
-class PriorityClass:
+class PriorityManagerClass:
     def __init__(self):
         self.rotationPriorities = {}
 
@@ -163,14 +163,24 @@ class PriorityClass:
         bottomType = PRIORITY_VILLAGER_MAP[bottomPriority]
         return topValue, topType, bottomType
 
-
-PriorityManager = PriorityClass()
+    def whichVillagerToUpgrade(self, village):
+        levelMod = dict(village.levelMod)
+        levelMod.pop('DrX', None)
+        lowestLevel = village.levelMod[min(levelMod, key=levelMod.get)]
+        sortedPriorities = dict(village.priorities)
+        {k: v for k, v in sorted(sortedPriorities.items(), key=lambda item: item[1])}
+        for k in sortedPriorities:
+            priorityVillager = PRIORITY_VILLAGER_MAP[k]
+            if village.levelMod[priorityVillager] == lowestLevel:
+                return priorityVillager
+ 
 
 if __name__ == '__main__':
     from pprint import pprint 
     from Village import VillageClass  
     villageSettings = Defaults.simulation["villages"][0]
     village = VillageClass(villageSettings)
+    PriorityManager = PriorityManagerClass()
     PriorityManager.calcPriorities(village)
     # print(village.priorities)
     # print(P.getRandomPriority(village))

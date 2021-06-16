@@ -10,13 +10,11 @@ from Location import LocationClass
 
 from util import V_Status
 
-from Priority import PriorityClass
-
 class SimRunnerClass:
     def __init__(self, name):
         self.villagerList = []
         self.sim = SimulationClass(name)
-        self.priority = PriorityClass()
+        self.priorityManager = PriorityManagerClass()
 
     def randomizeVillagers(self):
         self.villagerList = []

@@ -1,10 +1,10 @@
 import unittest
 import initDB
-from SimRunner2 import SimRunnerClass
+from SimRunner import SimRunnerClass
 from Villager import VillagerClass
 from pprint import pprint
 from util import *
-from Priority import PriorityManager
+from Priority import PriorityManagerClass
 
 class TestTakeAction(unittest.TestCase):
     def setUp(self):
@@ -51,7 +51,7 @@ class TestTakeAction(unittest.TestCase):
             "Defense": 10,
             "Research": 10,
             "ProjectX": 10,
-            "Exploring": 10
+            "Explore": 10
         } 
 
     def init_resources(self):
@@ -71,13 +71,9 @@ class TestTakeAction(unittest.TestCase):
         self.init_priorities()
         self.init_resources()
 
-        print(self.village.priorities)
-        diff = PriorityManager.calcPriorities(self.village)
-        print(diff)
-        vType = PriorityManager.whichVillagerToCreate(self.village)
-        print(vType)
-        (topValue, topType, bottomType) = PriorityManager.whichVillagerToSwitch(self.village)
-        print("Replace " + bottomType + " with " + topType + " Because it is "+ str(topValue))
+        diff = self.simRunner.priorityManager.calcPriorities(self.village)
+        vType = self.simRunner.priorityManager.whichVillagerToCreate(self.village)
+        (topValue, topType, bottomType) = self.simRunner.priorityManager.whichVillagerToSwitch(self.village)
         self.assertEqual(diff['Food'], 0)
         self.assertEqual(diff['Wood'], 0)
         self.assertEqual(diff['Stone'], 0)
@@ -95,12 +91,28 @@ class TestTakeAction(unittest.TestCase):
         self.village.resources["Food"] += 100
         self.village.resources["Wood"] -= 100
 
-        vType = PriorityManager.whichVillagerToCreate(self.village)
+        vType = self.simRunner.priorityManager.whichVillagerToCreate(self.village)
         self.assertEqual(vType, V_Type.LUMBERJACK.value)
         
-        (topValue, topType, bottomType) = PriorityManager.whichVillagerToSwitch(self.village)
+        (topValue, topType, bottomType) = self.simRunner.priorityManager.whichVillagerToSwitch(self.village)
         self.assertEqual(topType, V_Type.LUMBERJACK.value)
         self.assertEqual(bottomType, V_Type.FARMER.value)
+
+    def test_nextUpgrade(self):
+        self.village.levelMod = {
+            "Farmer": 3,
+            "Lumberjack": 2,
+            "Miner": 3,
+            "Stonemason": 3,
+            "Merchant": 3,
+            "Warrior": 4,
+            "Guard": 5,
+            "Scout": 3,
+            "DrX": 0,
+            "Researcher": 5
+        }
+        self.village.priorities['Food'] = 10
+        pprint(self.simRunner.priorityManager.whichVillagerToUpgrade(self.village))
 
 if __name__ == '__main__':
     unittest.main()
