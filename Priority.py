@@ -127,8 +127,8 @@ class PriorityClass:
         return diff
 
     def calcPriorities(self, village):
-        vDiff = Priority.calcVillageDiff(village)
-        rDiff = Priority.calcResourcesDiff(village)
+        vDiff = self.calcVillageDiff(village)
+        rDiff = self.calcResourcesDiff(village)
         for priority in rDiff:
             vDiff[priority] += rDiff[priority]*RESOURCE_MULTIPLIER
         return vDiff
@@ -162,18 +162,16 @@ class PriorityClass:
         topType = PRIORITY_VILLAGER_MAP[topPriority]
         bottomType = PRIORITY_VILLAGER_MAP[bottomPriority]
         return topValue, topType, bottomType
-  
- 
 
 
-Priority = PriorityClass()
+PriorityManager = PriorityClass()
 
 if __name__ == '__main__':
     from pprint import pprint 
     from Village import VillageClass  
     villageSettings = Defaults.simulation["villages"][0]
     village = VillageClass(villageSettings)
-    Priority.calcPriorities(village)
+    PriorityManager.calcPriorities(village)
     # print(village.priorities)
     # print(P.getRandomPriority(village))
     # print(P.getRandomPriority(village))

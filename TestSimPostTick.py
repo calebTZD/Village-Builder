@@ -4,7 +4,7 @@ from SimRunner2 import SimRunnerClass
 from Villager import VillagerClass
 from pprint import pprint
 from util import *
-from Priority import Priority
+from Priority import PriorityManager
 
 class TestTakeAction(unittest.TestCase):
     def setUp(self):
@@ -72,11 +72,11 @@ class TestTakeAction(unittest.TestCase):
         self.init_resources()
 
         print(self.village.priorities)
-        diff = Priority.calcPriorities(self.village)
+        diff = PriorityManager.calcPriorities(self.village)
         print(diff)
-        vType = Priority.whichVillagerToCreate(self.village)
+        vType = PriorityManager.whichVillagerToCreate(self.village)
         print(vType)
-        (topValue, topType, bottomType) = Priority.whichVillagerToSwitch(self.village)
+        (topValue, topType, bottomType) = PriorityManager.whichVillagerToSwitch(self.village)
         print("Replace " + bottomType + " with " + topType + " Because it is "+ str(topValue))
         self.assertEqual(diff['Food'], 0)
         self.assertEqual(diff['Wood'], 0)
@@ -95,10 +95,10 @@ class TestTakeAction(unittest.TestCase):
         self.village.resources["Food"] += 100
         self.village.resources["Wood"] -= 100
 
-        vType = Priority.whichVillagerToCreate(self.village)
+        vType = PriorityManager.whichVillagerToCreate(self.village)
         self.assertEqual(vType, V_Type.LUMBERJACK.value)
         
-        (topValue, topType, bottomType) = Priority.whichVillagerToSwitch(self.village)
+        (topValue, topType, bottomType) = PriorityManager.whichVillagerToSwitch(self.village)
         self.assertEqual(topType, V_Type.LUMBERJACK.value)
         self.assertEqual(bottomType, V_Type.FARMER.value)
 
