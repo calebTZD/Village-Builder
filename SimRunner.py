@@ -108,8 +108,11 @@ class SimRunnerClass:
     def defendVillage(self):
         pass #TODO if enemies>guards call back army and convert towns folk
 
-    def upgrade(self):
-        pass #TODO If research or ProjectX > threashold upgrade entitites
+    def upgrade(self, village):
+        priotiry = Priority.getRotationPriority
+        
+        
+         #TODO ProjectX > threashold upgrade entitites
 
     def runSimulation(self):
         tick = 0
