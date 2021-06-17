@@ -114,5 +114,63 @@ class TestTakeAction(unittest.TestCase):
         self.village.priorities['Food'] = 10
         pprint(self.simRunner.priorityManager.whichVillagerToUpgrade(self.village))
 
+    def test_upgrade(self):
+        self.village.levelMod = {
+            "Farmer": 3,
+            "Lumberjack": 2,
+            "Miner": 3,
+            "Stonemason": 3,
+            "Merchant": 3,
+            "Warrior": 5,
+            "Guard": 6,
+            "Scout": 3,
+            "DrX": 0,
+            "Researcher": 5
+        }
+        priotiryVillager = self.simRunner.priorityManager.whichVillagerToUpgrade(self.village)
+        self.assertEqual(priotiryVillager, V_Type.LUMBERJACK.value)
+        self.assertEqual(self.village.levelMod[priotiryVillager], 2)
+        self.simRunner.upgrade(self.village)
+        self.assertEqual(self.village.levelMod[priotiryVillager], 2)
+        self.assertEqual(self.village.levelMod[V_Type.GUARD.value], 6)
+        self.assertEqual(self.village.levelMod[V_Type.WARRIOR.value], 5)
+        self.village.resources["Research"] = self.sim.config.villagers[priotiryVillager]["enhancemntCost"]
+        self.village.resources["ProjectX"] = self.sim.config.villagers[V_Type.DRX.value]["enhancemntCost"]
+        self.simRunner.upgrade(self.village)
+        self.assertEqual(self.village.levelMod[priotiryVillager], 3)
+        self.assertEqual(self.village.levelMod[V_Type.GUARD.value], 7)
+        self.assertEqual(self.village.levelMod[V_Type.WARRIOR.value], 6)
+        self.assertEqual(self.village.resources["Research"], 0)
+        self.assertEqual(self.village.resources["ProjectX"], 0)
+
+    def test_createVillager(self):
+        self.init_villagers()
+        self.init_buildings()
+        self.init_priorities()
+        self.init_resources()
+        self.village.resources["Food"] += 100
+        self.village.resources["Wood"] -= 100
+        numLumberjacks = len(self.village.getVillagersByType(V_Type.LUMBERJACK.value))
+        self.assertEqual(numLumberjacks, 1)
+        self.simRunner.createVillager(self.village)
+        numLumberjacks = len(self.village.getVillagersByType(V_Type.LUMBERJACK.value))  
+        self.assertEqual(numLumberjacks, 2)
+
+
+    def test_reassignVillager(self):
+        self.init_villagers()
+        self.init_buildings()
+        self.init_priorities()
+        self.init_resources()
+        self.village.resources["Food"] += 5
+        self.village.resources["Wood"] -= 5
+        self.village.resources["Ore"] += 10
+        self.village.resources["Gold"] -= 10
+        numLumberjacks = len(self.village.getVillagersByType(V_Type.LUMBERJACK.value))
+        self.assertEqual(numLumberjacks, 1)
+        self.simRunner.createVillager(self.village)
+        numLumberjacks = len(self.village.getVillagersByType(V_Type.LUMBERJACK.value))
+        self.assertEqual(numLumberjacks, 2)
+
 if __name__ == '__main__':
     unittest.main()

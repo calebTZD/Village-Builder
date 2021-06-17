@@ -47,9 +47,11 @@ class VillageClass:
         self.stats = {}
 
     def getVillagersByType(self, type):
+        villagers = []
         for villager in self.villagers:
             if villager.type == type:
-                pass
+                villagers.append(villager)
+        return villagers
 
     def addVillager(self, villager):
         self.villagers.append(villager)
