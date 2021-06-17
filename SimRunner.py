@@ -97,7 +97,8 @@ class SimRunnerClass:
             self.createVillager(village)
             self.reassignVillagers(village)
             self.upgrade(village)            
-            self.sendArmy(village)            
+            self.sendArmy(village)
+            self.defendVillage(village)             
 
     def createVillager(self, village):
         villager = self.priorityManager.whichVillagerToCreate(village)
