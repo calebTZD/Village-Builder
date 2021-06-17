@@ -46,6 +46,11 @@ class VillageClass:
         #Stats
         self.stats = {}
 
+    def getVillagersByType(self, type):
+        for villager in self.villagers:
+            if villager.type == type:
+                pass
+
     def addVillager(self, villager):
         self.villagers.append(villager)
         villager.village = self
@@ -90,7 +95,7 @@ class VillageClass:
                     self.resources[reso] -= cost[resource]
 
 
-    def create(self, cost):
+    def spend(self, cost):
         # take resources away from village
         
         for resource in cost:
