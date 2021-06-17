@@ -140,10 +140,10 @@ class SimRunnerClass:
             village.levelMod[priotiryVillager] +=1
             village.resources["Research"] -= self.sim.config.villagers[priotiryVillager]["enhancemntCost"]
 
-        if village.resources["ProjectX"] >= self.sim.config.villagers["MrX"]["enhancemntCost"]:
+        if village.resources["ProjectX"] >= self.sim.config.villagers["DrX"]["enhancemntCost"]:
             village.levelMod["Guard"] +=1
             village.levelMod["Warrior"] +=1
-            village.resources["ProjectX"] -= self.sim.config.villagers["MrX"]["enhancemntCost"]
+            village.resources["ProjectX"] -= self.sim.config.villagers["DrX"]["enhancemntCost"]
         
 
     def runSimulation(self):
