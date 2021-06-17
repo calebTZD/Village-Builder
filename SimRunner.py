@@ -97,6 +97,15 @@ class SimRunnerClass:
             self.createVillager(village)
             self.reassignVillagers(village)
             self.upgrade(village)
+            warriors = []
+            if not village.attacking():
+                for villager in village.villagers:
+                    if villager.type == "Warrior":
+                        warriors.append(villager)
+
+                if len(warriors) >= 15:
+                    village.status = V_Status.ATTACKING
+                    self.sendArmy(warriors)
 
     def createVillager(self, village):
         villager = self.priorityManager.whichVillagerToCreate(village)
@@ -114,9 +123,12 @@ class SimRunnerClass:
                 village.switchVillagers(topPriority, bottomPriority)
 
 
-    def sendArmy(self, village):
-        for villager in village.villagers:
-            pass
+    def sendArmy(self, warriors):
+
+        for warrior in warriors:
+            warrior.status = V_Status.TO_WAR
+            warrior.distance = self.sim.config.world["distanceBetweenVillages"]
+
 
     def defendVillage(self):
         pass #TODO if enemies>guards call back army and convert towns folk
