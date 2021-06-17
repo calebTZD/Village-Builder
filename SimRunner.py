@@ -126,9 +126,10 @@ class SimRunnerClass:
     def defendVillage(self, village):
         if village.attacking:
             guards = village.getVillagersByType("Guard")
-            if len(village.enemies) > len(guards):
+            building = village.underAttack()
+            if building and len(building.enemies) > len(guards):
                 for warrior in village.getVillagersByType("Warrior"):
-                    warrior.assignedBuilding = village.underAttack()
+                    warrior.assignedBuilding = building
                     warrior.status = V_Status.DEFENDING
 
     def upgrade(self, village):
