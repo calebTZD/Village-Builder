@@ -115,21 +115,21 @@ class SimRunnerClass:
                 village.switchVillagers(topPriority, bottomPriority)
 
 
-    def sendArmy(self, village):
-        warriors = []
+    def sendArmy(self, village):        
         if not village.attacking():
-            for villager in village.villagers:
-                if villager.type == "Warrior":
-                    warriors.append(villager)
-
+            warriors = village.getVillagersByType("Warrior")
             if len(warriors) >= 15:
                 for warrior in warriors:
                     warrior.status = V_Status.TO_WAR
                     warrior.distance = self.sim.config.world["distanceBetweenVillages"]
 
-
-    def defendVillage(self):
-        pass #TODO if enemies>guards call back army and convert towns folk
+    def defendVillage(self, village):
+        if village.attacking:
+            guards = village.getVillagersByType("Guard")
+            if len(village.enemies) > len(guards):
+                for warrior in village.getVillagersByType("Warrior"):
+                    warrior.assignedBuilding = village.underAttack()
+                    warrior.status = V_Status.DEFENDING
 
     def upgrade(self, village):
         
