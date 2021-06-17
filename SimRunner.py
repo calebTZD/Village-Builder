@@ -109,8 +109,11 @@ class SimRunnerClass:
 
     def reassignVillagers(self, village):
         for x in range(3):
-            (topValue, topPriority, bottomPriority) = self.priorityManager.whichVillagerToCreate(village)
-            if topValue <= 10:
+            (topValue, topPriority, bottomPriority) = self.priorityManager.whichVillagerToSwitch(village)
+            print(topValue)
+            print(topPriority)
+            print(bottomPriority)
+            if topPriority == bottomPriority or bottomPriority == None or topValue <= 10:
                 return
             else:
                 village.switchVillagers(topPriority, bottomPriority)
@@ -133,8 +136,7 @@ class SimRunnerClass:
                     warrior.assignedBuilding = building
                     warrior.status = V_Status.DEFENDING
 
-    def upgrade(self, village):
-        
+    def upgrade(self, village):        
         priotiryVillager = self.priorityManager.whichVillagerToUpgrade(village)
         if village.resources["Research"] >= self.sim.config.villagers[priotiryVillager]["enhancemntCost"]:
             village.levelMod[priotiryVillager] +=1

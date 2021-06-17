@@ -83,21 +83,6 @@ class TestTakeAction(unittest.TestCase):
         self.assertEqual(diff['ProjectX'], 0)
         self.assertEqual(diff['Research'], 0)
 
-    def test_nextCreate(self):
-        self.init_villagers()
-        self.init_buildings()
-        self.init_priorities()
-        self.init_resources()
-        self.village.resources["Food"] += 100
-        self.village.resources["Wood"] -= 100
-
-        vType = self.simRunner.priorityManager.whichVillagerToCreate(self.village)
-        self.assertEqual(vType, V_Type.LUMBERJACK.value)
-        
-        (topValue, topType, bottomType) = self.simRunner.priorityManager.whichVillagerToSwitch(self.village)
-        self.assertEqual(topType, V_Type.LUMBERJACK.value)
-        self.assertEqual(bottomType, V_Type.FARMER.value)
-
     def test_nextUpgrade(self):
         self.village.levelMod = {
             "Farmer": 3,
@@ -162,15 +147,18 @@ class TestTakeAction(unittest.TestCase):
         self.init_buildings()
         self.init_priorities()
         self.init_resources()
-        self.village.resources["Food"] += 5
-        self.village.resources["Wood"] -= 5
-        self.village.resources["Ore"] += 10
-        self.village.resources["Gold"] -= 10
-        numLumberjacks = len(self.village.getVillagersByType(V_Type.LUMBERJACK.value))
-        self.assertEqual(numLumberjacks, 1)
-        self.simRunner.createVillager(self.village)
-        numLumberjacks = len(self.village.getVillagersByType(V_Type.LUMBERJACK.value))
-        self.assertEqual(numLumberjacks, 2)
+        self.village.resources["Food"] += 100
+        self.village.resources["Ore"] += 100
+        self.sim.createVillager(V_Type.FARMER.value, self.village)
+        self.sim.createVillager(V_Type.FARMER.value, self.village)
+        self.sim.createVillager(V_Type.MINER.value, self.village)
+        self.village.resources["Wood"] -= 100
+        self.village.resources["Gold"] -= 100
+        print(">>>")
+        print(self.village.getVillagersByType(V_Type.MERCHANT.value))
+        self.assertEqual(len(self.village.getVillagersByType(V_Type.LUMBERJACK.value)), 1)
+        self.simRunner.reassignVillagers(self.village)
+        self.assertEqual(len(self.village.getVillagersByType(V_Type.LUMBERJACK.value)), 3)
 
 if __name__ == '__main__':
     unittest.main()

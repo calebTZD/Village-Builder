@@ -146,9 +146,10 @@ class PriorityManagerClass:
                 topPriority = priority
                 topValue = priorities[priority]
             
-            if (bottomValue == None) or \
-               (bottomValue > priorities[priority]) or \
-               (bottomValue == priorities[priority] and village.priorities[priority] > village.priorities[bottomPriority]):
+            if (len(village.getVillagersByType(PRIORITY_VILLAGER_MAP[priority])) > 1) and \
+               ((bottomValue == None) or \
+                (bottomValue > priorities[priority]) or \
+                (bottomValue == priorities[priority] and village.priorities[priority] > village.priorities[bottomPriority])):
                 bottomPriority = priority
                 bottomValue = priorities[priority]
         return topValue, topPriority, bottomPriority
@@ -160,7 +161,7 @@ class PriorityManagerClass:
     def whichVillagerToSwitch(self, village):
         (topValue, topPriority, bottomPriority) = self.getTopBottomVillagers(village)
         topType = PRIORITY_VILLAGER_MAP[topPriority]
-        bottomType = PRIORITY_VILLAGER_MAP[bottomPriority]
+        bottomType = None if bottomPriority == None else PRIORITY_VILLAGER_MAP[bottomPriority]
         return topValue, topType, bottomType
 
     def whichVillagerToUpgrade(self, village):
