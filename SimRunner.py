@@ -96,26 +96,43 @@ class SimRunnerClass:
         for village in self.sim.world.villages:
             self.createVillager(village)
             self.reassignVillagers(village)
-            self.createVillager(village)
+            self.upgrade(village)
 
-    def createVillager(self):
-        pass #TODO
+    def createVillager(self, village):
+        villager = self.priorityManager.whichVillagerToCreate(village)
+        if village.canCreate(self.sim.config.villagers[villager]["spawnCost"]):
+            self.sim.createVillager(villager, village)
+            village.create(self.sim.config.villagers[villager]["spawnCost"])
+        
 
-    def reassignVillagers(self):
-        pass #TODO Until worst priority < threashold, convert villagers
+    def reassignVillagers(self, village):
+        for x in range(3):
+            (topValue, topPriority, bottomPriority) = self.priorityManager.whichVillagerToCreate(village)
+            if topValue <= 10:
+                return
+            else:
+                village.switchVillagers(topPriority, bottomPriority)
 
-    def sendArmy(self):
-        pass #TODO ifmilitary > minAttack create Military based on attach%
+
+    def sendArmy(self, village):
+        for villager in village.villagers:
+            pass
 
     def defendVillage(self):
         pass #TODO if enemies>guards call back army and convert towns folk
 
     def upgrade(self, village):
-        #TODO: if we have enough resources
+        
         priotiryVillager = self.priorityManager.whichVillagerToUpgrade(village)
+        if village.resources["Research"] >= self.sim.config.villagers[priotiryVillager]["enhancemntCost"]:
+            village.levelMod[priotiryVillager] +=1
+            village.resources["Research"] -= self.sim.config.villagers[priotiryVillager]["enhancemntCost"]
+
+        if village.resources["ProjectX"] >= self.sim.config.villagers["MrX"]["enhancemntCost"]:
+            village.levelMod["Guard"] +=1
+            village.levelMod["Warrior"] +=1
+            village.resources["ProjectX"] -= self.sim.config.villagers["MrX"]["enhancemntCost"]
         
-        
-         #TODO ProjectX > threashold upgrade entitites
 
     def runSimulation(self):
         tick = 0
