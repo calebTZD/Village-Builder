@@ -9,6 +9,9 @@ def initSimulationsCollection():
 def initVillagesCollection():
     DB.initVillagesCollection()
 
+def initStatsCollection():
+    DB.initStatsCollection()
+
 def addSampleData():
     #Simulation
     sampleSim = dict(Defaults.simulation)
@@ -20,7 +23,6 @@ def addSampleData():
         village = dict(v)
         village['simulationName'] = "The Myst"
         DB.VillageCol.insert_one(village)
-
 
 if __name__ == '__main__':
     initSimulationsCollection()

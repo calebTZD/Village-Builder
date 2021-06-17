@@ -3,10 +3,10 @@ from Defaults import Defaults
 from random import shuffle
 from util import *
 
-BUILDING_MULTIPLIER = 5
-VILLAGER_MULTIPLIER = 1
+BUILDING_MULTIPLIER = 50
+VILLAGER_MULTIPLIER = 10
 RESOURCE_MULTIPLIER = 1
-WARRIOR_MULTIPLIER = 3
+WARRIOR_MULTIPLIER = 30
 
 class PRIORITIES(Enum):
     FOOD = "Food"

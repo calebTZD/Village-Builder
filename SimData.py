@@ -63,7 +63,6 @@ class SimDataClass:
         else:
             return False
 
-
     def getVillagers(self, simName):
         sim = self.db.SimCol.find_one({'name': simName}, {"villagers": 1})
         if sim:
@@ -112,5 +111,20 @@ class SimDataClass:
         villageData['simulationName'] = simulationName
         results =  DB.VillageCol.replace_one({"name": villageData['name'], "simulationName": simulationName}, villageData, upsert=True)
 
-SimData = SimDataClass()
+    def getStatsByName(self, simName):
+        stats = self.db.StatsCol.find_one({'simName': simName})
+        if stats:
+            stats.pop('_id', None)
+        return stats
 
+    def saveStats(self, statsData):
+        results =  DB.StatsCol.replace_one({"simName": statsData["simName"]}, statsData, upsert=True)        
+
+    def deleteStats(self, name):
+        sim = self.db.StatsCol.delete_one({"simName": name})
+        if sim:
+            return True
+        else:
+            return False
+
+SimData = SimDataClass()
