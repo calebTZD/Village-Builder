@@ -5,7 +5,7 @@ import random
 class VillagerClass:
     def __init__(self, vType, villagerSettings):
         self.type = vType
-        self.config = {}
+        self.config = villagerSettings
 
         # #Defaults
         # self.enhancemntFactor = Defaults.villagersConfig[self.type]["enhancemntFactor"]

@@ -4,7 +4,7 @@ from Defaults import Defaults
 class BuildingClass:
     def __init__(self, bType, buildingSettings):
         self.type = bType
-        self.config ={}
+        self.config = buildingSettings
 
 
         # #Defaults

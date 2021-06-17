@@ -3,7 +3,7 @@ from Defaults import Defaults
 class LocationClass:
     def __init__(self, lType, locationSettings):
         self.type = lType
-        self.config ={}
+        self.config = locationSettings
 
         # #Defaults
         # self.maxBuildings = Defaults.locationsConfig[self.type]["maxBuildings"]

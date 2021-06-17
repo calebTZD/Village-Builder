@@ -60,7 +60,7 @@ class VillageClass:
     
     def findLocationForBuilding(self, bType):
         for location in self.locations:
-            if bType in location.buildingTypes and len(location.buildings) < location.maxBuildings:
+            if bType in location.config['buildingTypes'] and len(location.buildings) < location.config['maxBuildings']:
                 return location
 
     def canBuild(self, type):
