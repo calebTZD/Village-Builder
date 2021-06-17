@@ -96,22 +96,14 @@ class SimRunnerClass:
         for village in self.sim.world.villages:
             self.createVillager(village)
             self.reassignVillagers(village)
-            self.upgrade(village)
-            warriors = []
-            if not village.attacking():
-                for villager in village.villagers:
-                    if villager.type == "Warrior":
-                        warriors.append(villager)
-
-                if len(warriors) >= 15:
-                    village.status = V_Status.ATTACKING
-                    self.sendArmy(warriors)
+            self.upgrade(village)            
+            self.sendArmy(village)            
 
     def createVillager(self, village):
         villager = self.priorityManager.whichVillagerToCreate(village)
         if village.canCreate(self.sim.config.villagers[villager]["spawnCost"]):
             self.sim.createVillager(villager, village)
-            village.create(self.sim.config.villagers[villager]["spawnCost"])
+            village.spend(self.sim.config.villagers[villager]["spawnCost"])
         
 
     def reassignVillagers(self, village):
@@ -123,11 +115,17 @@ class SimRunnerClass:
                 village.switchVillagers(topPriority, bottomPriority)
 
 
-    def sendArmy(self, warriors):
+    def sendArmy(self, village):
+        warriors = []
+        if not village.attacking():
+            for villager in village.villagers:
+                if villager.type == "Warrior":
+                    warriors.append(villager)
 
-        for warrior in warriors:
-            warrior.status = V_Status.TO_WAR
-            warrior.distance = self.sim.config.world["distanceBetweenVillages"]
+            if len(warriors) >= 15:
+                for warrior in warriors:
+                    warrior.status = V_Status.TO_WAR
+                    warrior.distance = self.sim.config.world["distanceBetweenVillages"]
 
 
     def defendVillage(self):
