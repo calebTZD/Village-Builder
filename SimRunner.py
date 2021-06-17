@@ -17,6 +17,7 @@ class SimRunnerClass:
         self.villagerList = []
         self.sim = SimulationClass(name)
         self.priorityManager = PriorityManagerClass()
+        self.threshholds = []
 
     def randomizeVillagers(self):
         self.villagerList = []
