@@ -1,4 +1,5 @@
 from Defaults import Defaults
+import util
 
 class VillageClass:
     def __init__(self, settings):
@@ -72,9 +73,26 @@ class VillageClass:
                         return False
         return True
 
+    def canCreate(self, cost):        
+        for resource in cost:
+            for reso in self.resources:
+                if resource == reso:
+                    if self.resources[reso] < cost[resource]:
+                        return False
+        return True
+
     def build(self, type):
         # take resources away from village
         cost = Defaults.buildingsConfig[type]["cost"]
+        for resource in cost:
+            for reso in self.resources:
+                if resource == reso:
+                    self.resources[reso] -= cost[resource]
+
+
+    def build(self, cost):
+        # take resources away from village
+        
         for resource in cost:
             for reso in self.resources:
                 if resource == reso:
@@ -90,6 +108,16 @@ class VillageClass:
                 
                 return building
         return None
+
+    def switchVillagers(self, top, bottom):
+        for villager in self.villagers:
+            if villager.type != bottom:
+                continue
+            else:
+                villager.village.resources[villager.config["gatheringType"]] += villager.modify(villager.config["carryCapacity"])
+                villager.currentLoad[villager.config["gatheringType"]] = 0
+                villager.type = top
+                villager.status = util.V_Status.UNASSIGNED
         
 if __name__ == '__main__':    
     from pprint import pprint 
