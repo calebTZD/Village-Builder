@@ -7,17 +7,17 @@ class BuildingClass:
         self.config ={}
 
 
-        #Defaults
-        self.cost = Defaults.buildingsConfig[self.type]["cost"]
-        self.villagersAbleToSupport = Defaults.buildingsConfig[self.type]["villagersAbleToSupport"]
-        self.resource = Defaults.buildingsConfig[self.type]["resource"]
-        self.enhancemntFactor = Defaults.buildingsConfig[self.type]["enhancemntFactor"]
+        # #Defaults
+        # self.cost = Defaults.buildingsConfig[self.type]["cost"]
+        # self.villagersAbleToSupport = Defaults.buildingsConfig[self.type]["villagersAbleToSupport"]
+        # self.resource = Defaults.buildingsConfig[self.type]["resource"]
+        # self.enhancemntFactor = Defaults.buildingsConfig[self.type]["enhancemntFactor"]
 
-        #Settings
-        self.maxHealth = buildingSettings["maxHealth"]
-        self.buildTime = buildingSettings["buildTime"]
-        self.resourceAmount = buildingSettings["resourceAmount"]
-        self.enhancemntCost = buildingSettings["enhancemntCost"]
+        # #Settings
+        # self.maxHealth = buildingSettings["maxHealth"]
+        # self.buildTime = buildingSettings["buildTime"]
+        # self.resourceAmount = buildingSettings["resourceAmount"]
+        # self.enhancemntCost = buildingSettings["enhancemntCost"]
 
         #Initial Values
         self.village = None

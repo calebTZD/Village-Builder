@@ -5,15 +5,15 @@ class LocationClass:
         self.type = lType
         self.config ={}
 
-        #Defaults
-        self.maxBuildings = Defaults.locationsConfig[self.type]["maxBuildings"]
-        self.buildingTypes = Defaults.locationsConfig[self.type]["buildingTypes"]
-        self.enhancemntFactor = Defaults.locationsConfig[self.type]["enhancemntFactor"]
+        # #Defaults
+        # self.maxBuildings = Defaults.locationsConfig[self.type]["maxBuildings"]
+        # self.buildingTypes = Defaults.locationsConfig[self.type]["buildingTypes"]
+        # self.enhancemntFactor = Defaults.locationsConfig[self.type]["enhancemntFactor"]
 
-        #Settings
-        self.numPerVillage = locationSettings["numPerVillage"]
-        self.aveDistance = locationSettings["aveDistance"]
-        self.enhancemntCost = locationSettings["enhancemntCost"]        
+        # #Settings
+        # self.numPerVillage = locationSettings["numPerVillage"]
+        # self.aveDistance = locationSettings["aveDistance"]
+        # self.enhancemntCost = locationSettings["enhancemntCost"]        
 
         #Initial Values
         self.village = None

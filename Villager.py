@@ -7,22 +7,22 @@ class VillagerClass:
         self.type = vType
         self.config = {}
 
-        #Defaults
-        self.enhancemntFactor = Defaults.villagersConfig[self.type]["enhancemntFactor"]
-        self.preferredBuilding = Defaults.villagersConfig[self.type]["preferredBuilding"]
-        self.gatheringType = Defaults.villagersConfig[self.type]["gatheringType"]
+        # #Defaults
+        # self.enhancemntFactor = Defaults.villagersConfig[self.type]["enhancemntFactor"]
+        # self.preferredBuilding = Defaults.villagersConfig[self.type]["preferredBuilding"]
+        # self.gatheringType = Defaults.villagersConfig[self.type]["gatheringType"]
 
 
-        #Settings
-        self.speed = villagerSettings["speed"]
-        self.maxHealth = villagerSettings["maxHealth"]
-        self.carryCapacity = villagerSettings["carryCapacity"]
-        self.attack = villagerSettings["attack"]
-        self.defense = villagerSettings["defense"]
-        self.productionSpeed = villagerSettings["productionSpeed"]
-        self.spawnTime = villagerSettings["spawnTime"]
-        self.enhancemntCost = villagerSettings["enhancemntCost"]
-        self.spawnCost = villagerSettings["spawnCost"]
+        # #Settings
+        # self.speed = villagerSettings["speed"]
+        # self.maxHealth = villagerSettings["maxHealth"]
+        # self.carryCapacity = villagerSettings["carryCapacity"]
+        # self.attack = villagerSettings["attack"]
+        # self.defense = villagerSettings["defense"]
+        # self.productionSpeed = villagerSettings["productionSpeed"]
+        # self.spawnTime = villagerSettings["spawnTime"]
+        # self.enhancemntCost = villagerSettings["enhancemntCost"]
+        # self.spawnCost = villagerSettings["spawnCost"]
 
         #Initial Values
         self.village = None

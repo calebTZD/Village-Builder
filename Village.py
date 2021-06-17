@@ -2,7 +2,9 @@ from Defaults import Defaults
 
 class VillageClass:
     def __init__(self, settings):
-        #Defaults
+        self.config = {}
+
+        #Defaults 
         self.startingLocations = Defaults.villagesConfig["startingLocations"]
         self.startingBuildings = Defaults.villagesConfig["startingBuildings"]
 
