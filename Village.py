@@ -90,7 +90,7 @@ class VillageClass:
                     self.resources[reso] -= cost[resource]
 
 
-    def build(self, cost):
+    def create(self, cost):
         # take resources away from village
         
         for resource in cost:
@@ -118,6 +118,15 @@ class VillageClass:
                 villager.currentLoad[villager.config["gatheringType"]] = 0
                 villager.type = top
                 villager.status = util.V_Status.UNASSIGNED
+
+    def attacking(self):
+        for villager in self.villagers:
+            if villager.type == "Warrior":
+                for building in self.buildings:
+                    if building == villager.assignedBuilding:
+                        break
+                return True
+        return False
         
 if __name__ == '__main__':    
     from pprint import pprint 
