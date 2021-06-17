@@ -6,7 +6,7 @@ class DBaccess:
         self.villageDB = self.client["RTSDB"]
         self.SimCol = self.villageDB["Sims"]
         self.VillageCol = self.villageDB["Villages"]
-        self.StatCol = self.villageDB["Stats"]
+        self.StatsCol = self.villageDB["Results"]
 
     def initSimCollection(self):
         self.SimCol.drop()
@@ -17,7 +17,7 @@ class DBaccess:
         self.VillageCol.create_index([("name", ASCENDING), ("simulationName", ASCENDING)], unique=True)
 
     def initStatsCollection(self):
-        self.StatCol.drop()
-        self.StatCol.create_index("simulationName", unique=True)
+        self.StatsCol.drop()
+        self.StatsCol.create_index("simName", unique=True)
         
 DB = DBaccess()
