@@ -35,9 +35,7 @@ class SimRunnerClass:
             if villager.findBuilding():
                 villager.status = V_Status.TO_LOCATION
             elif villager.village.canBuild(villager.preferredBuilding):
-                building = BuildingClass(villager.preferredBuilding, self.sim.config['buildings'][villager.preferredBuilding])
-                villager.build(building)
-                villager.status = V_Status.TO_LOCATION
+                villager.village.addBuilding(villager.preferredBuilding)                
 
         elif villager.status == V_Status.HARVESTING:
             villager.harvest()
@@ -101,6 +99,7 @@ class SimRunnerClass:
         villagerType = self.priorityManager.whichVillagerToCreate(village)
         if village.canCreate(self.sim.config.villagers[villagerType]["spawnCost"]):
             village.addVillager(villagerType)
+            LOGIT.info(village.name + "Created " + villagerType)
             village.spend(self.sim.config.villagers[villagerType]["spawnCost"])
 
     def reassignVillagers(self, village):
@@ -109,13 +108,14 @@ class SimRunnerClass:
             if topPriority == bottomPriority or bottomPriority == None or topValue <= 10:
                 return
             else:
-                LOGIT.info("Reassign " + bottomPriority + " To " + topPriority)
+                LOGIT.info(village.name + "Reassign " + bottomPriority + " To " + topPriority)
                 village.switchVillagers(topPriority, bottomPriority)
 
     def sendArmy(self, village):        
         if not village.attacking():
             warriors = village.getVillagersByType("Warrior")
             if len(warriors) >= 15:
+                LOGIT.info("TO WAR")
                 for warrior in warriors:
                     warrior.status = V_Status.TO_WAR
                     warrior.distance = self.sim.config.world["distanceBetweenVillages"]
@@ -143,10 +143,11 @@ class SimRunnerClass:
 
     def runSimulation(self):
         tick = 0
-        while tick < self.sim.world.days:
+        while tick < self.sim.world.days * 8:
             self.doTick()
             self.postTick()
             tick += 1
+            LOGIT.info(tick)
 
 if __name__ == '__main__':
     sr = SimRunnerClass("The Myst")

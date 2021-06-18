@@ -2,46 +2,46 @@
     {
         "name": "Rohan",
         "priorities": {
-            "Food": 5,
-            "Wood": 1,
-            "Stone": 1,
-            "Ore": 1,
-            "Gold": 1,
-            "Attack": 1,
-            "Defense": 1,
-            "ProjectX": 1,
-            "Research": 1,
-            "Explore": 1
+            "Food": 45,
+            "Wood": 5,
+            "Stone": 5,
+            "Ore": 5,
+            "Gold": 5,
+            "Attack": 5,
+            "Defense": 5,
+            "ProjectX": 5,
+            "Research": 5,
+            "Explore": 5
         }        
     },
     {
         "name": "Rivendale",
         "priorities": {
-            "Food": 3,
-            "Wood": 1,
-            "Stone": 1,
-            "Ore": 1,
-            "Gold": 1,
-            "Attack": 1,
-            "Defense": 1,
-            "ProjectX": 1,
-            "Research": 1,
-            "Explore": 1
+            "Food": 28,
+            "Wood": 8,
+            "Stone": 8,
+            "Ore": 8,
+            "Gold": 8,
+            "Attack": 8,
+            "Defense": 8,
+            "ProjectX": 8,
+            "Research": 8,
+            "Explore": 8
         }
     },
     {
         "name": "Moria",
         "priorities": {
-            "Food": 1,
-            "Wood": 1,
+            "Food": 10,
+            "Wood": 10,
             "Stone": 10,
-            "Ore": 1,
-            "Gold": 1,
-            "Attack": 1,
-            "Defense": 1,
-            "ProjectX": 1,
-            "Research": 1,
-            "Explore": 1
+            "Ore": 10,
+            "Gold": 10,
+            "Attack": 10,
+            "Defense": 10,
+            "ProjectX": 10,
+            "Research": 10,
+            "Explore": 10
         }        
     }
 ]

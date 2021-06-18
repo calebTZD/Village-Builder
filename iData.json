@@ -13,15 +13,16 @@
     "villages": [{
                 "name": "Default",
                 "priorities": {
-                    "Food": 1,
-                    "Wood": 1,
-                    "Stone": 1,
-                    "Ore": 1,
-                    "Gold": 1,
-                    "attack": 1,
-                    "defense": 1,
-                    "Research": 1,
-                    "Exploring": 1
+                    "Food": 10,
+                    "Wood": 10,
+                    "Stone": 10,
+                    "Ore": 10,
+                    "Gold": 10,
+                    "attack": 10,
+                    "defense": 10,
+                    "Research": 10,
+                    "Exploring": 10,
+                    "ProjectX": 10
                 }
     }],
     "villagers":{
