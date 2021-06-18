@@ -1,5 +1,6 @@
 from util import V_Status
 from Defaults import Defaults
+from Stats import BuildingsStatsClass
 
 class BuildingClass:
     def __init__(self, bType, buildingSettings):
@@ -16,7 +17,10 @@ class BuildingClass:
         self.enemies = []
 
         #Stats
-        self.stats = {}
+        self.stats = BuildingsStatsClass(self)
+
+    def toDict(self):
+        return self.stats.statDict()
 
     def initSettings(self, buildingSettings):
         self.cost = buildingSettings["cost"]

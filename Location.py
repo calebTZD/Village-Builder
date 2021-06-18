@@ -1,4 +1,5 @@
 from Defaults import Defaults
+from Stats import LocationStatsClass
 
 class LocationClass:
     def __init__(self, lType, locationSettings):
@@ -11,7 +12,10 @@ class LocationClass:
         self.distance = self.calcDistance()
 
         #Stats
-        self.stats = {}
+        self.stats = LocationStatsClass(self)
+
+    def toDict(self):
+        return self.stats.statDict()
 
     def initSettings(self, locationSettings):
         self.maxBuildings = locationSettings["maxBuildings"]

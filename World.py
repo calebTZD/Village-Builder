@@ -1,4 +1,5 @@
 from Defaults import Defaults
+from Stats import WorldStatsClass
 
 class WorldClass:
     def __init__(self, sim, worldSettings):
@@ -9,7 +10,10 @@ class WorldClass:
         self.villages = []
 
         #Stats
-        self.stats = {}
+        self.stats = WorldStatsClass(self)
+
+    def toDict(self):
+        return self.stats.statDict()
 
     def initSettings(self, worldSettings):
         self.days = worldSettings["days"]
