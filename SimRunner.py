@@ -124,6 +124,7 @@ class SimRunnerClass:
             warriors = village.getVillagersByType("Warrior")
             if len(warriors) >= 15:
                 LOGIT.info("TO WAR")
+                village.stats.timesToWar += 1
                 for warrior in warriors:
                     warrior.status = V_Status.TO_WAR
                     warrior.distance = self.sim.config.world["distanceBetweenVillages"]
@@ -133,6 +134,7 @@ class SimRunnerClass:
             guards = village.getVillagersByType("Guard")
             building = village.underAttack()
             if building and len(building.enemies) > len(guards):
+                village.stats.timesAttacked += 1
                 for warrior in village.getVillagersByType("Warrior"):
                     warrior.assignedBuilding = building
                     warrior.status = V_Status.DEFENDING
@@ -156,7 +158,8 @@ class SimRunnerClass:
             self.doTick()
             self.postTick()
             tick += 1
-            LOGIT.info(tick)
+            self.sim.stats.ticks += 1
+            LOGIT.info(f'Tick number: {tick}')
         SimData.saveStats(self.sim.toDict())
 
 if __name__ == '__main__':

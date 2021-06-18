@@ -145,7 +145,7 @@ class TestTakeAction(unittest.TestCase):
     #     self.simRunner.takeAction(villager)
 
     def test_fullSim(self):
-        self.sim.world.days = 100
+        self.sim.world.days = 10
         self.simRunner.runSimulation()
         
 

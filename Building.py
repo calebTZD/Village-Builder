@@ -43,7 +43,10 @@ class BuildingClass:
 
     def attacked(self, villager):
         self.currentHealth -= villager.calcAttack()
+        villager.village.stats.damageOutput += villager.calcAttack()
+        self.village.stats.damageInput += villager.calcAttack()
         if self.currentHealth <= 0:
+            villager.village.stats.enemyBuildingsDestroed += 1
             self.village.destroyed.append(self)
             self.village.buildings.pop(self)
             for villager in self.villagers:

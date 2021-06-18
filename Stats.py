@@ -8,9 +8,11 @@ class SimStatsClass:
 
     def statDict(self):
         stats = {
+            'simName' : self.sim.name,
             'ticks': self.ticks,
             'world': self.sim.world.toDict()
         }
+        return stats
 
 class WorldStatsClass:
     def __init__(self, world):
@@ -40,7 +42,12 @@ class VillageStatsClass:
     def statDict(self):
         stats = {
             'name': self.village.name,
-            'timesAttacked': self.timesAttacked
+            'timesAttacked': self.timesAttacked,
+            'timesToWar': self.timesToWar,
+            'enemyBuildingsDestroed': self.enemyBuildingsDestroed,
+            'enemyKilled': self.enemyKilled,
+            'damageOutput': self.damageOutput,
+            'damageInput': self.damageInput,
         }
         stats['villagerCount'] = {}
         for vType in V_Type:
