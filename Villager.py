@@ -141,12 +141,15 @@ class VillagerClass:
             if self.assignedBuilding.buildTimeLeft <= 0:
                 if self.type == "Guard" or self.type == "Warrior":
                     self.status = V_Status.DEFENDING
+                elif self.type == "Scout":
+                    self.status = V_Status.SEARCHING
                 else:
                     self.status = V_Status.HARVESTING
             else:
                 self.status = V_Status.BUILDING
 
     def depositLoad(self):
+        
         self.village.incResource(self.gatheringType, self.calcCarryCapacity())
         self.currentLoad[self.gatheringType] = 0
 
@@ -158,7 +161,7 @@ class VillagerClass:
             self.distance = self.assignedBuilding.location.distance
 
     def search(self):
-        self.distance += 1
+        self.distance += self.speed
         if self.distance >= 9:
             return True
         return False

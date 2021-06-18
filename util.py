@@ -52,3 +52,9 @@ class R_Type(Enum):
     GOLD = "Gold"
     PROJECTX = "ProjectX"
     RESEARCH = "Research"
+
+class L_Type(Enum):
+    GRASSLAND = "Grassland"
+    FORREST = "Forest"
+    OREDEPOSIT = "OreDeposit"
+    STONEDEPOSIT = "StoneDeposit"

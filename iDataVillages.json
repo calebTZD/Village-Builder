@@ -2,12 +2,12 @@
     {
         "name": "Rohan",
         "priorities": {
-            "Food": 45,
+            "Food": 5,
             "Wood": 5,
             "Stone": 5,
             "Ore": 5,
             "Gold": 5,
-            "Attack": 5,
+            "Attack": 45,
             "Defense": 5,
             "ProjectX": 5,
             "Research": 5,

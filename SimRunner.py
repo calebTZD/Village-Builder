@@ -1,5 +1,5 @@
 import random
-from util import LOGIT
+from util import LOGIT, L_Type
 from SimData import SimData
 from Defaults import Defaults
 from Simulation import SimulationClass
@@ -35,7 +35,8 @@ class SimRunnerClass:
             if villager.findBuilding():
                 villager.status = V_Status.TO_LOCATION
             elif villager.village.canBuild(villager.preferredBuilding):
-                villager.village.addBuilding(villager.preferredBuilding)                
+                villager.village.addBuilding(villager.preferredBuilding) 
+                               
 
         elif villager.status == V_Status.HARVESTING:
             villager.harvest()
@@ -47,6 +48,8 @@ class SimRunnerClass:
             if villager.assignedBuilding.buildTimeLeft <= 0:
                 if villager.type == "Guard" or villager.type == "Warrior":
                     villager.status = V_Status.DEFENDING
+                elif villager.type == "Scout":
+                    villager.status = V_Status.SEARCHING
                 else:
                     villager.status = V_Status.HARVESTING
 
@@ -64,10 +67,15 @@ class SimRunnerClass:
         elif villager.status == V_Status.SEARCHING:
             if villager.search():
                 villager.status = V_Status.TO_VILLAGE
-                enemies = list(self.sim.world.villages)
-                random.shuffle(enemies)
-                enemy = enemies[0]
-                villager.village.addEnemy(enemy)
+                if villager.village.searchPriority == "enemy":
+                    enemies = list(self.sim.world.villages)
+                    random.shuffle(enemies)
+                    enemy = enemies[0]
+                    villager.village.addEnemy(enemy)
+                elif villager.village.searchPriority == "locations":
+                    villager.village.searchPriority = "enemy"
+                    for lType in L_Type:
+                        villager.village.addLocation(lType.value)
 
         elif villager.status == V_Status.TO_WAR:
             if villager.assignedBuilding.currentHealth <= 0 and villager.assignedBuilding.type != "Barracks":
@@ -134,12 +142,13 @@ class SimRunnerClass:
         if village.resources["Research"] >= self.sim.config.villagers[priotiryVillager]["enhancemntCost"]:
             village.levelMod[priotiryVillager] +=1
             village.resources["Research"] -= self.sim.config.villagers[priotiryVillager]["enhancemntCost"]
+            # LOGIT.info(village.name + " upgraded " + priotiryVillager)
 
         if village.resources["ProjectX"] >= self.sim.config.villagers["DrX"]["enhancemntCost"]:
             village.levelMod["Guard"] +=1
             village.levelMod["Warrior"] +=1
             village.resources["ProjectX"] -= self.sim.config.villagers["DrX"]["enhancemntCost"]
-        
+            # LOGIT.info(village.name + " upgraded Guard and Warrior")
 
     def runSimulation(self):
         tick = 0
@@ -148,6 +157,7 @@ class SimRunnerClass:
             self.postTick()
             tick += 1
             LOGIT.info(tick)
+        SimData.saveStats(self.sim.toDict())
 
 if __name__ == '__main__':
     sr = SimRunnerClass("The Myst")

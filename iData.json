@@ -7,7 +7,7 @@
             "numVillages": 5,
             "distanceBetweenVillages": 15,
             "maxVillagersPerVillage": 99,
-            "startingVillagers": ["Farmer", "Lumberjack"],
+            "startingVillagers": ["Farmer", "Lumberjack", "Scout"],
             "maxBuildingsPerVillage": 10
     },
     "villages": [{

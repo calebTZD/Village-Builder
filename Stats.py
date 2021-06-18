@@ -59,7 +59,7 @@ class VillageStatsClass:
             stats['buildings'].append(building.toDict())
         stats['resources'] = {}
         for rType in R_Type:
-            stats['resources'][rType.value] = self.village.resources[vType.value]
+            stats['resources'][rType.value] = self.village.resources[rType.value]
         stats['destroyedBuildings'] = len(self.village.destroyed)
         stats['deadVillagers'] = len(self.village.dead)
 
