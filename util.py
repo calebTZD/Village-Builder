@@ -1,3 +1,13 @@
+import logging
+
+LOGIT = logging.getLogger("Sim_Log")
+LOGIT.setLevel(logging.DEBUG)
+consoleLog = logging.StreamHandler()
+consoleLog.setLevel(logging.DEBUG)
+formatter = logging.Formatter('[%(asctime)s][%(name)s][%(levelname)s][%(filename)s]: %(message)s')
+consoleLog.setFormatter(formatter)
+LOGIT.addHandler(consoleLog)
+
 from enum import Enum
 class V_Status(Enum):
     UNASSIGNED = 1

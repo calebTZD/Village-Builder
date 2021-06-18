@@ -4,7 +4,7 @@ from SimRunner import SimRunnerClass
 from Villager import VillagerClass
 from pprint import pprint
 from util import *
-from Priority import PriorityManagerClass
+from Priority import *
 
 class TestTakeAction(unittest.TestCase):
     def setUp(self):
@@ -18,27 +18,27 @@ class TestTakeAction(unittest.TestCase):
 
     def init_villagers(self):
         self.village.villagers = []
-        self.sim.createVillager(V_Type.FARMER.value, self.village)
-        self.sim.createVillager(V_Type.LUMBERJACK.value, self.village)
-        self.sim.createVillager(V_Type.MINER.value, self.village)
-        self.sim.createVillager(V_Type.STONEMASON.value, self.village)
-        self.sim.createVillager(V_Type.WARRIOR.value, self.village)
-        self.sim.createVillager(V_Type.GUARD.value, self.village)
-        self.sim.createVillager(V_Type.MERCHANT.value, self.village)
-        self.sim.createVillager(V_Type.SCOUT.value, self.village)
-        self.sim.createVillager(V_Type.RESEARCHER.value, self.village)
-        self.sim.createVillager(V_Type.DRX.value, self.village)
+        self.village.addVillager(V_Type.FARMER.value)
+        self.village.addVillager(V_Type.LUMBERJACK.value)
+        self.village.addVillager(V_Type.MINER.value)
+        self.village.addVillager(V_Type.STONEMASON.value)
+        self.village.addVillager(V_Type.WARRIOR.value)
+        self.village.addVillager(V_Type.GUARD.value)
+        self.village.addVillager(V_Type.MERCHANT.value)
+        self.village.addVillager(V_Type.SCOUT.value)
+        self.village.addVillager(V_Type.RESEARCHER.value)
+        self.village.addVillager(V_Type.DRX.value)
 
     def init_buildings(self):   
         self.village.buildings = []
-        self.sim.createBuilding(B_Type.FARM.value, self.village)
-        self.sim.createBuilding(B_Type.LOGGINGCAMP.value, self.village)
-        self.sim.createBuilding(B_Type.MINE.value, self.village)
-        self.sim.createBuilding(B_Type.QUARRY.value, self.village)
-        self.sim.createBuilding(B_Type.BARRACKS.value, self.village)
-        self.sim.createBuilding(B_Type.MARKET.value, self.village)
-        self.sim.createBuilding(B_Type.LIBRARY.value, self.village)
-        self.sim.createBuilding(B_Type.BUILDINGX.value, self.village)
+        self.village.addBuilding(B_Type.FARM.value)
+        self.village.addBuilding(B_Type.LOGGINGCAMP.value)
+        self.village.addBuilding(B_Type.MINE.value)
+        self.village.addBuilding(B_Type.QUARRY.value)
+        self.village.addBuilding(B_Type.BARRACKS.value)
+        self.village.addBuilding(B_Type.MARKET.value)
+        self.village.addBuilding(B_Type.LIBRARY.value)
+        self.village.addBuilding(B_Type.BUILDINGX.value)
 
     def init_priorities(self):
         self.village.priorities = {
@@ -66,6 +66,7 @@ class TestTakeAction(unittest.TestCase):
         }
 
     def test_priorities(self):
+        LOGIT.info("*************** Test Priorities ***********")
         self.init_villagers()
         self.init_buildings()
         self.init_priorities()
@@ -84,6 +85,7 @@ class TestTakeAction(unittest.TestCase):
         self.assertEqual(diff['Research'], 0)
 
     def test_nextUpgrade(self):
+        LOGIT.info("*************** Test Next Upgrade ***********")
         self.village.levelMod = {
             "Farmer": 3,
             "Lumberjack": 2,
@@ -97,9 +99,10 @@ class TestTakeAction(unittest.TestCase):
             "Researcher": 5
         }
         self.village.priorities['Food'] = 10
-        pprint(self.simRunner.priorityManager.whichVillagerToUpgrade(self.village))
+        self.assertEqual(self.simRunner.priorityManager.whichVillagerToUpgrade(self.village), V_Type.LUMBERJACK.value)
 
     def test_upgrade(self):
+        LOGIT.info("*************** Test Upgrade ***********")
         self.village.levelMod = {
             "Farmer": 3,
             "Lumberjack": 2,
@@ -129,6 +132,7 @@ class TestTakeAction(unittest.TestCase):
         self.assertEqual(self.village.resources["ProjectX"], 0)
 
     def test_createVillager(self):
+        LOGIT.info("*************** Test Create Villager ***********")
         self.init_villagers()
         self.init_buildings()
         self.init_priorities()
@@ -141,23 +145,25 @@ class TestTakeAction(unittest.TestCase):
         numLumberjacks = len(self.village.getVillagersByType(V_Type.LUMBERJACK.value))  
         self.assertEqual(numLumberjacks, 2)
 
-
     def test_reassignVillager(self):
+        LOGIT.info("*************** Test Reassign Villager ***********")
         self.init_villagers()
         self.init_buildings()
         self.init_priorities()
         self.init_resources()
-        self.village.resources["Food"] += 100
+        self.village.resources["Food"] += 400
         self.village.resources["Ore"] += 100
-        self.sim.createVillager(V_Type.FARMER.value, self.village)
-        self.sim.createVillager(V_Type.FARMER.value, self.village)
-        self.sim.createVillager(V_Type.MINER.value, self.village)
+        self.village.addVillager(V_Type.FARMER.value)
+        self.village.addVillager(V_Type.FARMER.value)
+        self.village.addVillager(V_Type.MINER.value)
         self.village.resources["Wood"] -= 100
         self.village.resources["Gold"] -= 100
-        print(">>>")
-        print(self.village.getVillagersByType(V_Type.MERCHANT.value))
         self.assertEqual(len(self.village.getVillagersByType(V_Type.LUMBERJACK.value)), 1)
+        self.assertEqual(len(self.village.getVillagersByType(V_Type.MERCHANT.value)), 1)
         self.simRunner.reassignVillagers(self.village)
+        self.assertEqual(len(self.village.getVillagersByType(V_Type.FARMER.value)), 1)
+        self.assertEqual(len(self.village.getVillagersByType(V_Type.MINER.value)), 1)
+        self.assertEqual(len(self.village.getVillagersByType(V_Type.MERCHANT.value)), 2)
         self.assertEqual(len(self.village.getVillagersByType(V_Type.LUMBERJACK.value)), 3)
 
 if __name__ == '__main__':

@@ -1,27 +1,13 @@
 from Defaults import Defaults
 import util
+from Villager import VillagerClass
+from Location import LocationClass
+from Building import BuildingClass
 
 class VillageClass:
-    def __init__(self, settings):
-        self.config = {}
-
-        #Defaults 
-        self.startingLocations = Defaults.villagesConfig["startingLocations"]
-        self.startingBuildings = Defaults.villagesConfig["startingBuildings"]
-
-        #Settings
-        self.name = settings["name"]
-        self.priorities = settings["priorities"]
-        #TODO Add resources to default data and UI
-        self.resources = {
-            "Food": 0,
-            "Wood": 0,
-            "Stone": 0,
-            "Ore": 0,
-            "Gold": 0,
-            "ProjectX": 0,
-            "Research": 0
-        }
+    def __init__(self, world, settings):
+        self.world = world
+        self.initSettings(settings)
 
         #Initial Values
         self.locations = []
@@ -46,6 +32,22 @@ class VillageClass:
         #Stats
         self.stats = {}
 
+    def initSettings(self, settings):
+        self.startingLocations = settings["startingLocations"]
+        self.startingBuildings = settings["startingBuildings"]
+        self.name = settings["name"]
+        self.priorities = settings["priorities"]
+        #TODO Add resources to default data and UI
+        self.resources = {
+            "Food": 0,
+            "Wood": 0,
+            "Stone": 0,
+            "Ore": 0,
+            "Gold": 0,
+            "ProjectX": 0,
+            "Research": 0
+        }
+
     def getVillagersByType(self, type):
         villagers = []
         for villager in self.villagers:
@@ -53,22 +55,29 @@ class VillageClass:
                 villagers.append(villager)
         return villagers
 
-    def addVillager(self, villager):
+    def addVillager(self, vType):
+        villager = VillagerClass(vType, self.world.sim.config.villagers[vType])
         self.villagers.append(villager)
         villager.village = self
 
-    def addBuilding(self, building, location):
+    def addBuilding(self, bType):
+        building = BuildingClass(bType, self.world.sim.config.buildings[bType])
+        location = self.findLocationForBuilding(bType)
         location.addBuilding(building)
         self.buildings.append(building)
         building.village = self
 
-    def addLocation(self, location):
+    def addLocation(self, lType):
+        location = LocationClass(lType, self.world.sim.config.locations[lType])
         self.locations.append(location)
         location.village = self
     
+    def incResource(self, resourceType, amount):
+        self.resources[resourceType] += amount
+
     def findLocationForBuilding(self, bType):
         for location in self.locations:
-            if bType in location.config['buildingTypes'] and len(location.buildings) < location.config['maxBuildings']:
+            if bType in location.buildingTypes and len(location.buildings) < location.maxBuildings:
                 return location
 
     def canBuild(self, type):
@@ -96,10 +105,8 @@ class VillageClass:
                 if resource == reso:
                     self.resources[reso] -= cost[resource]
 
-
     def spend(self, cost):
-        # take resources away from village
-        
+        # take resources away from village        
         for resource in cost:
             for reso in self.resources:
                 if resource == reso:
@@ -121,10 +128,11 @@ class VillageClass:
             if villager.type != bottom:
                 continue
             else:
-                villager.village.resources[villager.config["gatheringType"]] += villager.modify(villager.config["carryCapacity"])
-                villager.currentLoad[villager.config["gatheringType"]] = 0
+                villager.depositLoad()
                 villager.type = top
                 villager.status = util.V_Status.UNASSIGNED
+                villager.initSettings(self.world.sim.config.villagers[villager.type])
+                return
 
     def attacking(self):
         for villager in self.villagers:
@@ -135,15 +143,5 @@ class VillageClass:
                 return True
         return False
         
-if __name__ == '__main__':    
-    from pprint import pprint 
-    from Villager import VillagerClass       
-    for villageSettings in Defaults.simulation["villages"]:
-        village = VillageClass(villageSettings)
 
-        for vType, villagerSettings in Defaults.simulation["villagers"].items():
-            v = VillagerClass(vType, villagerSettings)
-            village.addVillager(v)
-
-        pprint(village.__dict__)
     

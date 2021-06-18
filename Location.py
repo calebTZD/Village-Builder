@@ -3,17 +3,7 @@ from Defaults import Defaults
 class LocationClass:
     def __init__(self, lType, locationSettings):
         self.type = lType
-        self.config = locationSettings
-
-        # #Defaults
-        # self.maxBuildings = Defaults.locationsConfig[self.type]["maxBuildings"]
-        # self.buildingTypes = Defaults.locationsConfig[self.type]["buildingTypes"]
-        # self.enhancemntFactor = Defaults.locationsConfig[self.type]["enhancemntFactor"]
-
-        # #Settings
-        # self.numPerVillage = locationSettings["numPerVillage"]
-        # self.aveDistance = locationSettings["aveDistance"]
-        # self.enhancemntCost = locationSettings["enhancemntCost"]        
+        self.initSettings(locationSettings)     
 
         #Initial Values
         self.village = None
@@ -22,10 +12,18 @@ class LocationClass:
 
         #Stats
         self.stats = {}
-    
+
+    def initSettings(self, locationSettings):
+        self.maxBuildings = locationSettings["maxBuildings"]
+        self.buildingTypes = locationSettings["buildingTypes"]
+        self.enhancemntFactor = locationSettings["enhancemntFactor"]
+        self.numPerVillage = locationSettings["numPerVillage"]
+        self.aveDistance = locationSettings["aveDistance"]
+        self.enhancemntCost = locationSettings["enhancemntCost"]   
+
     def calcDistance(self):
         #TODO: Need to finish this
-        return self.config["aveDistance"]
+        return self.aveDistance
     
     def addBuilding(self, building):
         #TODO: Need to validate building type and max buildings, etc.

@@ -1,12 +1,9 @@
 import random
+from util import LOGIT
 from SimData import SimData
 from Defaults import Defaults
 from Simulation import SimulationClass
-from World import WorldClass
-from Villager import VillagerClass
-from Village import VillageClass
-from Building import BuildingClass
-from Location import LocationClass
+from Building import BuildingClass #TODO Add build to village
 from Priority import PriorityManagerClass
 
 from util import V_Status
@@ -101,23 +98,19 @@ class SimRunnerClass:
             self.defendVillage(village)             
 
     def createVillager(self, village):
-        villager = self.priorityManager.whichVillagerToCreate(village)
-        if village.canCreate(self.sim.config.villagers[villager]["spawnCost"]):
-            self.sim.createVillager(villager, village)
-            village.spend(self.sim.config.villagers[villager]["spawnCost"])
-        
+        villagerType = self.priorityManager.whichVillagerToCreate(village)
+        if village.canCreate(self.sim.config.villagers[villagerType]["spawnCost"]):
+            village.addVillager(villagerType)
+            village.spend(self.sim.config.villagers[villagerType]["spawnCost"])
 
     def reassignVillagers(self, village):
         for x in range(3):
             (topValue, topPriority, bottomPriority) = self.priorityManager.whichVillagerToSwitch(village)
-            print(topValue)
-            print(topPriority)
-            print(bottomPriority)
             if topPriority == bottomPriority or bottomPriority == None or topValue <= 10:
                 return
             else:
+                LOGIT.info("Reassign " + bottomPriority + " To " + topPriority)
                 village.switchVillagers(topPriority, bottomPriority)
-
 
     def sendArmy(self, village):        
         if not village.attacking():

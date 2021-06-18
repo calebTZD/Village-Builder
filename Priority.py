@@ -1,3 +1,4 @@
+from Simulation import SimulationClass
 import re
 from Defaults import Defaults
 from random import shuffle
@@ -175,20 +176,3 @@ class PriorityManagerClass:
             if village.levelMod[priorityVillager] == lowestLevel:
                 return priorityVillager
  
-
-if __name__ == '__main__':
-    from pprint import pprint 
-    from Village import VillageClass  
-    villageSettings = Defaults.simulation["villages"][0]
-    village = VillageClass(villageSettings)
-    PriorityManager = PriorityManagerClass()
-    PriorityManager.calcPriorities(village)
-    # print(village.priorities)
-    # print(P.getRandomPriority(village))
-    # print(P.getRandomPriority(village))
-    # print(P.getRotationPriority(village))
-    # print(P.getRotationPriority(village))
-    # print(P.getRotationPriority(village))
-    # print(P.getRotationPriority(village))
-
-

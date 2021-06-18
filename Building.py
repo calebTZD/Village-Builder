@@ -4,32 +4,29 @@ from Defaults import Defaults
 class BuildingClass:
     def __init__(self, bType, buildingSettings):
         self.type = bType
-        self.config = buildingSettings
-
-
-        # #Defaults
-        # self.cost = Defaults.buildingsConfig[self.type]["cost"]
-        # self.villagersAbleToSupport = Defaults.buildingsConfig[self.type]["villagersAbleToSupport"]
-        # self.resource = Defaults.buildingsConfig[self.type]["resource"]
-        # self.enhancemntFactor = Defaults.buildingsConfig[self.type]["enhancemntFactor"]
-
-        # #Settings
-        # self.maxHealth = buildingSettings["maxHealth"]
-        # self.buildTime = buildingSettings["buildTime"]
-        # self.resourceAmount = buildingSettings["resourceAmount"]
-        # self.enhancemntCost = buildingSettings["enhancemntCost"]
+        self.initSettings(buildingSettings)
 
         #Initial Values
         self.village = None
         self.location = None
-        self.currentHealth = int(self.config["maxHealth"])
-        self.buildTimeLeft = self.config["buildTime"]
-        self.currentResources = int(self.config["resourceAmount"])
+        self.currentHealth = int(self.maxHealth)
+        self.buildTimeLeft = self.buildTime
+        self.currentResources = int(self.resourceAmount)
         self.villagers = []
         self.enemies = []
 
         #Stats
         self.stats = {}
+
+    def initSettings(self, buildingSettings):
+        self.cost = buildingSettings["cost"]
+        self.villagersAbleToSupport = buildingSettings["villagersAbleToSupport"]
+        self.resource = buildingSettings["resource"]
+        self.enhancemntFactor = buildingSettings["enhancemntFactor"]
+        self.maxHealth = buildingSettings["maxHealth"]
+        self.buildTime = buildingSettings["buildTime"]
+        self.resourceAmount = buildingSettings["resourceAmount"]
+        self.enhancemntCost = buildingSettings["enhancemntCost"]        
 
     def assignVillager(self, villager):
         self.villagers.append(villager)
@@ -41,7 +38,7 @@ class BuildingClass:
         return False
 
     def attacked(self, villager):
-        self.currentHealth -= villager.modify(villager.config["attack"])
+        self.currentHealth -= villager.calcAttack()
         if self.currentHealth <= 0:
             self.village.destroyed.append(self)
             self.village.buildings.pop(self)

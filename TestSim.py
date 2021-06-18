@@ -1,3 +1,4 @@
+from re import A
 import unittest
 import initDB
 from SimRunner import SimRunnerClass
@@ -126,16 +127,18 @@ class TestTakeAction(unittest.TestCase):
     #     self.simRunner.takeAction(villager)
 
     def test_defense(self):
-        villager = VillagerClass("Guard", self.simRunner.sim.config["villagers"]["Guard"])
-        self.village.addVillager(villager)
-        self.sim.createBuilding("Barracks", self.village)
+        self.village.addVillager(V_Type.GUARD.value)
+        self.village.addBuilding(B_Type.BARRACKS.value)
         for building in self.village.buildings:
             building.buildTimeLeft = 0
+        villager = self.village.getVillagersByType(V_Type.GUARD.value)[0]
         self.simRunner.takeAction(villager)
         self.simRunner.takeAction(villager)
         self.assertEqual(villager.status, V_Status.DEFENDING)
         target = self.village.buildings[0]
-        attacker = VillagerClass("Warrior", self.simRunner.sim.config["villagers"]["Warrior"])
+        attackingVillage = self.simRunner.sim.world.villages[1]
+        attackingVillage.addVillager(V_Type.WARRIOR.value)
+        attacker = attackingVillage.getVillagersByType(V_Type.WARRIOR.value)[0]
         target.enemies.append(attacker)
         self.assertEqual(target.enemyPresent(), True)
         self.simRunner.takeAction(villager)
