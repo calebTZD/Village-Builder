@@ -1,5 +1,6 @@
 from Defaults import Defaults
 from util import V_Status
+from Stats import VillagerStatsClass
 import random
 
 class VillagerClass:
@@ -24,7 +25,10 @@ class VillagerClass:
         self.assignedBuilding = None
 
         #Stats
-        self.stats = {}
+        self.stats = VillagerStatsClass(self)
+
+    def toDict(self):
+        return self.stats.statDict()
 
     def initSettings(self, villagerSettings):
         self.enhancemntFactor = villagerSettings["enhancemntFactor"]

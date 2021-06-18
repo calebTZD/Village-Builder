@@ -3,6 +3,7 @@ import util
 from Villager import VillagerClass
 from Location import LocationClass
 from Building import BuildingClass
+from Stats import VillageStatsClass
 
 class VillageClass:
     def __init__(self, world, settings):
@@ -30,7 +31,10 @@ class VillageClass:
         }
 
         #Stats
-        self.stats = {}
+        self.stats = VillageStatsClass(self)
+
+    def toDict(self):
+        return self.stats.statDict()
 
     def initSettings(self, settings):
         self.startingLocations = settings["startingLocations"]

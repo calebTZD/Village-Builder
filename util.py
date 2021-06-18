@@ -21,7 +21,6 @@ class V_Status(Enum):
     TO_WAR = 9
     DEFENDING = 10
 
-
 class V_Type(Enum):
     FARMER = "Farmer"
     LUMBERJACK = "Lumberjack"
@@ -44,3 +43,12 @@ class B_Type(Enum):
     BARRACKS = "Barracks"
     BUILDINGX = "BuildingX"
     TOWNHALL = "Townhall"
+
+class R_Type(Enum):
+    FOOD = "Food"
+    WOOD = "Wood"
+    STONE = "Stone"
+    ORE = "Ore"
+    GOLD = "Gold"
+    PROJECTX = "ProjectX"
+    RESEARCH = "Research"
