@@ -136,10 +136,8 @@ class VillageClass:
 
     def attacking(self):
         for villager in self.villagers:
-            if villager.type == "Warrior":
-                for building in self.buildings:
-                    if building == villager.assignedBuilding:
-                        break
+            if villager.type == "Warrior" and villager.status == util.V_Status.TO_WAR or villager.status == util.V_Status.ATTACKING:
+                
                 return True
         return False
         

@@ -27,8 +27,8 @@ class SimRunnerClass:
         self.randomizeVillagers()
 
         for villager in self.villagerList:
-            print(villager.village.name + ": " + villager.type)
-            #self.takeAction(villager)
+            # print(villager.village.name + ": " + villager.type)
+            self.takeAction(villager)
 
     def takeAction(self, villager):
         if villager.status == V_Status.UNASSIGNED:
