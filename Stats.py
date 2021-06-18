@@ -31,6 +31,11 @@ class VillageStatsClass:
     def __init__(self, village):
         self.village = village
         self.timesAttacked = 0
+        self.timesToWar = 0
+        self.enemyBuildingsDestroed = 0
+        self.enemyKilled = 0
+        self.damageOutput = 0
+        self.damageInput = 0 
 
     def statDict(self):
         stats = {
@@ -40,15 +45,23 @@ class VillageStatsClass:
         stats['villagerCount'] = {}
         for vType in V_Type:
             stats['villagerCount'][vType.value] = len(self.village.getVillagersByType(vType.value))
-        stats['villages'] = []
-        for village in self.village.villagers:
-            stats['villages'].append(village.toDict())
+        stats['villagers'] = []
+        for villager in self.village.villagers:
+            stats['villagers'].append(villager.toDict())
+        stats['buildingCount'] = {}
+        for bType in B_Type:
+            stats['buildingCount'][bType.value] = len(self.village.getBuildingsByType(bType.value))
         stats['locations'] = []
         for location in self.village.locations:
             stats['locations'].append(location.toDict())
         stats['buildings'] = []
         for building in self.village.buildings:
             stats['buildings'].append(building.toDict())
+        stats['resources'] = {}
+        for rType in R_Type:
+            stats['resources'][rType.value] = self.village.resources[vType.value]
+        stats['destroyedBuildings'] = len(self.village.destroyed)
+        stats['deadVillagers'] = len(self.village.dead)
 
         return stats
 

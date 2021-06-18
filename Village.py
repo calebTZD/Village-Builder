@@ -59,6 +59,13 @@ class VillageClass:
                 villagers.append(villager)
         return villagers
 
+    def getBuildingsByType(self, type):
+        buildings = []
+        for building in self.buildings:
+            if building.type == type:
+                buildings.append(building)
+        return buildings
+
     def addVillager(self, vType):
         villager = VillagerClass(vType, self.world.sim.config.villagers[vType])
         self.villagers.append(villager)

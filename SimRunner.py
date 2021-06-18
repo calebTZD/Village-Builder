@@ -99,7 +99,7 @@ class SimRunnerClass:
         villagerType = self.priorityManager.whichVillagerToCreate(village)
         if village.canCreate(self.sim.config.villagers[villagerType]["spawnCost"]):
             village.addVillager(villagerType)
-            LOGIT.info(village.name + "Created " + villagerType)
+            LOGIT.info(village.name + " Created " + villagerType)
             village.spend(self.sim.config.villagers[villagerType]["spawnCost"])
 
     def reassignVillagers(self, village):
@@ -108,7 +108,7 @@ class SimRunnerClass:
             if topPriority == bottomPriority or bottomPriority == None or topValue <= 10:
                 return
             else:
-                LOGIT.info(village.name + "Reassign " + bottomPriority + " To " + topPriority)
+                LOGIT.info(village.name + " Reassign " + bottomPriority + " To " + topPriority)
                 village.switchVillagers(topPriority, bottomPriority)
 
     def sendArmy(self, village):        
