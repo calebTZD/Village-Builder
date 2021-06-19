@@ -5,7 +5,7 @@ export const SimulationView = {
             <h2>RPG Simulation</h2>
         </div>
         <div v-show="showList">
-            <SimListView ref="simlist" @edit="onEdit"></SimListView>
+            <SimListView ref="simlist" @edit="onEdit" @view="onView"></SimListView>
         </div> 
         <div v-show="showEdit" id="edit-pane">   
             <div id="edit-banner">            
@@ -38,16 +38,39 @@ export const SimulationView = {
                 <div v-show="editView==='BuildingView'">
                     <BuildingView ref="buildings"></BuildingView>
                 </div>
+            </div>
+        </div>
+
+        <div v-show="showView" id="stats-pane">   
+            <div id="stats-banner">            
+                <h4 class="flex-row-gap">Simulation Results: {{simName}} : {{runName}}</h4>    
+                <button type="button" class="btn btn-primary flex-row-gap" v-on:click="finishedView()">Done</button>   
+            </div>
+            <div id="stats-run-list">
+                <div class="list-group">
+                    <div v-for="run in simulationRuns" >
+                        <button class="list-group-item list-group-item-primary list-group-item-action" type="button" v-on:click="selectRun(run)">
+                            {{run}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div id="stats-simulation">
+                <StatsView ref="stats" ></StatsView>
+            </div>
         </div>
     </div>
     `,
     data() {
       return {
-        simName: "The Myst",
+        simName: "",
+        runName: "",
         simData: {},
         showEdit: false,
+        showView: false,
         showList: true,
-        editView: "WorldView"
+        editView: "WorldView",
+        simulationRuns: ['asdfasda', 'basdlf']
       }
     },
     methods: {
@@ -58,12 +81,28 @@ export const SimulationView = {
             this.showEdit = true;
             this.load();
         },
+        onView: function(simName){
+            console.log("VIEW EVENT: " + simName);
+            this.simName = simName;
+            this.showList = false;
+            this.showView = true;
+            this.load();
+        },
         setEdit: function(view){
             this.editView = view;
+        },
+        finishedView: function(){
+            this.showList = true;
+            this.showView = false;      
         },
         done: function(){
             this.showList = true;
             this.showEdit = false;          
+        },
+        selectRun: function(run){
+            console.log("LOAD Simulation Stats");
+            this.runName = run;
+            this.$refs.stats.loadStats(this.simName, this.runName);
         },
         load: function(){
             console.log("LOAD");

@@ -40,6 +40,53 @@
     margin: 2px;
 }
 
+/********************** EDIT SIMULATION***********************/
+#stats-pane{
+    grid-row: 2;
+    display: grid;
+    grid-template-rows: 50px auto;
+    grid-template-columns: 200px auto;
+}
+
+#stats-banner{
+    grid-row: 1;
+    grid-column: 1 / 3;
+    background: darkslategray;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#stats-simulation{
+    grid-row: 2;
+    grid-column: 2;
+}
+
+#stats-view{
+    display: grid;    
+    grid-template-columns: 150px auto;
+    background-color: black;
+    min-height: 80vh;
+    color:white;
+}
+
+#stats-menu{
+    grid-column: 1/2;
+    display: flex;
+    flex-direction: column;
+}
+
+#stats-graphs{
+    grid-column: 2;
+}
+
+#sim-config{
+    color: greenyellow;
+}
+
+/********************** EDIT SIMULATION***********************/
 #edit-pane{
     grid-row: 2;
     display: grid;

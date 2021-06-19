@@ -37,7 +37,7 @@ export const VillagesView = {
                         <input class="form-control" type="text" v-model="villageData.name">                          
                         <input type="number" class="form-control" v-for="(value, priority) in villageData.priorities" v-model="villageData.priorities[priority]">
                     </div>
-                    <div id="edit-villages-labels v-else> 
+                    <div id="edit-villages-labels" v-else> 
                         <p>No Village Selected</p> 
                     </div>
                 </div>`,

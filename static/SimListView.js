@@ -27,7 +27,7 @@ export const SimListView = {
                         <button type="button" class="btn btn-primary"  v-on:click="runSimulation()">
                             Run Simulation ({{simState}})
                         </button>
-                        <button type="button" class="btn btn-primary"  v-on:click="viewSimulation()" v-if="simComplete">
+                        <button type="button" class="btn btn-primary"  v-on:click="viewSimulation()" v-if="simComplete2">
                             View Results
                         </button>
                     </div>
@@ -38,7 +38,8 @@ export const SimListView = {
             createName: "",
             simulation: null,
             simState: "",
-            simComplete: false          
+            simComplete: false,
+            simComplete2: true      
         }
     },    
     methods: {
@@ -115,6 +116,9 @@ export const SimListView = {
         },
         editSimulation: function(){
             this.$emit('edit', this.simulation);
+        },
+        viewSimulation: function(){
+            this.$emit('view', this.simulation);
         },
         loadSimulations: function(){
             fetch("/getSims")           
