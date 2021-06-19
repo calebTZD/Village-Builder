@@ -1,5 +1,5 @@
 from util import *
-
+import datetime
 
 class SimStatsClass:
     def __init__(self, sim):
@@ -8,11 +8,17 @@ class SimStatsClass:
 
     def statDict(self):
         stats = {
+            
             'simName' : self.sim.name,
             'ticks': self.ticks,
             'world': self.sim.world.toDict()
         }
+        stats['timeStamp'] = self.getTime()
         return stats
+
+    def getTime(self):
+        fTime = datetime.datetime.now().strftime("%Y-%d-%w: %I:%M:%S")
+        return fTime
 
 class WorldStatsClass:
     def __init__(self, world):
