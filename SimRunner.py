@@ -1,5 +1,5 @@
 import random
-from util import LOGIT
+from util import LOGIT, L_Type
 from SimData import SimData
 from Defaults import Defaults
 from Simulation import SimulationClass
@@ -27,17 +27,16 @@ class SimRunnerClass:
         self.randomizeVillagers()
 
         for villager in self.villagerList:
-            print(villager.village.name + ": " + villager.type)
-            #self.takeAction(villager)
+            # print(villager.village.name + ": " + villager.type)
+            self.takeAction(villager)
 
     def takeAction(self, villager):
         if villager.status == V_Status.UNASSIGNED:
             if villager.findBuilding():
                 villager.status = V_Status.TO_LOCATION
             elif villager.village.canBuild(villager.preferredBuilding):
-                building = BuildingClass(villager.preferredBuilding, self.sim.config['buildings'][villager.preferredBuilding])
-                villager.build(building)
-                villager.status = V_Status.TO_LOCATION
+                villager.village.addBuilding(villager.preferredBuilding) 
+                               
 
         elif villager.status == V_Status.HARVESTING:
             villager.harvest()
@@ -49,6 +48,8 @@ class SimRunnerClass:
             if villager.assignedBuilding.buildTimeLeft <= 0:
                 if villager.type == "Guard" or villager.type == "Warrior":
                     villager.status = V_Status.DEFENDING
+                elif villager.type == "Scout":
+                    villager.status = V_Status.SEARCHING
                 else:
                     villager.status = V_Status.HARVESTING
 
@@ -66,10 +67,15 @@ class SimRunnerClass:
         elif villager.status == V_Status.SEARCHING:
             if villager.search():
                 villager.status = V_Status.TO_VILLAGE
-                enemies = list(self.sim.world.villages)
-                random.shuffle(enemies)
-                enemy = enemies[0]
-                villager.village.addEnemy(enemy)
+                if villager.village.searchPriority == "enemy":
+                    enemies = list(self.sim.world.villages)
+                    random.shuffle(enemies)
+                    enemy = enemies[0]
+                    villager.village.addEnemy(enemy)
+                elif villager.village.searchPriority == "locations":
+                    villager.village.searchPriority = "enemy"
+                    for lType in L_Type:
+                        villager.village.addLocation(lType.value)
 
         elif villager.status == V_Status.TO_WAR:
             if villager.assignedBuilding.currentHealth <= 0 and villager.assignedBuilding.type != "Barracks":
@@ -101,6 +107,7 @@ class SimRunnerClass:
         villagerType = self.priorityManager.whichVillagerToCreate(village)
         if village.canCreate(self.sim.config.villagers[villagerType]["spawnCost"]):
             village.addVillager(villagerType)
+            LOGIT.info(village.name + " Created " + villagerType)
             village.spend(self.sim.config.villagers[villagerType]["spawnCost"])
 
     def reassignVillagers(self, village):
@@ -109,13 +116,15 @@ class SimRunnerClass:
             if topPriority == bottomPriority or bottomPriority == None or topValue <= 10:
                 return
             else:
-                LOGIT.info("Reassign " + bottomPriority + " To " + topPriority)
+                LOGIT.info(village.name + " Reassign " + bottomPriority + " To " + topPriority)
                 village.switchVillagers(topPriority, bottomPriority)
 
     def sendArmy(self, village):        
         if not village.attacking():
             warriors = village.getVillagersByType("Warrior")
             if len(warriors) >= 15:
+                LOGIT.info("TO WAR")
+                village.stats.timesToWar += 1
                 for warrior in warriors:
                     warrior.status = V_Status.TO_WAR
                     warrior.distance = self.sim.config.world["distanceBetweenVillages"]
@@ -125,6 +134,7 @@ class SimRunnerClass:
             guards = village.getVillagersByType("Guard")
             building = village.underAttack()
             if building and len(building.enemies) > len(guards):
+                village.stats.timesAttacked += 1
                 for warrior in village.getVillagersByType("Warrior"):
                     warrior.assignedBuilding = building
                     warrior.status = V_Status.DEFENDING
@@ -134,19 +144,23 @@ class SimRunnerClass:
         if village.resources["Research"] >= self.sim.config.villagers[priotiryVillager]["enhancemntCost"]:
             village.levelMod[priotiryVillager] +=1
             village.resources["Research"] -= self.sim.config.villagers[priotiryVillager]["enhancemntCost"]
+            # LOGIT.info(village.name + " upgraded " + priotiryVillager)
 
         if village.resources["ProjectX"] >= self.sim.config.villagers["DrX"]["enhancemntCost"]:
             village.levelMod["Guard"] +=1
             village.levelMod["Warrior"] +=1
             village.resources["ProjectX"] -= self.sim.config.villagers["DrX"]["enhancemntCost"]
-        
+            # LOGIT.info(village.name + " upgraded Guard and Warrior")
 
     def runSimulation(self):
         tick = 0
-        while tick < self.sim.world.days:
+        while tick < self.sim.world.days * 8:
             self.doTick()
             self.postTick()
             tick += 1
+            self.sim.stats.ticks += 1
+            LOGIT.info(f'Tick number: {tick}')
+        SimData.saveStats(self.sim.toDict())
 
 if __name__ == '__main__':
     sr = SimRunnerClass("The Myst")

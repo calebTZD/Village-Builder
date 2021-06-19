@@ -14,6 +14,7 @@ class VillageClass:
         self.locations = []
         self.buildings = []
         self.villagers = []
+        self.searchPriority = "enemy"
         self.enemyVilages = []
         self.dead = []
         self.destroyed =[]
@@ -59,6 +60,13 @@ class VillageClass:
                 villagers.append(villager)
         return villagers
 
+    def getBuildingsByType(self, type):
+        buildings = []
+        for building in self.buildings:
+            if building.type == type:
+                buildings.append(building)
+        return buildings
+
     def addVillager(self, vType):
         villager = VillagerClass(vType, self.world.sim.config.villagers[vType])
         self.villagers.append(villager)
@@ -67,9 +75,12 @@ class VillageClass:
     def addBuilding(self, bType):
         building = BuildingClass(bType, self.world.sim.config.buildings[bType])
         location = self.findLocationForBuilding(bType)
-        location.addBuilding(building)
-        self.buildings.append(building)
-        building.village = self
+        if location:
+            location.addBuilding(building)
+            self.buildings.append(building)
+            building.village = self
+        else:
+            self.searchPriority = "locations"
 
     def addLocation(self, lType):
         location = LocationClass(lType, self.world.sim.config.locations[lType])
@@ -77,12 +88,15 @@ class VillageClass:
         location.village = self
     
     def incResource(self, resourceType, amount):
+        if resourceType == "None":
+            return
         self.resources[resourceType] += amount
 
     def findLocationForBuilding(self, bType):
         for location in self.locations:
             if bType in location.buildingTypes and len(location.buildings) < location.maxBuildings:
                 return location
+        return
 
     def canBuild(self, type):
         cost = Defaults.buildingsConfig[type]["cost"]
@@ -140,10 +154,8 @@ class VillageClass:
 
     def attacking(self):
         for villager in self.villagers:
-            if villager.type == "Warrior":
-                for building in self.buildings:
-                    if building == villager.assignedBuilding:
-                        break
+            if villager.type == "Warrior" and villager.status == util.V_Status.TO_WAR or villager.status == util.V_Status.ATTACKING:
+                
                 return True
         return False
         

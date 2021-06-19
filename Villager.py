@@ -85,8 +85,13 @@ class VillagerClass:
     def attacked(self, villager):
         self.currentHealth -= villager.calcAttack()
         villager.currentHealth -= self.calcDefense()
+        villager.village.stats.damageOutput += villager.calcAttack()
+        villager.village.stats.damageInput += self.calcDefense()
+        self.village.stats.damageOutput += self.calcDefense()
+        self.village.stats.damageInput += villager.calcAttack()
         
         if self.currentHealth <= 0:
+            villager.village.stats.enemyKilled += 1
             self.status = V_Status.DEAD
             self.village.dead.append(self)
             self.village.villagers.pop(self)
@@ -141,13 +146,18 @@ class VillagerClass:
             if self.assignedBuilding.buildTimeLeft <= 0:
                 if self.type == "Guard" or self.type == "Warrior":
                     self.status = V_Status.DEFENDING
+                elif self.type == "Scout":
+                    self.status = V_Status.SEARCHING
                 else:
                     self.status = V_Status.HARVESTING
             else:
                 self.status = V_Status.BUILDING
 
     def depositLoad(self):
+        if self.gatheringType == "None":
+            return
         self.village.incResource(self.gatheringType, self.calcCarryCapacity())
+        self.stats.harvestedResources[self.gatheringType] += self.calcCarryCapacity()
         self.currentLoad[self.gatheringType] = 0
 
     def toVillage(self):
@@ -158,7 +168,7 @@ class VillagerClass:
             self.distance = self.assignedBuilding.location.distance
 
     def search(self):
-        self.distance += 1
+        self.distance += self.speed
         if self.distance >= 9:
             return True
         return False

@@ -1,4 +1,5 @@
 from re import A
+import datetime
 import unittest
 import initDB
 from SimRunner import SimRunnerClass
@@ -126,23 +127,31 @@ class TestTakeAction(unittest.TestCase):
     #     villager.status = V_Status.TO_WAR
     #     self.simRunner.takeAction(villager)
 
-    def test_defense(self):
-        self.village.addVillager(V_Type.GUARD.value)
-        self.village.addBuilding(B_Type.BARRACKS.value)
-        for building in self.village.buildings:
-            building.buildTimeLeft = 0
-        villager = self.village.getVillagersByType(V_Type.GUARD.value)[0]
-        self.simRunner.takeAction(villager)
-        self.simRunner.takeAction(villager)
-        self.assertEqual(villager.status, V_Status.DEFENDING)
-        target = self.village.buildings[0]
-        attackingVillage = self.simRunner.sim.world.villages[1]
-        attackingVillage.addVillager(V_Type.WARRIOR.value)
-        attacker = attackingVillage.getVillagersByType(V_Type.WARRIOR.value)[0]
-        target.enemies.append(attacker)
-        self.assertEqual(target.enemyPresent(), True)
-        self.simRunner.takeAction(villager)
-        self.simRunner.takeAction(villager)
+    # def test_defense(self):
+    #     self.village.addVillager(V_Type.GUARD.value)
+    #     self.village.addBuilding(B_Type.BARRACKS.value)
+    #     for building in self.village.buildings:
+    #         building.buildTimeLeft = 0
+    #     villager = self.village.getVillagersByType(V_Type.GUARD.value)[0]
+    #     self.simRunner.takeAction(villager)
+    #     self.simRunner.takeAction(villager)
+    #     self.assertEqual(villager.status, V_Status.DEFENDING)
+    #     target = self.village.buildings[0]
+    #     attackingVillage = self.simRunner.sim.world.villages[1]
+    #     attackingVillage.addVillager(V_Type.WARRIOR.value)
+    #     attacker = attackingVillage.getVillagersByType(V_Type.WARRIOR.value)[0]
+    #     target.enemies.append(attacker)
+    #     self.assertEqual(target.enemyPresent(), True)
+    #     self.simRunner.takeAction(villager)
+    #     self.simRunner.takeAction(villager)
+
+    # def test_fullSim(self):
+    #     self.sim.world.days = 10
+    #     self.simRunner.runSimulation()
+
+    def test_time(self):
+        fTime = datetime.datetime.now().strftime("%Y-%d-%w: %I:%M:%S")
+        pprint(fTime)
         
 
 if __name__ == '__main__':

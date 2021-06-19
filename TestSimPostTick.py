@@ -166,5 +166,50 @@ class TestTakeAction(unittest.TestCase):
         self.assertEqual(len(self.village.getVillagersByType(V_Type.MERCHANT.value)), 2)
         self.assertEqual(len(self.village.getVillagersByType(V_Type.LUMBERJACK.value)), 3)
 
+    def test_sendArmy(self):
+        enemy = self.simRunner.sim.world.villages[1]
+        self.village.enemyVilages.append(enemy)
+        self.init_villagers()
+        self.init_buildings()
+        self.init_priorities()
+        self.init_resources()
+        self.simRunner.sendArmy(self.village)
+        for villager in self.village.villagers:
+            if villager.type == "Warrior":
+                self.assertEqual(villager.status, V_Status.UNASSIGNED)
+        for x in range(18):
+            self.village.addVillager(V_Type.WARRIOR.value)
+        self.simRunner.sendArmy(self.village)
+        for villager in self.village.villagers:
+            if villager.type == "Warrior":
+                self.assertEqual(villager.status, V_Status.TO_WAR)
+
+    def test_defendVillage(self):
+        enemy = self.simRunner.sim.world.villages[1]
+        self.village.enemyVilages.append(enemy)
+        self.init_villagers()
+        self.init_buildings()
+        self.init_priorities()
+        self.init_resources()        
+        for x in range(15):
+            self.village.addVillager(V_Type.WARRIOR.value)
+        self.simRunner.sendArmy(self.village)
+        self.simRunner.defendVillage(self.village)
+        for villager in self.village.villagers:
+            if villager.type == "Warrior":
+                self.assertEqual(villager.status, V_Status.TO_WAR)
+        enemy.addVillager(V_Type.WARRIOR.value)
+        enemy.addVillager(V_Type.WARRIOR.value)
+        enemy.addVillager(V_Type.WARRIOR.value)
+        enemies = enemy.getVillagersByType("Warrior")
+        attackedBuilding = self.village.buildings[4]
+        for villager in enemies:
+            villager.assignedBuilding = attackedBuilding
+            attackedBuilding.enemies.append(villager)
+        self.simRunner.defendVillage(self.village)
+        for villager in self.village.villagers:
+            if villager.type == "Warrior":
+                self.assertEqual(villager.status, V_Status.DEFENDING)
+
 if __name__ == '__main__':
     unittest.main()
