@@ -248,6 +248,30 @@ def updateVillage():
         traceback.print_exc(file=sys.stdout)
         raise InvalidUsageExeption("Failed to update Village.", status_code=400)
 
+@app.route('/getSimRuns', methods = ['GET'])
+def getSimRuns():
+    try:
+        simName = request.args.get('simName')
+        stats = SimData.getStatsByName(simName)
+        if not stats:
+                raise NameError("Simulation not found: " + simName)
+        return json.dumps(stats)
+    except:
+        traceback.print_exc(file=sys.stdout)
+        raise InvalidUsageExeption("Failed to load stats.", status_code=400)
+
+@app.route('/getSimRun', methods = ['GET'])
+def getSimRun():
+    try:
+        simName = request.args.get('simName')
+        simRun = request.args.get('simRun')
+        stat = SimData.getStatsByRun(simName, simRun)
+        if not stat:
+                raise NameError("Simulation Run not found: " + simName)
+        return json.dumps(stat)
+    except:
+        traceback.print_exc(file=sys.stdout)
+        raise InvalidUsageExeption("Failed to load stats.", status_code=400)
 
 class InvalidUsageExeption(Exception):
     def __init__(self, message, status_code=400, data={}):

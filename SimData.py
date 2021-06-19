@@ -112,13 +112,21 @@ class SimDataClass:
         results =  DB.VillageCol.replace_one({"name": villageData['name'], "simulationName": simulationName}, villageData, upsert=True)
 
     def getStatsByName(self, simName):
-        stats = self.db.StatsCol.find_one({'simName': simName})
+        cursor = self.db.StatsCol.find({'simName': simName})
+        stats = []
+        for item in cursor:
+            item.pop('_id', None)
+            stats.append(item)
+        return stats
+
+    def getStatsByRun(self, simName, timeStamp):
+        stats = self.db.StatsCol.find_one({'simName': simName, 'timeStamp': timeStamp})
         if stats:
             stats.pop('_id', None)
         return stats
 
     def saveStats(self, statsData):
-        results =  DB.StatsCol.replace_one({"simName": statsData["simName"]}, statsData, upsert=True)        
+        results =  DB.StatsCol.insert_one(statsData)
 
     def deleteStats(self, name):
         sim = self.db.StatsCol.delete_one({"simName": name})
