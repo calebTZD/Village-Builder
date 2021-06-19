@@ -112,7 +112,7 @@ class SimDataClass:
         results =  DB.VillageCol.replace_one({"name": villageData['name'], "simulationName": simulationName}, villageData, upsert=True)
 
     def getStatsByName(self, simName):
-        cursor = self.db.StatsCol.find({'simName': simName})
+        cursor = self.db.StatsCol.find({'simName': simName}, {'simName': 1, 'timeStamp': 1})
         stats = []
         for item in cursor:
             item.pop('_id', None)

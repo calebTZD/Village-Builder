@@ -27,4 +27,5 @@ def addSampleData():
 if __name__ == '__main__':
     initSimulationsCollection()
     initVillagesCollection()
+    initStatsCollection()
     addSampleData()

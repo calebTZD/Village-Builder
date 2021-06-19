@@ -7,8 +7,7 @@ class SimStatsClass:
         self.ticks = 0
 
     def statDict(self):
-        stats = {
-            
+        stats = {            
             'simName' : self.sim.name,
             'ticks': self.ticks,
             'world': self.sim.world.toDict()
@@ -17,7 +16,7 @@ class SimStatsClass:
         return stats
 
     def getTime(self):
-        fTime = datetime.datetime.now().strftime("%Y-%d-%w: %I:%M:%S")
+        fTime = datetime.datetime.now().strftime("%Y-%d-%wT%I:%M:%S")
         return fTime
 
 class WorldStatsClass:
@@ -34,6 +33,7 @@ class WorldStatsClass:
         stats['villages'] = []
         for village in self.world.villages:
             stats['villages'].append(village.toDict())
+        return stats
 
 class VillageStatsClass:
     def __init__(self, village):

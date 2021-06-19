@@ -18,6 +18,6 @@ class DBaccess:
 
     def initStatsCollection(self):
         self.StatsCol.drop()
-        #self.StatsCol.create_index("simName")
+        self.StatsCol.create_index("simName")
         
 DB = DBaccess()
