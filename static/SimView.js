@@ -119,6 +119,27 @@ export const SimulationView = {
             this.$refs.villagers.updateVillagers(this.simName);
             this.$refs.locations.updateLocations(this.simName);
             this.$refs.buildings.updateBuildings(this.simName);
+        },
+        loadSimRuns: function(simName){
+            console.log("LOAD Sim Runs");
+            let url = new URL('../getSimRuns', window.location.href);
+            let params = {'simName': simName};
+            url.search = new URLSearchParams(params).toString();
+            fetch(url)
+            .then((response) => {
+                if (response.ok){
+                    return response.json();
+                } else {
+                    throw new Error("Failed to Get Sim");
+                }
+            })
+            .then(results => { 
+                this.simulationRuns = results;
+                console.log(this.simulationRuns);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
         }
     },
     mounted(){

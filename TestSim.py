@@ -145,14 +145,10 @@ class TestTakeAction(unittest.TestCase):
     #     self.simRunner.takeAction(villager)
     #     self.simRunner.takeAction(villager)
 
-    # def test_fullSim(self):
-    #     self.sim.world.days = 10
-    #     self.simRunner.runSimulation()
+    def test_fullSim(self):
+        self.sim.world.days = 10
+        self.simRunner.runSimulation()
 
-    def test_time(self):
-        fTime = datetime.datetime.now().strftime("%Y-%d-%w: %I:%M:%S")
-        pprint(fTime)
-        
 
 if __name__ == '__main__':
     unittest.main()
