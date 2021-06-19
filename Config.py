@@ -16,6 +16,14 @@ class ConfigClass:
         self.initLocations(simulation)
         self.initBuildings(simulation)
 
+    def toDict(self):
+        return {
+            'world': self.world,
+            'villages': self.villages,
+            'villagers': self.villagers,
+            'locations': self.locations,
+            'buildings': self.buildings
+        }
 
     def initWorld(self, simulation):        
         for setting in simulation['world']:

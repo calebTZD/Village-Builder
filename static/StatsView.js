@@ -50,7 +50,8 @@ export const StatsView = {
                         {label: 'Gandalf', value: 90},
                         {label: 'Frodo', value: 6},
                         {label: 'Elron', value: 25}];
-            ChartMaker.drawBarChart("#chart2", h, w, data);
+            //ChartMaker.drawBarChart("#chart2", h, w, data);
+            ChartMaker.drawLineChart("#chart2", h, w, data);
         },
         loadStats: function(simName, runName){
             this.drawCharts();

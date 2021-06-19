@@ -67,7 +67,7 @@
 #stats-view{
     display: grid;    
     grid-template-columns: 150px auto;
-    background-color: black;
+    background-color: lightgray;
     min-height: 80vh;
     color:white;
 }
