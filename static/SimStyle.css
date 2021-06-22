@@ -40,7 +40,7 @@
     margin: 2px;
 }
 
-/********************** EDIT SIMULATION***********************/
+/********************** VIEW SIMULATION***********************/
 #stats-pane{
     grid-row: 2;
     display: grid;
@@ -83,7 +83,7 @@
 }
 
 #sim-config{
-    color: greenyellow;
+    color: green;
 }
 
 /********************** EDIT SIMULATION***********************/

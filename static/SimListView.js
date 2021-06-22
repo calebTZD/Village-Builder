@@ -88,6 +88,23 @@ export const SimListView = {
               console.log(error);
             });
         },
+        runSimulation: function(){
+            console.log("running " + this.simulation)
+            let url = new URL('../runSim', window.location.href);
+            let params = {'simName': this.simulation};
+            url.search = new URLSearchParams(params).toString();
+            fetch(url)            
+            .then((response) => {
+                if (response.ok){
+                    return response.json();
+                } else {
+                    throw new Error("Failed to Run Simulation");
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+              });
+        },
         selectSimulation: function(sim){
             console.log("Select: " + sim);
             let url = new URL('../getSimStatus', window.location.href);

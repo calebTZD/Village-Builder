@@ -154,7 +154,7 @@ class SimRunnerClass:
 
     def runSimulation(self):
         tick = 0
-        while tick < self.sim.world.days * 100:
+        while tick < self.sim.world.days * 10:
             self.doTick()
             self.postTick()
             if tick % 10 == 0:
@@ -163,6 +163,7 @@ class SimRunnerClass:
             self.sim.stats.ticks += 1
             LOGIT.info(f'Tick number: {tick}')
         SimData.saveStats(self.sim.toDict())
+        return True
 
 if __name__ == '__main__':
     sr = SimRunnerClass("The Myst")

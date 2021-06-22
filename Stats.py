@@ -37,7 +37,6 @@ class WorldStatsClass:
             'tickStats': self.tickStats,
             'numVillages': self.world.numVillages,
             'maxVillagersPerVillage': self.world.maxVillagersPerVillage,
-            'numVillages': self.world.numVillages
         }
         stats['villages'] = []
         for village in self.world.villages:
@@ -59,6 +58,7 @@ class VillageStatsClass:
         self.enemyKilled = 0
         self.damageOutput = 0
         self.damageInput = 0 
+        self.score = village.getScore()
 
     def initTickStats(self):
         self.tickStats['resources'] = {}
@@ -83,6 +83,7 @@ class VillageStatsClass:
             'enemyKilled': self.enemyKilled,
             'damageOutput': self.damageOutput,
             'damageInput': self.damageInput,
+            'score': self.score,
         }
         stats['villagerCount'] = {}
         for vType in V_Type:

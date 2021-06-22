@@ -159,5 +159,12 @@ class VillageClass:
                 return True
         return False
         
-
-    
+    def getScore(self):
+        score = 0
+        for type in util.V_Type:
+            score += len(self.getVillagersByType(type)) * self.levelMod[type]
+        for type in util.B_Type:
+            score += len(self.getBuildingsByType(type)) * 5
+        for resource in self.resources:
+            score += resource
+        

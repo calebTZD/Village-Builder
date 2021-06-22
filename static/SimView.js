@@ -101,7 +101,7 @@ export const SimulationView = {
         },
         selectRun: function(run){
             console.log("LOAD Simulation Stats");
-            this.runName = run;
+            this.runName = run["timeStamp"];
             this.$refs.stats.loadStats(this.simName, this.runName);
         },
         load: function(){
@@ -111,6 +111,7 @@ export const SimulationView = {
             this.$refs.villagers.loadVillagers(this.simName);
             this.$refs.locations.loadLocations(this.simName);
             this.$refs.buildings.loadBuildings(this.simName);
+            this.loadSimRuns(this.simName)
         },      
         update: function(){
             console.log("UPDATE");
@@ -140,7 +141,7 @@ export const SimulationView = {
             .catch((error) => {
               console.log(error);
             });
-        }
+        }        
     },
     mounted(){
     }

@@ -11,7 +11,7 @@ export const StatsView = {
                     </div>
                     <div id="stats-graphs">
                         <div v-show="statView==='ConfigView'">
-                            <div id="sim-config">config {{statView}}</div>
+                            <div id="sim-config">config {{runStats}}</div>
                         </div>
                         <div v-show="statView==='Chart1View'">
                             <H2>Chart 1</H2>
@@ -44,6 +44,9 @@ export const StatsView = {
                         {label: 'Asteroid', value: 17},
                         {label: 'Launch', value: 29},
                         {label: 'Sword', value: 21}];
+            self.runStats.world.Villages.foreach(function(item, index){
+                data.push({label: index, value: item.score})
+            })
             ChartMaker.drawBarChart("#chart1", h, w, data);
             data = [{label: 'Legolas', value: 15},
                         {label: 'Gimli', value: 8},
@@ -54,12 +57,12 @@ export const StatsView = {
             ChartMaker.drawLineChart("#chart2", h, w, data);
         },
         loadStats: function(simName, runName){
-            this.drawCharts();
+            
             console.log("LOAD STATS");
             this.runName = runName;
             this.simName = simName;
-            let url = new URL('../getStats', window.location.href);
-            let params = {'simName': simName, 'runName': runName};
+            let url = new URL('../getSimRun', window.location.href);
+            let params = {'simName': simName, 'simRun': runName};
             url.search = new URLSearchParams(params).toString();
             fetch(url)
             .then((response) => {
@@ -71,6 +74,7 @@ export const StatsView = {
             })
             .then(results => { 
                 this.runStats = results;
+                this.drawCharts();
                 console.log(this.runStats);
             })
             .catch((error) => {

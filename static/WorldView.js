@@ -3,7 +3,7 @@ export const WorldView = {
                     <div id="edit-world-labels">
                         <h5>Settings</h5>
                         <label class="col-form-label">Days to Run: </label>
-                        <label class="col-form-label">Days to Run: </label>
+                        <label class="col-form-label">Distance Between Villages: </label>
                         <label class="col-form-label">Villeger Maximum: </label>
                         <label class="col-form-label">Building Maximum: </label>
                     </div>

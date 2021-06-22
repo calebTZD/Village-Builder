@@ -5,6 +5,8 @@ from bson import json_util
 
 from SimData import SimData
 
+from SimRunner import SimRunnerClass
+
 from Defaults import Defaults
 
 app = Flask(__name__)
@@ -79,6 +81,20 @@ def deleteSim():
     except:
         traceback.print_exc(file=sys.stdout)
         raise InvalidUsageExeption("Failed to delete simulation.", status_code=400)
+
+@app.route('/runSim', methods = ['GET'])
+def runSim():
+    try:
+        simName = request.args.get('simName')
+        sim = SimRunnerClass(simName)        
+        results = sim.runSimulation()
+        if results == True:
+            return json.dumps({'status': "Success"})
+        else:
+            raise Exception("Failure")    
+    except:
+        traceback.print_exc(file=sys.stdout)
+        raise InvalidUsageExeption("Failed to run simulation.", status_code=400)
 
 @app.route('/getSimStatus', methods = ['GET'])
 def getSimStatus():
