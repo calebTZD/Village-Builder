@@ -5,6 +5,11 @@ class ChartMakerClass {
     }
     
     drawBarChart(elemID, h, w, data){
+        // data = [{label: 'Legolas', value: 15},
+        //                 {label: 'Gimli', value: 8},
+        //                 {label: 'Gandalf', value: 90},
+        //                 {label: 'Frodo', value: 6},
+        //                 {label: 'Elron', value: 25}];
         $(elemID).empty();
         let spacing = 1;    
         let max = 0;

@@ -20,11 +20,11 @@ export class StatsDataClass {
         console.log(this.getChartData('Village', 'Food'));
     }
 
-    getChartList(statsType){
-        return Object.keys(this.stats[statsType]);
+    getChartList(catagory){
+        return Object.keys(this.stats[catagory]);
     }
-    getChartData(statsType, chartName){
-        return this.stats[statsType][chartName];
+    getChartData(catagory, chartName){
+        return this.stats[catagory][chartName];
     }
 
     //****************************** Villages *******************************/

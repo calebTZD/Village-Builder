@@ -1,15 +1,15 @@
-// import { StatsDataClass } from './StatsData.js';
+import { StatsDataClass } from './StatsData.js';
 import { ChartMaker } from './ChartMaker.js';
 
 
 export const StatsView = {
     template: `<div id="stats-view">
                     <div id="stats-menu">
-                            <button type="button" class="list-group-item list-group-item-success list-group-item-action" v-on:click="loadStats('World')">World</button>
-                            <button type="button" class="list-group-item list-group-item-success list-group-item-action" v-on:click="loadStats('Village')">Village</button>
-                            <button type="button" class="list-group-item list-group-item-success list-group-item-action" v-on:click="loadStats('Villager')">Villager</button>
-                            <button type="button" class="list-group-item list-group-item-success list-group-item-action" v-on:click="loadStats('Location')">Location</button>
-                            <button type="button" class="list-group-item list-group-item-success list-group-item-action" v-on:click="loadStats('Building')">Building</button>
+                            <button type="button" class="list-group-item list-group-item-success list-group-item-action" v-on:click="setCategory('World')">World</button>
+                            <button type="button" class="list-group-item list-group-item-success list-group-item-action" v-on:click="setCategory('Village')">Village</button>
+                            <button type="button" class="list-group-item list-group-item-success list-group-item-action" v-on:click="setCategory('Villager')">Villager</button>
+                            <button type="button" class="list-group-item list-group-item-success list-group-item-action" v-on:click="setCategory('Location')">Location</button>
+                            <button type="button" class="list-group-item list-group-item-success list-group-item-action" v-on:click="setCategory('Building')">Building</button>
 
                     </div>
                     <div id="stats-options">
@@ -28,11 +28,7 @@ export const StatsView = {
                         <div v-show="statView==='Chart1View'">
                             <H2>Chart 1</H2>
                             <div id="chart1"></div>
-                        </div> 
-                        <div v-show="statView==='Chart2View'">
-                            <H2>Chart 2</H2>
-                            <div id="chart2"></div>
-                        </div>                         
+                        </div>                       
                     </div>
                 </div>
                 `,
@@ -40,34 +36,36 @@ export const StatsView = {
         return {
             simName: "",
             runName: "",
-            statView: "ConfigView",
+            statView: "Chart1View",
             statsOptions: ["Total Resources", "Total Villagers"],
-            runStats: {}
+            runStats: {},
+            statsData: {}
         }
     },    
     methods: {
         setStatView: function(viewName){
             this.statView = viewName;
         },
-        drawCharts: function(){
+        setCategory: function(category){
+            this.category = category;
+            this.statsOptions = this.statsData.getChartList(category);
+        },
+        selectChart: function(chartName){
+            this.chartName = chartName;
+            this.drawCharts(this.category, chartName);
+        },
+        drawCharts: function(category, chartName){
             let h = 600;
             let w = 800;
-            let data = [{label: 'Rock', value: 5},
-                        {label: 'Bacon', value: 10},
-                        {label: 'Asteroid', value: 17},
-                        {label: 'Launch', value: 29},
-                        {label: 'Sword', value: 21}];
-            self.runStats.world.Villages.foreach(function(item, index){
-                data.push({label: index, value: item.score})
-            })
-            ChartMaker.drawBarChart("#chart1", h, w, data);
-            data = [{label: 'Legolas', value: 15},
-                        {label: 'Gimli', value: 8},
-                        {label: 'Gandalf', value: 90},
-                        {label: 'Frodo', value: 6},
-                        {label: 'Elron', value: 25}];
-            //ChartMaker.drawBarChart("#chart2", h, w, data);
-            ChartMaker.drawLineChart("#chart2", h, w, data);
+            let data = this.statsData.getChartData(category, chartName);
+            
+            if(data.type == "line"){           
+            
+                ChartMaker.drawBarChart("#chart1", h, w, data.dataSet);
+            }
+            else if(data.type == "bar"){
+                ChartMaker.drawBarChart("#chart1", h, w, data.dataSet);
+            }
         },
         loadStats: function(simName, runName){            
             console.log("LOAD STATS");
@@ -86,7 +84,7 @@ export const StatsView = {
             })
             .then(results => { 
                 this.runStats = results;
-                this.drawCharts();
+                this.statsData = new StatsDataClass(results)
                 console.log(this.runStats);
             })
             .catch((error) => {
