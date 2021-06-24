@@ -61,7 +61,7 @@ export const StatsView = {
             
             if(data.type == "line"){           
             
-                ChartMaker.drawBarChart("#chart1", h, w, data.dataSet);
+                ChartMaker.drawLineChart("#chart1", h, w, data.dataSet);
             }
             else if(data.type == "bar"){
                 ChartMaker.drawBarChart("#chart1", h, w, data.dataSet);

@@ -45,27 +45,27 @@ class ChartMakerClass {
     }
 
     drawLineChart(elemID, h, w, dataSet){
-        // append the svg object to the body of the page
-        var svg = d3.select(elemID)
-            .append("svg")
-            .attr("width", w+20)
-            .attr("height", h+40)
-            .append("g")
-            .attr("transform",
-                  "translate(" + 20 + "," + 20 + ")");
-        
         // let dataSet = [{key: "Brad", values: [{tick:1,value:1},{tick:2,value:2},{tick:3,value:2},{tick:4,value:2},{tick:5,value:2}]},
         //             {key: "Caleb", values: [{tick:1,value:1},{tick:2,value:5},{tick:3,value:7},{tick:4,value:3},{tick:5,value:2}]}];
+        $(elemID).empty();
+        var svg = d3.select(elemID)
+            .append("svg")
+            .attr("width", w+100)
+            .attr("height", h+100)
+            .append("g")
+            .attr("transform",
+                  "translate(" + 40 + "," + 40 + ")");        
+
         let res = dataSet.map(function(d){ return d.key })
         let color = d3.scaleOrdinal()
                         .domain(res)
                         .range(['#e41a1c','#377eb8','#4daf4a','#984ea3','#ff7f00','#ffff33','#a65628','#f781bf','#999999']);
 
-        let maxX = 0;
-        let maxY = dataSet[0].values.length;
+        let maxY = 0;
+        let maxX = dataSet[0].values.length;
         for(let set of dataSet){
             for (let datum of set.values) {
-                if (datum.value > maxX) maxX = datum.value;
+                if (datum.value > maxY) maxY = datum.value;
             }
         }
         // Add X axis --> it is a date format
@@ -83,7 +83,6 @@ class ChartMakerClass {
         svg.append("g")
             .call(d3.axisLeft(y));
 
-
         svg.selectAll(".line")
             .data(dataSet)
             .enter()
@@ -91,6 +90,7 @@ class ChartMakerClass {
             .attr("fill", "none")
             .attr("stroke", function(d){ return color(d.key) })
             .attr("stroke-width", 1.5)
+            .text(d => d.key)
             .attr("d", function(d){
             return d3.line()
                 .x(function(d) { return x(d.tick); })
