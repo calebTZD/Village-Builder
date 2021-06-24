@@ -39,7 +39,7 @@ class ChartMakerClass {
             //.attr("transform", "rotate(-90)");
     }
 
-    drawLineChart(elemID, h, w, data){
+    drawLineChart(elemID, h, w, dataSet){
         // append the svg object to the body of the page
         var svg = d3.select(elemID)
             .append("svg")
@@ -49,16 +49,23 @@ class ChartMakerClass {
             .attr("transform",
                   "translate(" + 20 + "," + 20 + ")");
         
-        let sdata = [{key: "Brad", values: [{tick:1,value:1},{tick:2,value:2},{tick:3,value:2},{tick:4,value:2},{tick:5,value:2}]},
-                    {key: "Caleb", values: [{tick:1,value:1},{tick:2,value:5},{tick:3,value:7},{tick:4,value:3},{tick:5,value:2}]}];
-        let res = sdata.map(function(d){ return d.key })
+        // let dataSet = [{key: "Brad", values: [{tick:1,value:1},{tick:2,value:2},{tick:3,value:2},{tick:4,value:2},{tick:5,value:2}]},
+        //             {key: "Caleb", values: [{tick:1,value:1},{tick:2,value:5},{tick:3,value:7},{tick:4,value:3},{tick:5,value:2}]}];
+        let res = dataSet.map(function(d){ return d.key })
         let color = d3.scaleOrdinal()
                         .domain(res)
                         .range(['#e41a1c','#377eb8','#4daf4a','#984ea3','#ff7f00','#ffff33','#a65628','#f781bf','#999999']);
 
-          // Add X axis --> it is a date format
+        let maxX = 0;
+        let maxY = dataSet[0].values.length;
+        for(let set of dataSet){
+            for (let datum of set.values) {
+                if (datum.value > maxX) maxX = datum.value;
+            }
+        }
+        // Add X axis --> it is a date format
         let x = d3.scaleLinear()
-            .domain([0,5])
+            .domain([0, maxX])
             .range([ 0, w ]);
         svg.append("g")
             .attr("transform", "translate(0," + h + ")")
@@ -66,14 +73,14 @@ class ChartMakerClass {
 
         // Add Y axis
         let y = d3.scaleLinear()
-            .domain([0, 10])
+            .domain([0, maxY])
             .range([ h, 0 ]);
         svg.append("g")
             .call(d3.axisLeft(y));
 
 
         svg.selectAll(".line")
-            .data(sdata)
+            .data(dataSet)
             .enter()
             .append("path")
             .attr("fill", "none")
