@@ -24,13 +24,13 @@ class BuildingClass:
 
     def initSettings(self, buildingSettings):
         self.cost = buildingSettings["cost"]
-        self.villagersAbleToSupport = buildingSettings["villagersAbleToSupport"]
+        self.villagersAbleToSupport = int(buildingSettings["villagersAbleToSupport"])
         self.resource = buildingSettings["resource"]
-        self.enhancemntFactor = buildingSettings["enhancemntFactor"]
-        self.maxHealth = buildingSettings["maxHealth"]
-        self.buildTime = buildingSettings["buildTime"]
-        self.resourceAmount = buildingSettings["resourceAmount"]
-        self.enhancemntCost = buildingSettings["enhancemntCost"]        
+        self.enhancemntFactor = int(buildingSettings["enhancemntFactor"])
+        self.maxHealth = int(buildingSettings["maxHealth"])
+        self.buildTime = int(buildingSettings["buildTime"])
+        self.resourceAmount = int(buildingSettings["resourceAmount"])
+        self.enhancemntCost = int(buildingSettings["enhancemntCost"])       
 
     def assignVillager(self, villager):
         self.villagers.append(villager)

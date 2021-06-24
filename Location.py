@@ -18,12 +18,12 @@ class LocationClass:
         return self.stats.statDict()
 
     def initSettings(self, locationSettings):
-        self.maxBuildings = locationSettings["maxBuildings"]
+        self.maxBuildings = int(locationSettings["maxBuildings"])
         self.buildingTypes = locationSettings["buildingTypes"]
-        self.enhancemntFactor = locationSettings["enhancemntFactor"]
-        self.numPerVillage = locationSettings["numPerVillage"]
-        self.aveDistance = locationSettings["aveDistance"]
-        self.enhancemntCost = locationSettings["enhancemntCost"]   
+        self.enhancemntFactor = int(locationSettings["enhancemntFactor"])
+        self.numPerVillage = int(locationSettings["numPerVillage"])
+        self.aveDistance = int(locationSettings["aveDistance"])
+        self.enhancemntCost = int(locationSettings["enhancemntCost"]) 
 
     def calcDistance(self):
         #TODO: Need to finish this
