@@ -41,7 +41,7 @@ export const SimulationView = {
             </div>
         </div>
 
-        <div v-show="showView" id="stats-pane">   
+        <div v-show="showStats" id="stats-pane">   
             <div id="stats-banner">            
                 <h4 class="flex-row-gap">Simulation Results: {{simName}} : {{runName}}</h4>    
                 <button type="button" class="btn btn-primary flex-row-gap" v-on:click="finishedView()">Done</button>   
@@ -50,7 +50,7 @@ export const SimulationView = {
                 <div class="list-group">
                     <div v-for="run in simulationRuns" >
                         <button class="list-group-item list-group-item-primary list-group-item-action" type="button" v-on:click="selectRun(run)">
-                            {{run}}
+                            {{run.timeStamp}}
                         </button>
                     </div>
                 </div>
@@ -67,7 +67,7 @@ export const SimulationView = {
         runName: "",
         simData: {},
         showEdit: false,
-        showView: false,
+        showStats: false,
         showList: true,
         editView: "WorldView",
         simulationRuns: ['asdfasda', 'basdlf']
@@ -85,7 +85,7 @@ export const SimulationView = {
             console.log("VIEW EVENT: " + simName);
             this.simName = simName;
             this.showList = false;
-            this.showView = true;
+            this.showStats = true;
             this.load();
         },
         setEdit: function(view){
@@ -93,7 +93,7 @@ export const SimulationView = {
         },
         finishedView: function(){
             this.showList = true;
-            this.showView = false;      
+            this.showStats = false;      
         },
         done: function(){
             this.showList = true;

@@ -3,10 +3,17 @@ import { ChartMaker } from './ChartMaker.js';
 export const StatsView = {
     template: `<div id="stats-view">
                     <div id="stats-menu">
-                        <div class="list-group">
                             <button type="button" class="list-group-item list-group-item-success list-group-item-action" v-on:click="setStatView('ConfigView')">Config</button>
                             <button type="button" class="list-group-item list-group-item-success list-group-item-action" v-on:click="setStatView('Chart1View')">Chart1View</button>
                             <button type="button" class="list-group-item list-group-item-success list-group-item-action" v-on:click="setStatView('Chart2View')">Chart2View</button>
+                    </div>
+                    <div id="stats-options">
+                        <div class="list-group">
+                            <div v-for="option in statsOptions" >
+                                <button class="list-group-item list-group-item-primary list-group-item-action" type="button" v-on:click="selectChart(option)">
+                                    {{option}}
+                                </button>
+                            </div>
                         </div>
                     </div>
                     <div id="stats-graphs">
@@ -29,6 +36,7 @@ export const StatsView = {
             simName: "",
             runName: "",
             statView: "ConfigView",
+            statsOptions: ["Total Resources", "Total Villagers"],
             runStats: {}
         }
     },    
@@ -56,8 +64,7 @@ export const StatsView = {
             //ChartMaker.drawBarChart("#chart2", h, w, data);
             ChartMaker.drawLineChart("#chart2", h, w, data);
         },
-        loadStats: function(simName, runName){
-            
+        loadStats: function(simName, runName){            
             console.log("LOAD STATS");
             this.runName = runName;
             this.simName = simName;

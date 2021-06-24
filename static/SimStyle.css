@@ -65,21 +65,31 @@
 }
 
 #stats-view{
-    display: grid;    
-    grid-template-columns: 150px auto;
+    display: grid;
+    grid-template-rows: 50px auto;
+    grid-template-columns: 150px auto;    
     background-color: lightgray;
     min-height: 80vh;
     color:white;
 }
 
 #stats-menu{
+    grid-column: 1/3;
+    grid-row: 1/2;
+    display: flex;
+    flex-direction: row;
+}
+
+#stats-options{
     grid-column: 1/2;
+    grid-row: 2/3;
     display: flex;
     flex-direction: column;
 }
 
 #stats-graphs{
-    grid-column: 2;
+    grid-row: 2/3;
+    grid-column: 2/3;
 }
 
 #sim-config{
