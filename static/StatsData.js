@@ -38,7 +38,7 @@ export class StatsDataClass {
         for(let v of this.worldData.villages){  
             this.addBarDatum(dataSet, v.name, v.villagers.length);
         }
-        this.stats['Village']['Total Villagers'] = dataSet;
+        this.stats['Village']['Total Villagers'] = {'type': 'bar', 'dataSet': dataSet};
     }
 
     initVillagesFood(){
@@ -46,7 +46,7 @@ export class StatsDataClass {
         for(let v of this.worldData.villages){
             this.addLineData(dataSet, v.name, v.tickStats.resources.Food);
         }
-        this.stats['Village']['Food'] = dataSet;
+        this.stats['Village']['Food'] = {'type': 'line', 'dataSet': dataSet};
     }
 
     //****************************** Villagers *******************************/
