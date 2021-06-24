@@ -16,12 +16,12 @@ class WorldClass:
         return self.stats.statDict()
 
     def initSettings(self, worldSettings):
-        self.days = worldSettings["days"]
+        self.days = int(worldSettings["days"])
         self.statValues = worldSettings["statValues"]
-        self.numVillages = worldSettings["numVillages"]
-        self.maxVillagersPerVillage = worldSettings["maxVillagersPerVillage"]
+        self.numVillages = int(worldSettings["numVillages"])
+        self.maxVillagersPerVillage = int(worldSettings["maxVillagersPerVillage"])
         self.startingVillagers = worldSettings["startingVillagers"]
-        self.maxBuildingsPerVillage = worldSettings["maxBuildingsPerVillage"]   
+        self.maxBuildingsPerVillage = int(worldSettings["maxBuildingsPerVillage"])   
 
     def addVillage(self, village):
         self.villages.append(village)

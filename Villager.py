@@ -31,17 +31,17 @@ class VillagerClass:
         return self.stats.statDict()
 
     def initSettings(self, villagerSettings):
-        self.enhancemntFactor = villagerSettings["enhancemntFactor"]
+        self.enhancemntFactor = int(villagerSettings["enhancemntFactor"])
         self.preferredBuilding = villagerSettings["preferredBuilding"]
         self.gatheringType = villagerSettings["gatheringType"]
-        self.speed = villagerSettings["speed"]
-        self.maxHealth = villagerSettings["maxHealth"]
-        self.carryCapacity = villagerSettings["carryCapacity"]
-        self.attack = villagerSettings["attack"]
-        self.defense = villagerSettings["defense"]
-        self.productionSpeed = villagerSettings["productionSpeed"]
+        self.speed = int(villagerSettings["speed"])
+        self.maxHealth = int(villagerSettings["maxHealth"])
+        self.carryCapacity = int(villagerSettings["carryCapacity"])
+        self.attack = int(villagerSettings["attack"])
+        self.defense = int(villagerSettings["defense"])
+        self.productionSpeed = int(villagerSettings["productionSpeed"])
         self.spawnTime = villagerSettings["spawnTime"]
-        self.enhancemntCost = villagerSettings["enhancemntCost"]
+        self.enhancemntCost = int(villagerSettings["enhancemntCost"])
         self.spawnCost = villagerSettings["spawnCost"]
 
     def getLevel(self):

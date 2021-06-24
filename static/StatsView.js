@@ -1,11 +1,16 @@
+// import { StatsDataClass } from './StatsData.js';
 import { ChartMaker } from './ChartMaker.js';
+
 
 export const StatsView = {
     template: `<div id="stats-view">
                     <div id="stats-menu">
-                            <button type="button" class="list-group-item list-group-item-success list-group-item-action" v-on:click="setStatView('ConfigView')">Config</button>
-                            <button type="button" class="list-group-item list-group-item-success list-group-item-action" v-on:click="setStatView('Chart1View')">Chart1View</button>
-                            <button type="button" class="list-group-item list-group-item-success list-group-item-action" v-on:click="setStatView('Chart2View')">Chart2View</button>
+                            <button type="button" class="list-group-item list-group-item-success list-group-item-action" v-on:click="loadStats('World')">World</button>
+                            <button type="button" class="list-group-item list-group-item-success list-group-item-action" v-on:click="loadStats('Village')">Village</button>
+                            <button type="button" class="list-group-item list-group-item-success list-group-item-action" v-on:click="loadStats('Villager')">Villager</button>
+                            <button type="button" class="list-group-item list-group-item-success list-group-item-action" v-on:click="loadStats('Location')">Location</button>
+                            <button type="button" class="list-group-item list-group-item-success list-group-item-action" v-on:click="loadStats('Building')">Building</button>
+
                     </div>
                     <div id="stats-options">
                         <div class="list-group">

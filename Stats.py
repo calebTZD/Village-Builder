@@ -22,7 +22,7 @@ class SimStatsClass:
         self.sim.world.stats.doTickStats()
 
     def getTime(self):
-        fTime = datetime.datetime.now().strftime("%Y-%d-%wT%I:%M:%S")
+        fTime = datetime.datetime.now().strftime("%Y-%m-%dT%I:%M:%S")
         return fTime
 
 class WorldStatsClass:
@@ -58,7 +58,7 @@ class VillageStatsClass:
         self.enemyKilled = 0
         self.damageOutput = 0
         self.damageInput = 0 
-        self.score = village.getScore()
+        # self.score = village.getScore()
 
     def initTickStats(self):
         self.tickStats['resources'] = {}
@@ -83,7 +83,7 @@ class VillageStatsClass:
             'enemyKilled': self.enemyKilled,
             'damageOutput': self.damageOutput,
             'damageInput': self.damageInput,
-            'score': self.score,
+            # 'score': self.score,
         }
         stats['villagerCount'] = {}
         for vType in V_Type:
