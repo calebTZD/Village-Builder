@@ -31,6 +31,7 @@ export class StatsDataClass {
     initVillagesData() {
         this.initVillagesNumVillagers();
         this.initVillagesFood();
+        this.initVillagesResources();
     }
 
     initVillagesNumVillagers(){
@@ -39,6 +40,14 @@ export class StatsDataClass {
             this.addBarDatum(dataSet, v.name, v.villagers.length);
         }
         this.stats['Village']['Total Villagers'] = {'type': 'bar', 'dataSet': dataSet};
+    }
+
+    initVillagesResources(){
+        let dataSet = [];
+        for(let v of this.worldData.villages){
+            this.addStackData(dataSet, v.name, v.resources);
+        }
+        this.stats['Village']['Resources'] = {'type': 'stacked', 'dataSet': dataSet};
     }
 
     initVillagesFood(){
@@ -66,5 +75,17 @@ export class StatsDataClass {
         //EXAMPLE:
         //[{key: "Brad", values: [{tick:1,value:1},{tick:2,value:2},{tick:3,value:2},{tick:4,value:2},{tick:5,value:2}]},
         // {key: "Caleb", values: [{tick:1,value:1},{tick:2,value:5},{tick:3,value:7},{tick:4,value:3},{tick:5,value:2}]}];
+    }
+
+    addStackData(dataSet, key, values){
+        let columnData = {};
+        columnData['key'] = key;
+        for (let v in values){
+            columnData[v] = values[v];
+        }
+        dataSet.push(columnData);
+        //EXAMPLE:
+        //[{"key":"Brad", "Swords":5,"Knifes":8, "Axes":13},
+        // {"key":"Caleb", "Swords":5,"Knifes":8, "Axes":13}];
     }
 }

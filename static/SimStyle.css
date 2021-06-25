@@ -90,6 +90,17 @@
 #stats-graphs{
     grid-row: 2/3;
     grid-column: 2/3;
+    background-color: darkslategray;
+}
+
+.chartAxis line{ 
+    stroke: white;
+}
+.chartAxis path{
+    stroke: white;
+}
+.chartAxis text{
+    fill: white;
 }
 
 #sim-config{
@@ -241,3 +252,5 @@
     margin-left: 5px;
     margin-right: 5px;
 }
+
+

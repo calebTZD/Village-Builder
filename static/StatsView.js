@@ -26,7 +26,7 @@ export const StatsView = {
                             <div id="sim-config">config {{runStats}}</div>
                         </div>
                         <div v-show="statView==='Chart1View'">
-                            <H2>Chart 1</H2>
+                            <h2>{{chartName}}</h2>
                             <div id="chart1"></div>
                         </div>                       
                     </div>
@@ -38,6 +38,8 @@ export const StatsView = {
             runName: "",
             statView: "Chart1View",
             statsOptions: ["Total Resources", "Total Villagers"],
+            category: "",
+            chartName: "",
             runStats: {},
             statsData: {}
         }
@@ -57,6 +59,7 @@ export const StatsView = {
         drawCharts: function(category, chartName){
             let h = 600;
             let w = 800;
+            
             let data = this.statsData.getChartData(category, chartName);
             
             if(data.type == "line"){           
@@ -65,6 +68,9 @@ export const StatsView = {
             }
             else if(data.type == "bar"){
                 ChartMaker.drawBarChart("#chart1", h, w, data.dataSet);
+            }
+            else if(data.type == "stacked"){
+                ChartMaker.drawHorizontalStackedBarChart("#chart1", h, w, data.dataSet);
             }
         },
         loadStats: function(simName, runName){            
@@ -92,6 +98,6 @@ export const StatsView = {
             });
         }
     },
-    created(){
+    created(){        
     }
   };
