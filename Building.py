@@ -48,12 +48,13 @@ class BuildingClass:
         if self.currentHealth <= 0:
             villager.village.stats.enemyBuildingsDestroed += 1
             self.village.destroyed.append(self)
-            self.village.buildings.pop(self)
+            self.village.buildings.remove(self)
             for villager in self.villagers:
                 villager.status = V_Status.UNASSIGNED
                 villager.assignedBuilding = None
-                self.villagers.pop(villager)
-            self.enemies = []
+                self.villagers.remove(villager)
+            for enemy in self.enemies:
+                enemy.findTarget()
 
 
 if __name__ == '__main__':    

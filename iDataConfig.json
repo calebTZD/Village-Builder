@@ -88,8 +88,7 @@
     "buildings": {
         "LoggingCamp":{
                 "cost": {
-                    "Wood": 50,
-                    "Gold": 50
+                    "Wood": 50
                 },
                 "villagersAbleToSupport": 5,
                 "resource": "Wood",
@@ -115,8 +114,7 @@
         },
         "Farm":{
                 "cost": {
-                    "Wood": 50,
-                    "Gold": 50
+                    "Wood": 50
                 },
                 "villagersAbleToSupport": 5,
                 "resource": "Food",
@@ -125,8 +123,7 @@
         
         "Market":{
                 "cost": {
-                    "Wood": 50,
-                    "Gold": 50
+                    "Wood": 50
                 },
                 "villagersAbleToSupport": 5,
                 "resource": "Gold",
@@ -135,7 +132,7 @@
         "Library":{
                 "cost": {
                     "Wood": 50,
-                    "Gold": 50
+                    "Stone": 50
                 },
                 "villagersAbleToSupport": 5,
                 "resource": "Research",
@@ -143,8 +140,7 @@
         }, 
         "Barracks":{
                 "cost": {
-                    "Wood": 50,
-                    "Gold": 50
+                    "Wood": 50
                 },
                 "villagersAbleToSupport": 5,
                 "resource": "Defense",
@@ -153,7 +149,8 @@
         "BuildingX":{
                 "cost": {
                     "Wood": 50,
-                    "Gold": 50
+                    "Gold": 50,
+                    "Stone": 50
                 },
                 "villagersAbleToSupport": 5,
                 "resource": "ProjectX",

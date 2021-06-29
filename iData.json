@@ -36,8 +36,7 @@
                 "spawnTime": 2,
                 "enhancemntCost": 300,
                 "spawnCost": {
-                    "Food": 50,
-                    "wood": 100
+                    "Food": 50
                 }
         },
         "Lumberjack": {
@@ -63,7 +62,8 @@
                 "spawnTime": 2,
                 "enhancemntCost": 300,
                 "spawnCost": {
-                    "Food": 50
+                    "Food": 50,
+                    "Wood": 100
                 }
         },
         "Miner": {
@@ -76,7 +76,8 @@
                 "spawnTime": 2,
                 "enhancemntCost": 300,
                 "spawnCost": {
-                    "Food": 50
+                    "Food": 50,
+                    "Wood": 100
                 }
         },
         
@@ -90,7 +91,8 @@
                 "spawnTime": 2,
                 "enhancemntCost": 300,
                 "spawnCost": {
-                    "Food": 50
+                    "Food": 50,
+                    "Ore": 10
                 }
         },
         "Guard": {
@@ -103,7 +105,8 @@
                 "spawnTime": 2,
                 "enhancemntCost": 300,
                 "spawnCost": {
-                    "Food": 50
+                    "Food": 50,
+                    "Ore": 10
                 }
         },
         "DrX": {
@@ -116,7 +119,8 @@
                 "spawnTime": 2,
                 "enhancemntCost": 300,
                 "spawnCost": {
-                    "Food": 50
+                    "Food": 50,
+                    "Gold": 50
                 }
         },
         "Merchant": {
@@ -129,7 +133,8 @@
                 "spawnTime": 2,
                 "enhancemntCost": 300,
                 "spawnCost": {
-                    "Food": 50
+                    "Food": 50,
+                    "wood": 100
                 }
         },
         "Researcher": {
@@ -142,7 +147,8 @@
                 "spawnTime": 2,
                 "enhancemntCost": 300,
                 "spawnCost": {
-                    "Food": 50
+                    "Food": 50,
+                    "Gold": 50
                 }
         },
         "Scout": {

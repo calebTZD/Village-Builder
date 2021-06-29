@@ -90,13 +90,15 @@ export const SimListView = {
         },
         runSimulation: function(){
             console.log("running " + this.simulation)
+            this.simState = "Running"
             let url = new URL('../runSim', window.location.href);
             let params = {'simName': this.simulation};
             url.search = new URLSearchParams(params).toString();
             fetch(url)            
             .then((response) => {
                 if (response.ok){
-                    return response.json();
+                    this.simState = "Complete"
+                    return response.json();                    
                 } else {
                     throw new Error("Failed to Run Simulation");
                 }

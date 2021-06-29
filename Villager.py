@@ -94,21 +94,28 @@ class VillagerClass:
             villager.village.stats.enemyKilled += 1
             self.status = V_Status.DEAD
             self.village.dead.append(self)
-            self.village.villagers.pop(self)
-
+            if self in self.village.villagers:
+                self.village.villagers.remove(self)
+            
     def attacking(self):
         if len(self.assignedBuilding.villagers) > 0:
             target = self.assignedBuilding.villagers[0]
             target.attacked(self)
+            if target.status == V_Status.DEAD:
+                self.assignedBuilding.villagers.remove(target)
         else:
-            self.assignedBuilding.attacked(self)
+            if self.assignedBuilding.currentHealth > 0:
+                self.assignedBuilding.attacked(self)
+            else:
+                self.findTarget
             
     def findTarget(self):
         target = self.village.enemyVilages[0]
         targets = list(target.buildings)
         random.shuffle(targets)
-        self.assignedBuilding = targets[0]        
-        self.distance = self.assignedBuilding.location.distance
+        if len(targets) > 0:
+            self.assignedBuilding = targets[0]        
+            self.distance = self.assignedBuilding.location.distance
 
     def toWar(self):
         self.distance -= self.calcSpeed()
@@ -120,8 +127,10 @@ class VillagerClass:
             if len(self.assignedBuilding.enemies) > 0:
                 target = self.assignedBuilding.enemies[0]
                 target.attacked(self)
-            elif self.underAttack():
-                building = self.underAttack()
+                if target.status == V_Status.DEAD:
+                    self.assignedBuilding.enemies.remove(target)
+            elif self.village.underAttack():
+                building = self.village.underAttack()
                 self.assignedBuilding = building
                 self.distance = building.location.distance
             else:

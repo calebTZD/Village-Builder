@@ -7,7 +7,7 @@ from util import *
 BUILDING_MULTIPLIER = 50
 VILLAGER_MULTIPLIER = 10
 RESOURCE_MULTIPLIER = 1
-WARRIOR_MULTIPLIER = 10
+WARRIOR_MULTIPLIER = 20
 
 class PRIORITIES(Enum):
     FOOD = "Food"
@@ -63,7 +63,7 @@ RESOURCE_PRIORITY_LIST = [PRIORITIES.FOOD.value, PRIORITIES.WOOD.value, PRIORITI
                           PRIORITIES.RESEARCH.value]
 VILLAGE_PRIORITY_LIST = [PRIORITIES.FOOD.value, PRIORITIES.WOOD.value, PRIORITIES.STONE.value, \
                          PRIORITIES.ORE.value, PRIORITIES.GOLD.value, \
-                         PRIORITIES.DEFENSE.value, PRIORITIES.PROJECTX.value, PRIORITIES.RESEARCH.value]
+                         PRIORITIES.DEFENSE.value, PRIORITIES.ATTACK.value, PRIORITIES.PROJECTX.value, PRIORITIES.RESEARCH.value]
 
 class PriorityManagerClass:
     def __init__(self):

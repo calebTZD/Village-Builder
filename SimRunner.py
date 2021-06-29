@@ -127,6 +127,7 @@ class SimRunnerClass:
                 village.stats.timesToWar += 1
                 for warrior in warriors:
                     warrior.status = V_Status.TO_WAR
+                    warrior.findTarget()
                     warrior.distance = self.sim.config.world["distanceBetweenVillages"]
 
     def defendVillage(self, village):
