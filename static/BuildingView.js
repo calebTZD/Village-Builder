@@ -10,10 +10,10 @@ export const BuildingView = {
                     <div id="edit-buildings-values">
                         <div v-for="(item, type) in buildingData" class="d-flex flex-column align-items-center">
                             <label class="col-form-label">{{type}}</label>
-                            <input type="number" class="form-control text-center" v-model="item.maxHealth">
-                            <input type="number" class="form-control text-center" v-model="item.buildTime">
-                            <input type="number" class="form-control text-center" v-model="item.resourceAmount">
-                            <input type="number" class="form-control text-center" v-model="item.enhancemntCost">
+                            <input type="number" min="1" max="100" class="form-control text-center" v-model="item.maxHealth">
+                            <input type="number" min="1" max="50" class="form-control text-center" v-model="item.buildTime">
+                            <input type="number" min="1000" max="100000" class="form-control text-center" v-model="item.resourceAmount">
+                            <input type="number" min="1" max="10000" class="form-control text-center" v-model="item.enhancemntCost">
                         </div>
                     </div>
                 </div>`,

@@ -10,10 +10,10 @@ export const LocationView = {
                         <div v-for="(item, type) in locationData" class="d-flex flex-column align-items-center">
                             <label class="col-form-label">{{type}}</label>
                             <input type="number" class="form-control text-center" v-model="item.numPerVillage" v-if="type==='Village'" readonly>
-                            <input type="number" class="form-control text-center" v-model="item.numPerVillage" v-else>
+                            <input type="number" min="1" max="100" class="form-control text-center" v-model="item.numPerVillage" v-else>
                             <input type="number" class="form-control text-center" v-model="item.aveDistance" v-if="type==='Village'" readonly>
-                            <input type="number" class="form-control text-center" v-model="item.aveDistance" v-else>
-                            <input type="number" class="form-control text-center" v-model="item.enhancemntCost">
+                            <input type="number" min="1" max="100" class="form-control text-center" v-model="item.aveDistance" v-else>
+                            <input type="number" min="1" max="1000" class="form-control text-center" v-model="item.enhancemntCost">
                         </div>
                     </div>
                 </div>`,

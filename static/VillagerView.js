@@ -14,14 +14,14 @@ export const VillagerView = {
                     <div id="edit-villagers-values">
                         <div v-for="(item, type) in villagerData" class="d-flex flex-column align-items-center">
                             <label class="col-form-label">{{type}}</label>
-                            <input type="number" class="form-control text-center" v-model="item.speed">
-                            <input type="number" class="form-control text-center" v-model="item.maxHealth">
-                            <input type="number" class="form-control text-center" v-model="item.enhancemntCost">
-                            <input type="number" class="form-control text-center" v-model="item.carryCapacity">
-                            <input type="number" class="form-control text-center" v-model="item.attack">
-                            <input type="number" class="form-control text-center" v-model="item.defense">
-                            <input type="number" class="form-control text-center" v-model="item.productionSpeed">
-                            <input type="number" class="form-control text-center" v-model="item.spawnTime">
+                            <input type="number" min="1" max="10" class="form-control text-center" v-model="item.speed">
+                            <input type="number" min="1" max="100" class="form-control text-center" v-model="item.maxHealth">
+                            <input type="number" min="1" max="1000" class="form-control text-center" v-model="item.enhancemntCost">
+                            <input type="number" min="1" max="50" class="form-control text-center" v-model="item.carryCapacity">
+                            <input type="number" min="1" max="10" class="form-control text-center" v-model="item.attack">
+                            <input type="number" min="1" max="10" class="form-control text-center" v-model="item.defense">
+                            <input type="number" min="1" max="10" class="form-control text-center" v-model="item.productionSpeed">
+                            <input type="number" min="1" max="10" class="form-control text-center" v-model="item.spawnTime">
                         </div>
                     </div>
                 </div>`,

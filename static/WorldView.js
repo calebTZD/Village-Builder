@@ -9,10 +9,10 @@ export const WorldView = {
                     </div>
                     <div id="edit-world-values">
                         <h5>:</h5>
-                        <input type="number" class="form-control" v-model="worldData.days">
-                        <input type="number" class="form-control" v-model="worldData.distanceBetweenVillages">
-                        <input type="number" class="form-control" v-model="worldData.maxVillagersPerVillage">
-                        <input type="number" class="form-control" v-model="worldData.maxBuildingsPerVillage">
+                        <input type="number" min="1" max="1000" class="form-control" v-model="worldData.days">
+                        <input type="number" min="1" max="100" class="form-control" v-model="worldData.distanceBetweenVillages">
+                        <input type="number" min="1" max="50" class="form-control" v-model="worldData.maxVillagersPerVillage">
+                        <input type="number" min="1" max="100" class="form-control" v-model="worldData.maxBuildingsPerVillage">
                     </div>
                     <div id="edit-world-villagers">
                         <h5>Starting Villagers</h5>
