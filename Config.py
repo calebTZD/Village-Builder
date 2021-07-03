@@ -50,18 +50,4 @@ class ConfigClass:
         for bType in simulation['buildings']:
             bTypeSettings = simulation['buildings'][bType]
             for setting in bTypeSettings:
-                self.buildings[bType][setting] = copy(bTypeSettings[setting])                
-
-
-
-if __name__ == '__main__':
-    from pprint import pprint
-    Config = ConfigClass(Defaults.simulation)
-    # pprint(Defaults.simulation)
-    # pprint(Config.world)
-    # pprint(Config.villages)
-    pprint(Config.villages)
-    # pprint(Config.villagers)
-    # pprint(Config.buildings)
-    # pprint(Config.locations)
-    #pprint(Defaults.simulation)
+                self.buildings[bType][setting] = copy(bTypeSettings[setting])

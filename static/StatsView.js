@@ -36,7 +36,7 @@ export const StatsView = {
         return {
             simName: "",
             runName: "",
-            statView: "Chart1View",
+            statView: "ConfigView",
             statsOptions: ["Total Resources", "Total Villagers"],
             category: "",
             chartName: "",
@@ -53,6 +53,7 @@ export const StatsView = {
             this.statsOptions = this.statsData.getChartList(category);
         },
         selectChart: function(chartName){
+            this.setStatView("Chart1View");
             this.chartName = chartName;
             this.drawCharts(this.category, chartName);
         },

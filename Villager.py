@@ -182,10 +182,3 @@ class VillagerClass:
             return True
         return False
             # TODO make more complicated
-    
-
-if __name__ == '__main__':    
-    from pprint import pprint
-    for vType, villagerSettings in Defaults.simulation["villagers"].items():
-        v = VillagerClass(vType, villagerSettings)
-        pprint(v.__dict__)

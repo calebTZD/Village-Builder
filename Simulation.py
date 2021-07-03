@@ -43,10 +43,3 @@ class SimulationClass:
             world.addVillage(village) 
             
         return world
-
-
-if __name__ == '__main__':
-    from pprint import pprint 
-    sim = SimulationClass("The Myst")
-    pprint(sim.__dict__)
-    pprint(sim.config.__dict__)

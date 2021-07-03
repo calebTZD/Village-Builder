@@ -45,12 +45,3 @@ class DefaultsClass:
 
 
 Defaults = DefaultsClass()
-
-if __name__ == '__main__':
-    from pprint import pprint
-    # pprint(Defaults.simulation)
-    pprint(Defaults.worldConfig)
-    pprint(Defaults.villagesConfig)
-    pprint(Defaults.villagersConfig)
-    pprint(Defaults.buildingsConfig)
-    pprint(Defaults.locationsConfig)

@@ -33,9 +33,3 @@ class LocationClass:
         #TODO: Need to validate building type and max buildings, etc.
         self.buildings.append(building)
         building.location = self
-
-if __name__ == '__main__':    
-    from pprint import pprint
-    for lType, locationSettings in Defaults.simulation["locations"].items():
-        l = LocationClass(lType, locationSettings)
-        pprint(l.__dict__)

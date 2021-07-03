@@ -55,14 +55,3 @@ class BuildingClass:
                 self.villagers.remove(villager)
             for enemy in self.enemies:
                 enemy.findTarget()
-
-
-if __name__ == '__main__':    
-    from pprint import pprint
-    from Location import LocationClass
-    location = LocationClass('Grassland', Defaults.simulation["locations"]["Grassland"])    
-    for bType, buildingSettings in Defaults.simulation["buildings"].items():
-        b = BuildingClass(bType, buildingSettings)
-        location.addBuilding(b)
-        pprint(b.__dict__)
-        pprint(b.location.__dict__)

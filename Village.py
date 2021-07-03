@@ -41,7 +41,9 @@ class VillageClass:
         self.startingLocations = settings["startingLocations"]
         self.startingBuildings = settings["startingBuildings"]
         self.name = settings["name"]
-        self.priorities = settings["priorities"]
+        self.priorities = {}
+        for priority in settings["priorities"]:
+            self.priorities[priority] = int(settings["priorities"][priority])
         #TODO Add resources to default data and UI
         self.resources = {
             "Food": 0,
@@ -158,13 +160,4 @@ class VillageClass:
                 
                 return True
         return False
-        
-    # def getScore(self):
-    #     score = 0
-    #     for type in util.V_Type:
-    #         score += len(self.getVillagersByType(type.value)) * self.levelMod[type.value]
-    #     for type in util.B_Type:
-    #         score += len(self.getBuildingsByType(type.value)) * 5
-    #     for resource in self.resources:
-    #         score += resource
         

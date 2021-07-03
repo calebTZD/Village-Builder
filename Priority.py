@@ -175,4 +175,3 @@ class PriorityManagerClass:
             priorityVillager = PRIORITY_VILLAGER_MAP[k]
             if village.levelMod[priorityVillager] == lowestLevel:
                 return priorityVillager
- 

@@ -165,8 +165,3 @@ class SimRunnerClass:
             LOGIT.info(f'Tick number: {tick}')
         SimData.saveStats(self.sim.toDict())
         return True
-
-if __name__ == '__main__':
-    sr = SimRunnerClass("The Myst")
-    sr.runSimulation()
-    print(sr.sim.toDict())
